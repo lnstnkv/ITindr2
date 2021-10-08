@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_button">16dp</dimen>
-    <dimen name="mardin">20dp</dimen>
+    <dimen name="margin">20dp</dimen>
+    <dimen name="margin_twice">40dp</dimen>
+    <dimen name="padding">24dp</dimen>
 </resources>

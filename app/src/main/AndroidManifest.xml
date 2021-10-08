@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ITindr">
         <activity
-            android:name=".MainActivity"
+            android:name=".authorization.AuthorizationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".start.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

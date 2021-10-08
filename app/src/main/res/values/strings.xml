@@ -3,4 +3,9 @@
     <string name="itindr_phrase">Ты найдешь того, кто поревьюит твой код</string>
     <string name="register">Зарегистрироваться</string>
     <string name="come">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="email">E-mail</string>
+    <string name="password">Пароль</string>
+    <string name="password_twice">Повторить пароль</string>
+    <string name="back">Назад</string>
 </resources>

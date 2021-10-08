@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".start.MainActivity">
 
     <ImageView
         android:id="@+id/imageViewLodo"
@@ -35,9 +35,9 @@
         android:id="@+id/imageViewTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/mardin"
+        android:layout_marginStart="@dimen/margin"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="@dimen/mardin"
+        android:layout_marginEnd="@dimen/margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPhraseITindr"
