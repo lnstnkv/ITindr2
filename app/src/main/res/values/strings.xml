@@ -9,4 +9,22 @@
     <string name="password_twice">Повторить пароль</string>
     <string name="back">Назад</string>
     <string name="authorization">Авторизация</string>
+    <string name="tell_about">Расскажи о себе</string>
+    <string name="indicate_interests">Укажи интересы</string>
+    <string name="choose_photo">Выбрать фото</string>
+    <string name="name">Имя</string>
+    <string name="about_yourself">О себе</string>
+    <string name="save">Сохранить</string>
+    <string name="python">Python</string>
+    <string name="django">Django</string>
+    <string name="rest">REST</string>
+    <string name="swift">Swift</string>
+    <string name="react_js">React JS</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="git">Git</string>
+    <string name="unity">Unity</string>
+    <string name="net">.NET</string>
+    <string name="sql">SQL</string>
+    <string name="clean">Clean Architecture</string>
+    <string name="uml">UML</string>
 </resources>

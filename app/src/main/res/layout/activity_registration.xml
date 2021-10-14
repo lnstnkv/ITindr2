@@ -7,21 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".registration.RegistrationActivity">
 
-    <TextView
-        android:id="@+id/textViewRegister"
-        style="@style/Title.Start"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginTop="@dimen/margin_twice"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:text="@string/registration"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewLogoSmall"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="116dp"
@@ -32,62 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_logo_small" />
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        style="@style/Hint"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginTop="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:background="@drawable/selector_background"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:paddingVertical="18dp"
-        android:paddingStart="@dimen/padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRegister" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        style="@style/Hint"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingVertical="18dp"
-        android:paddingStart="@dimen/padding"
-        android:ems="10"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginTop="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:hint="@string/password"
-        android:background="@drawable/selector_background"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword2"
-        style="@style/Hint"
-        android:layout_width="0dp"
-        android:paddingVertical="18dp"
-        android:paddingStart="@dimen/padding"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginTop="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:ems="10"
-        android:hint="@string/password_twice"
-        android:background="@drawable/selector_background"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
-
     <Button
-        android:id="@+id/buttonBack"
+        android:id="@+id/buttonBackAuto"
         style="@style/Button.Ghoast"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -101,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonRegistration"
+        android:id="@+id/buttonComeAuto"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -110,7 +43,74 @@
         android:layout_marginBottom="@dimen/margin_button"
         android:paddingVertical="15dp"
         android:text="@string/register"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBack"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBackAuto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRegistration"
+        style="@style/Title.Start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="@dimen/margin_twice"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:text="@string/registration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogoSmall" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddressReg"
+        style="@style/Hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:background="@drawable/selector_background"
+        android:ems="10"
+        android:hint="@string/email"
+        android:paddingVertical="18dp"
+        android:paddingStart="@dimen/padding"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegistration" />
+
+    <EditText
+        android:id="@+id/editTextTextPassworReg"
+        style="@style/Hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:background="@drawable/selector_background"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingVertical="18dp"
+        android:paddingStart="@dimen/padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddressReg" />
+
+    <EditText
+        android:id="@+id/editTextTextPasswordTwice"
+        style="@style/Hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:background="@drawable/selector_background"
+        android:hint="@string/password_twice"
+        android:paddingVertical="18dp"
+        android:paddingStart="@dimen/padding"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassworReg" />
 </androidx.constraintlayout.widget.ConstraintLayout>

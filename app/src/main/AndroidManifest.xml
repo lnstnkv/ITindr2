@@ -11,6 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ITindr">
         <activity
+            android:name=".tellabout.TellAboutActivity"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
             android:name=".authorization.AuthorizationActivity"
             android:exported="true" />
         <activity
@@ -19,11 +28,7 @@
         <activity
             android:name=".start.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
