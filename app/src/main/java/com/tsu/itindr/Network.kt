@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 
 object Network {
 
-    private  const val BASE_URL=" http://193.38.50.175/itindr/api/mobile"
+    private  const val BASE_URL= "http://193.38.50.175/itindr/api/mobile/"
     private val mediaType= "application/json".toMediaType()
 
     private val client = OkHttpClient.Builder()

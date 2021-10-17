@@ -6,5 +6,4 @@ import kotlinx.serialization.Serializable
 data class RegisterParams(
     val email:String,
     val password:String
-
 )

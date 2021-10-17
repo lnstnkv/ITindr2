@@ -20,21 +20,21 @@
         app:srcCompat="@drawable/ic_logo_small" />
 
     <Button
-        android:id="@+id/buttonBackAuto"
+        android:id="@+id/buttonBackRegister"
         style="@style/Button.Ghoast"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:layout_marginBottom="@dimen/margin_button"
-        android:paddingVertical="15dp"
-        android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingVertical="15dp"
+        android:text="@string/back"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:layout_marginBottom="@dimen/margin_button"/>
 
     <Button
-        android:id="@+id/buttonComeAuto"
+        android:id="@+id/buttonComeRegister"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:layout_marginBottom="@dimen/margin_button"
         android:paddingVertical="15dp"
         android:text="@string/register"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBackAuto"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBackRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
