@@ -4,10 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.tsu.itindr.R
 import com.tsu.itindr.RegisterController
 import com.tsu.itindr.RegisterParams
-import com.tsu.itindr.databinding.ActivityMainBinding
 import com.tsu.itindr.databinding.ActivityRegistrationBinding
 import com.tsu.itindr.tellabout.TellAboutActivity
 
@@ -25,13 +23,18 @@ class RegistrationActivity : AppCompatActivity() {
                     viewbinding.editTextTextPassworReg.text.toString()
                 ),
                 onSuccess = {
-                    val intent = Intent(this@RegistrationActivity, TellAboutActivity::class.java)
-                    viewbinding.buttonComeRegister.setOnClickListener { startActivity(intent) }
+                    if(samePassword( viewbinding.editTextTextPassworReg.text.toString(), viewbinding.editTextTextPasswordTwice.text.toString())){
+                        val intent = Intent(this@RegistrationActivity, TellAboutActivity::class.java)
+                        viewbinding.buttonComeRegister.setOnClickListener { startActivity(intent) }
+                    }
 
                 },
                 onFailure = {
                     Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show()
                 })
         }
+    }
+    private fun samePassword(password: String, passwordRepeat: String): Boolean {
+        return passwordRepeat.contentEquals(password)
     }
 }
