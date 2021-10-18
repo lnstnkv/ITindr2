@@ -65,6 +65,7 @@
         android:paddingLeft="50dp"
         android:text="@string/refusal"
         app:icon="@drawable/ic_close"
+        app:iconTint="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintHorizontal_bias="0.5"

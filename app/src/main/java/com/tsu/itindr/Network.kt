@@ -13,8 +13,14 @@ object Network {
     private  const val BASE_URL= "http://193.38.50.175/itindr/api/mobile/"
     private val mediaType= "application/json".toMediaType()
 
+    private val interceptor: HttpLoggingInterceptor by lazy {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.apply {
+            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
     private val client = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor()).build()
+        .addInterceptor(interceptor).build()
 
     @ExperimentalSerializationApi
     val retrofit = Retrofit.Builder()
