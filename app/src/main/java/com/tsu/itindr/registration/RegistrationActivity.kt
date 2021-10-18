@@ -10,22 +10,28 @@ import com.tsu.itindr.databinding.ActivityRegistrationBinding
 import com.tsu.itindr.tellabout.TellAboutActivity
 
 class RegistrationActivity : AppCompatActivity() {
-    private val conroller = RegisterController()
+    private val controller = RegisterController()
     private lateinit var viewbinding: ActivityRegistrationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewbinding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
+        viewbinding.buttonBackRegister.setOnClickListener { this.finish() }
         viewbinding.buttonComeRegister.setOnClickListener {
-            conroller.register(
+            controller.register(
                 RegisterParams(
                     viewbinding.editTextEmailAddressReg.text.toString(),
                     viewbinding.editTextTextPassworReg.text.toString()
                 ),
                 onSuccess = {
-                    if(samePassword( viewbinding.editTextTextPassworReg.text.toString(), viewbinding.editTextTextPasswordTwice.text.toString())){
-                        val intent = Intent(this@RegistrationActivity, TellAboutActivity::class.java)
-                        viewbinding.buttonComeRegister.setOnClickListener { startActivity(intent) }
+                    if (samePassword(
+                            viewbinding.editTextTextPassworReg.text.toString(),
+                            viewbinding.editTextTextPasswordTwice.text.toString()
+                        )&&(emailRegex( viewbinding.editTextEmailAddressReg.text.toString()))
+                    ) {
+                        val intent =
+                            Intent(this@RegistrationActivity, TellAboutActivity::class.java)
+                        startActivity(intent)
                     }
 
                 },
@@ -34,7 +40,12 @@ class RegistrationActivity : AppCompatActivity() {
                 })
         }
     }
-    private fun samePassword(password: String, passwordRepeat: String): Boolean {
-        return passwordRepeat.contentEquals(password)
-    }
+
+}
+private fun emailRegex(email:String): Boolean{
+    var regex= Regex("\\w*@\\w*\\.[a-zA-Z]*")
+    return regex.matches(email)
+}
+private fun samePassword(password: String, passwordRepeat: String): Boolean {
+    return passwordRepeat.contentEquals(password)
 }
