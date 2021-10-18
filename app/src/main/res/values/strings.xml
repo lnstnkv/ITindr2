@@ -27,4 +27,11 @@
     <string name="sql">SQL</string>
     <string name="clean">Clean Architecture</string>
     <string name="uml">UML</string>
+    <string name="search">Поиск</string>
+    <string name="people">Люди</string>
+    <string name="chat">Чаты</string>
+    <string name="profile">Профиль</string>
+    <string name="refusal">Отказ</string>
+    <string name="like">Лайк</string>
+
 </resources>
