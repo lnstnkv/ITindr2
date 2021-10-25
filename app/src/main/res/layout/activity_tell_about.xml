@@ -132,7 +132,6 @@
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
         android:paddingVertical="@dimen/padding_vertical"
-        app:backgroundTint="@null"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
