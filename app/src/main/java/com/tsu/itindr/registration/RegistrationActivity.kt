@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tsu.itindr.ProfileController
@@ -15,15 +16,11 @@ import com.tsu.itindr.tellabout.TellAboutActivity
 
 class RegistrationActivity : AppCompatActivity() {
     private val controller = RegisterController()
-    private val controller2 = ProfileController()
+
     private lateinit var accessToken: String
     private lateinit var viewbinding: ActivityRegistrationBinding
-    val APP_PREFERENCES = "token"
-    var mSettings: SharedPreferences? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         viewbinding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
         viewbinding.buttonBackRegister.setOnClickListener { this.finish() }
@@ -43,7 +40,9 @@ class RegistrationActivity : AppCompatActivity() {
                         viewbinding.editTextTextPassworReg.text.toString()
                     ),
                     onSuccess = {
-                        // accessToken=
+                       // val accessToken = "Some token From Server"
+                        //val preferences: SharedPreferences = getActivity().getSharedPreferences("MY_APP", MODE_PRIVATE)
+                        //preferences.edit().putString("accessToken", accessToken).apply()
                         val intent =
                             Intent(this@RegistrationActivity, TellAboutActivity::class.java)
                         startActivity(intent)
@@ -58,7 +57,7 @@ class RegistrationActivity : AppCompatActivity() {
     }
 }
 private fun emailRegex(email:String): Boolean{
-    var regex= Regex("\\w*@\\w*\\.[a-zA-Z]*")
+    val regex= Regex("""\w*@\w*\.[a-zA-Z]*""")
     return regex.matches(email)
 }
 private fun samePassword(password: String, passwordRepeat: String): Boolean {
