@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
@@ -26,6 +30,16 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
     <TextView
+        style="@style/Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/choose_photo"
+        app:layout_constraintStart_toEndOf="@+id/imageViewEdit"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
         android:id="@+id/textView7"
         style="@style/Title.Start"
         android:layout_width="0dp"
@@ -37,4 +51,224 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+
+        android:id="@+id/imageViewEdit"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="@dimen/margin_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:srcCompat="@drawable/selector_background" />
+
+    <EditText
+        android:id="@+id/EditTextEdit"
+        style="@style/Hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:background="@drawable/selector_background"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:paddingVertical="18dp"
+        android:paddingLeft="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewEdit" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditTextEdit">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/Hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_background"
+            android:hint="@string/about_yourself"
+            android:inputType="textLongMessage"
+            android:paddingVertical="64dp">
+
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/Title.Start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:text="@string/interests"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="@dimen/margin_button"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+
+            android:text="@string/python"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/back_chip"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/django"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rest"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/swift"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/react_js"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kotlin"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/git"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unity"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/net"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sql"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clean"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uml"
+            android:textColor="@color/pink"
+            app:chipBackgroundColor="@color/white"
+            app:chipMinHeight="25dp"
+            app:chipStrokeColor="@color/pink"
+            app:chipStrokeWidth="1dp" />
+
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Button"
+        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="@dimen/margin_button"
+        android:layout_marginBottom="@dimen/margin_button"
+        android:letterSpacing="0"
+        android:paddingVertical="18dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
