@@ -33,5 +33,7 @@
     <string name="profile">Профиль</string>
     <string name="refusal">Отказ</string>
     <string name="like">Лайк</string>
+    <string name="edit">Редактировать</string>
+    <string name="edit_profile">Редактирование</string>
 
 </resources>

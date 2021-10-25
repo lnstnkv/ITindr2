@@ -31,4 +31,9 @@
     <style name="Text_Bottom_Navigation">
         <item name="android:textSize">10sp</item>
     </style>
+    <style name="ToolBar">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/pink</item>
+        <item name="fontFamily">@font/montserrat_semi_bold</item>
+    </style>
 </resources>
