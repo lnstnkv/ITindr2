@@ -12,7 +12,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.ITindr"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:fontFamily="@font/montserrat_bold">
         <activity
             android:name=".edit.EditActivity"
             android:exported="true" />

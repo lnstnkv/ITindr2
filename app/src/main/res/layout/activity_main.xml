@@ -8,7 +8,7 @@
     tools:context=".start.MainActivity">
 
     <ImageView
-        android:id="@+id/imageViewLodo"
+        android:id="@+id/imageViewLogo"
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLodo" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
 
     <ImageView
         android:id="@+id/imageViewTitle"
@@ -49,11 +49,11 @@
         style="@style/Button.Ghoast"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:layout_marginBottom="@dimen/margin_button"
-        android:letterSpacing="0"
-        android:paddingVertical="18dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:backgroundTint="@null"
+        android:paddingVertical="@dimen/padding_vertical"
         android:text="@string/come"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,11 +64,11 @@
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:layout_marginBottom="@dimen/margin_button"
-        android:letterSpacing="0"
-        android:paddingVertical="18dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:backgroundTint="@null"
+        android:paddingVertical="@dimen/padding_vertical"
         android:text="@string/register"
         app:layout_constraintBottom_toTopOf="@+id/buttonCome"
         app:layout_constraintEnd_toEndOf="parent"

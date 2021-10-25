@@ -28,9 +28,9 @@
         style="@style/Title.Start"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_standard"
         android:text="@string/tell_about"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,17 +44,16 @@
         android:layout_marginStart="@dimen/padding"
         android:layout_marginTop="50dp"
         android:text="@string/choose_photo"
-        app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
         app:layout_constraintTop_toBottomOf="@+id/textViewTellAbout" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTextName"
         style="@style/Hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginTop="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
         android:background="@drawable/selector_background"
         android:ems="10"
         android:hint="@string/name"
@@ -63,33 +62,42 @@
         android:paddingLeft="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-    <ImageView
-        android:id="@+id/imageViewAvatar"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginTop="@dimen/margin_button"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginStart="@dimen/margin_standard"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTellAbout"
-        app:srcCompat="@drawable/selector_background" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTellAbout">
+
+        <ImageView
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/ic_user" />
+    </androidx.cardview.widget.CardView>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayoutAbout"
         style="@style/Hint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
-        android:layout_marginTop="@dimen/margin_button"
-        android:layout_marginEnd="@dimen/margin_button"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2">
+        app:layout_constraintTop_toBottomOf="@+id/editTextName">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextAboutYourself"
             style="@style/Hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,46 +110,48 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewInterest"
         style="@style/Title.Start"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/padding"
-        android:layout_marginEnd="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_standard"
         android:text="@string/indicate_interests"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAbout" />
 
     <Button
         android:id="@+id/buttonSaveYourself"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="@dimen/margin_button"
-        android:layout_marginBottom="@dimen/margin_button"
-        android:letterSpacing="0"
-        android:paddingVertical="18dp"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:paddingVertical="@dimen/padding_vertical"
+        app:backgroundTint="@null"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_button"
+        android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="@dimen/margin_button"
+        android:layout_marginEnd="@dimen/margin_standard"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/textViewInterest">
 
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
