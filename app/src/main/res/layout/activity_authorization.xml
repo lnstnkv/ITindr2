@@ -89,6 +89,8 @@
         android:layout_marginStart="@dimen/margin_button"
         android:layout_marginEnd="@dimen/margin_button"
         android:layout_marginBottom="@dimen/margin_button"
+        android:background="@drawable/gradient"
+        app:backgroundTint="@null"
         android:paddingVertical="15dp"
         android:text="@string/come"
         app:layout_constraintBottom_toTopOf="@+id/buttonBackAuto"

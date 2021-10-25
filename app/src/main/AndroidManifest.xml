@@ -14,11 +14,14 @@
         android:theme="@style/Theme.ITindr"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".edit.EditActivity"
+            android:exported="true" />
+        <activity
             android:name=".find.FindActivity"
             android:exported="true" />
         <activity
             android:name=".tellabout.TellAboutActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".authorization.AuthorizationActivity"
             android:exported="true" />
