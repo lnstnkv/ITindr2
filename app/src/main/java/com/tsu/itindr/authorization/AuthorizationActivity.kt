@@ -26,6 +26,7 @@ class AuthorizationActivity : AppCompatActivity() {
                         viewbinding.editTextPasswordAuto.text.toString()
                     ),
                     onSuccess = {
+                        sharedPreference.save("accessToken",it.accessToken)
                         val intent =
                             Intent(this@AuthorizationActivity, TellAboutActivity::class.java)
                         startActivity(intent)

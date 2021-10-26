@@ -35,12 +35,12 @@ class TellAboutActivity : AppCompatActivity() {
         val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
         viewbinding.buttonSaveYourself.setOnClickListener { startActivity(intent) }
         controller.profile(
-            "Bearer "+ sharedPreference.getValueString("accessToken"),
+            "Bearer:"+ sharedPreference.getValueString("accessToken"),
             onSuccess ={
                 Toast.makeText(this, "Все прекрасно мы живы", Toast.LENGTH_LONG).show()
             },
             onFailure = {
-                Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Ошибка , продолжаем тупить", Toast.LENGTH_LONG).show()
             }
 
         )
