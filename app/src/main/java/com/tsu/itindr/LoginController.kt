@@ -7,14 +7,16 @@ import retrofit2.Response
 class LoginController {
     private val api: LoginInt = Network.retrofit.create(LoginInt::class.java)
 
-    fun login(loginParams: LoginParams, onSuccess: () -> Unit, onFailure: () -> Unit) {
+    fun login(loginParams: LoginParams, onSuccess: (data:LoginResponse) -> Unit, onFailure: () -> Unit) {
         api.loginProfile(loginParams).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
                 if (response.isSuccessful) {
-                    onSuccess.invoke()
+                    response.body()?.let{
+                    onSuccess.invoke(it)
+                    }
                 } else {
                     onFailure.invoke()
                     //Log.i(TAG, "Ошибка тут")

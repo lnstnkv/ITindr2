@@ -10,14 +10,16 @@ class RegisterController {
 
     private val api: RegisterInt = Network.retrofit.create(RegisterInt::class.java)
 
-    fun register(registerParams: RegisterParams, onSuccess: () -> Unit, onFailure: () -> Unit) {
+    fun register(registerParams: RegisterParams, onSuccess: (data:RegisterResponse) -> Unit, onFailure: () -> Unit) {
         api.registerProfile(registerParams).enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
             ) {
                 if (response.isSuccessful) {
-                    onSuccess.invoke()
+                    response.body()?.let{
+                    onSuccess.invoke(it)
+                    }
                 } else {
                     onFailure.invoke()
                     //Log.i(TAG, "Ошибка тут")

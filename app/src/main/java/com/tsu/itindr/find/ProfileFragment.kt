@@ -20,7 +20,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         binding = FragmentProfileBinding.bind(view)
         val intent= Intent(activity,EditActivity::class.java)
 
-        binding.button4.setOnClickListener { startActivity(intent) }
+        binding.buttonEdit.setOnClickListener { startActivity(intent) }
     }
 
 }
