@@ -8,5 +8,5 @@ data class ProfileResponses(
     val name: String?=null,
     val aboutMyself: String?=null,
     val avatar: String,
-    val topics:List<Topic>
+    val topic:List<TopicResponse>
 )

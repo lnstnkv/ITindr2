@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView
 import com.tsu.itindr.ProfileController
 import com.tsu.itindr.R
 import com.tsu.itindr.SharedPreference
+import com.tsu.itindr.TopicController
 import com.tsu.itindr.databinding.ActivityRegistrationBinding
 import com.tsu.itindr.databinding.ActivityTellAboutBinding
 import com.tsu.itindr.find.FindActivity
@@ -26,7 +27,7 @@ class TellAboutActivity : AppCompatActivity() {
     private lateinit var viewbinding: ActivityTellAboutBinding
     private val REQUEST_TAKE_PHOTO = 1
     private lateinit var imageView: CardView
-    private val controller = ProfileController()
+    private val controller = TopicController()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewbinding = ActivityTellAboutBinding.inflate(layoutInflater)
@@ -34,8 +35,8 @@ class TellAboutActivity : AppCompatActivity() {
         val sharedPreference = SharedPreference(this)
         val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
         viewbinding.buttonSaveYourself.setOnClickListener { startActivity(intent) }
-        controller.profile(
-            "Bearer:"+ sharedPreference.getValueString("accessToken"),
+        controller.topic(
+            "Bearer "+ sharedPreference.getValueString("accessToken"),
             onSuccess ={
                 Toast.makeText(this, "Все прекрасно мы живы", Toast.LENGTH_LONG).show()
             },

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class ProfileParams (
     val name: String?=null,
     val aboutMyself: String?=null,
-    val topics:List<Topic>
+    val topic:List<TopicResponse>
     )
