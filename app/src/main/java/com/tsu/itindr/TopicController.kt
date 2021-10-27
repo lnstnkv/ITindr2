@@ -6,16 +6,18 @@ import retrofit2.Response
 
 class TopicController {
     private val api: TopicInt = Network.retrofit.create(TopicInt::class.java)
-    fun topic(accessToken:String,onSuccess: () -> Unit, onFailure: () -> Unit) {
-    api.getTopic(accessToken).enqueue(object:Callback<TopicResponse>{
-        override fun onResponse(call: Call<TopicResponse>, response: Response<TopicResponse>) {
+    fun topic(accessToken:String, onSuccess: (data: List<TopicResponse>) -> Unit, onFailure: () -> Unit) {
+    api.getTopic(accessToken).enqueue(object:Callback<List<TopicResponse>>{
+        override fun onResponse(call: Call<List<TopicResponse>>, response: Response<List<TopicResponse>>) {
                 if (response.isSuccessful) {
-                    onSuccess.invoke()
+                    response.body()?.let {
+                        onSuccess.invoke(it)
+                    }
                 } else {
                     onFailure.invoke()
                 }
             }
-        override fun onFailure(call: Call<TopicResponse>, t: Throwable) {
+        override fun onFailure(call: Call<List<TopicResponse>>, t: Throwable) {
 
                 onFailure.invoke()
 

@@ -7,7 +7,7 @@ import android.widget.Toast
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityAuthorizationBinding
 import com.tsu.itindr.databinding.ActivityRegistrationBinding
-import com.tsu.itindr.tellabout.TellAboutActivity
+import com.tsu.itindr.find.FindActivity
 
 class AuthorizationActivity : AppCompatActivity() {
     private val controller = LoginController()
@@ -28,7 +28,7 @@ class AuthorizationActivity : AppCompatActivity() {
                     onSuccess = {
                         sharedPreference.save("accessToken",it.accessToken)
                         val intent =
-                            Intent(this@AuthorizationActivity, TellAboutActivity::class.java)
+                            Intent(this@AuthorizationActivity, FindActivity::class.java)
                         startActivity(intent)
 
                     },

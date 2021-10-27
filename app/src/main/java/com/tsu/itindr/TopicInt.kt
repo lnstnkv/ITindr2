@@ -6,5 +6,5 @@ import retrofit2.http.Header
 
 interface TopicInt {
     @GET("./v1/topic")
-    fun getTopic(@Header("Authorization")token:String): Call<TopicResponse>
+    fun getTopic(@Header("Authorization")token:String): Call<List<TopicResponse>>
 }

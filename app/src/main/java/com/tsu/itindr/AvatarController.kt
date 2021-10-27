@@ -6,8 +6,8 @@ import retrofit2.Response
 
 class AvatarController {
     private val api: AvatarInt = Network.retrofit.create(AvatarInt::class.java)
-    fun saveAvatar(avatarParams: AvatarParams,onSuccess: () -> Unit, onFailure: () -> Unit) {
-        api.profileEdit(avatarParams).enqueue(object :
+    fun saveAvatar(accessToken:String,avatarParams: AvatarParams,onSuccess: () -> Unit, onFailure: () -> Unit) {
+        api.profileEdit(accessToken,avatarParams).enqueue(object :
         Callback<ProfileResponses> {
         override fun onResponse(
             call: Call<ProfileResponses>,
