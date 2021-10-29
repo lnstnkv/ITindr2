@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import com.tsu.itindr.R
+import com.tsu.itindr.SharedPreference
 import com.tsu.itindr.databinding.ActivityFindBinding
 
 class FindActivity : AppCompatActivity() {
@@ -13,6 +14,7 @@ class FindActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityFindBinding.inflate(layoutInflater)
+        val sharedPreference = SharedPreference(this)
         setContentView(viewBinding.root)
         if(savedInstanceState==null){
             selectScreen(SearchFragment.TAG,SearchFragment.newInstance())

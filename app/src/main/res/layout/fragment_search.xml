@@ -15,44 +15,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_logo_small" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="77dp"
-        app:cardCornerRadius="100dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="206dp"
-            android:layout_height="206dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@drawable/title_background" />
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/Title.Start"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
+    <ImageView
+        android:id="@+id/imageViewAvatarSearch"
+        android:layout_width="206dp"
+        android:layout_height="206dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="77dp"
-        android:text="TextView"
-        android:textColor="@color/black"
+        android:background="@drawable/shape_photo"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:srcCompat="@drawable/ic_user" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonClose"
         style="@style/Button.Ghoast"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -60,20 +38,62 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="@dimen/padding"
         android:gravity="fill"
-        app:backgroundTint="@null"
         android:paddingVertical="@dimen/padding_vertical"
         android:paddingLeft="50dp"
         android:text="@string/refusal"
+        app:backgroundTint="@null"
         app:icon="@drawable/ic_close"
         app:iconTint="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLike"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameFeed" />
+
+    <TextView
+        android:id="@+id/textViewAbout"
+        style="@style/Text_Medium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+
+        android:text="dkjsfdlfds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/chipGroupSearch"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroupSearch" />
+
+
+    <TextView
+        android:id="@+id/textViewNameFeed"
+        style="@style/Title.Start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="77dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAvatarSearch" />
+
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonLike"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -89,18 +109,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/buttonClose" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

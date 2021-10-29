@@ -36,5 +36,6 @@
     <string name="like">Лайк</string>
     <string name="edit">Редактировать</string>
     <string name="edit_profile">Редактирование</string>
+    <string name="delete">Удалить</string>
 
 </resources>

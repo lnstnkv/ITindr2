@@ -2,8 +2,9 @@ package com.tsu.itindr
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.tsu.itindr.tellabout.TellAboutActivity
 
-class SharedPreference (val context: Context) {
+class SharedPreference(val context: Context) {
     private val PREFS_NAME = "ACCESS_TOKEN"
     val sharedPref: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 

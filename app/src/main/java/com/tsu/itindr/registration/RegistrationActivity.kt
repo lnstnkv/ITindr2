@@ -52,7 +52,7 @@ class RegistrationActivity : AppCompatActivity() {
     }
 }
 private fun emailRegex(email:String): Boolean{
-    val regex= Regex("""\w*@\w*\.[a-zA-Z]*""")
+    val regex= Regex("""[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}""") //[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}
     return regex.matches(email)
 }
 private fun samePassword(password: String, passwordRepeat: String): Boolean {

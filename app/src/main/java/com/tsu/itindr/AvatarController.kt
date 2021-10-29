@@ -1,29 +1,27 @@
 package com.tsu.itindr
 
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AvatarController {
-    private val api: AvatarInt = Network.retrofit.create(AvatarInt::class.java)
-    fun saveAvatar(accessToken:String,avatarParams: AvatarParams,onSuccess: () -> Unit, onFailure: () -> Unit) {
-        api.profileEdit(accessToken,avatarParams).enqueue(object :
-        Callback<ProfileResponses> {
-        override fun onResponse(
-            call: Call<ProfileResponses>,
-            response: Response<ProfileResponses>
-        ) {
-            if (response.isSuccessful) {
-                onSuccess.invoke()
-            } else {
+    private val api: AvatarInt = Network.retrofitMultipart.create(AvatarInt::class.java)
+    fun updateAvatar(accessToken:String,avatar: MultipartBody.Part, onSuccess: () -> Unit,onFailure: () -> Unit){
+        api.upload(accessToken,avatar).enqueue(object: Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    onSuccess.invoke()
+                } else {
+                    onFailure.invoke()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
                 onFailure.invoke()
             }
-        }
-
-        override fun onFailure(call: Call<ProfileResponses>, t: Throwable) {
-            onFailure.invoke()
-        }
-
-    })
+        })
     }
+
 }
+

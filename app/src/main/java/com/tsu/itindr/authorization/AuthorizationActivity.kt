@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityAuthorizationBinding
-import com.tsu.itindr.databinding.ActivityRegistrationBinding
 import com.tsu.itindr.find.FindActivity
 
 class AuthorizationActivity : AppCompatActivity() {

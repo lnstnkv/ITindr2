@@ -36,17 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogoTell" />
 
-    <TextView
-        android:id="@+id/textViewChoosePhoto"
-        style="@style/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding"
-        android:layout_marginTop="50dp"
-        android:text="@string/choose_photo"
-        app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTellAbout" />
-
     <EditText
         android:id="@+id/editTextName"
         style="@style/Hint"
@@ -65,17 +54,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
 
+
     <ImageView
         android:id="@+id/imageViewAvatar"
         android:layout_width="88dp"
         android:layout_height="88dp"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
+        android:background="@drawable/shape_photo"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTellAbout"
-        app:srcCompat="@drawable/selector_background" />
-
-
+        app:srcCompat="@drawable/ic_user" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutAbout"
@@ -141,15 +131,23 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:textColor="@color/pink"
-        app:chipBackgroundColor="@color/white"
-        app:chipMinHeight="25dp"
-        app:chipStrokeColor="@color/pink"
-        app:chipStrokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewInterest">
     </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Button.Ghoast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
+        android:elevation="@null"
+        android:stateListAnimator="@null"
+        android:text="@string/choose_photo"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTellAbout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

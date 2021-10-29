@@ -6,8 +6,8 @@ import retrofit2.Response
 
 class UserController {
     private val api: UserInt = Network.retrofit.create(UserInt::class.java)
-    fun update(accessToken:String,profileParams: ProfileParams,onSuccess: () -> Unit, onFailure: () -> Unit){
-        api.updateProfile(accessToken,profileParams).enqueue(object: Callback<ProfileResponses>{
+    fun update(accessToken:String,updateParams: UpdateParams,onSuccess: () -> Unit, onFailure: () -> Unit){
+        api.updateProfile(accessToken,updateParams).enqueue(object: Callback<ProfileResponses>{
             override fun onResponse(
                 call: Call<ProfileResponses>,
                 response: Response<ProfileResponses>
@@ -19,6 +19,7 @@ class UserController {
             }
         }
             override fun onFailure(call: Call<ProfileResponses>, t: Throwable) {
+                t.printStackTrace()
                 onFailure.invoke()
             }
         })

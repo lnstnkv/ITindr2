@@ -7,6 +7,6 @@ data class ProfileResponses(
     val userId: String,
     val name: String?=null,
     val aboutMyself: String?=null,
-    val avatar: String,
-    val topic:List<TopicResponse>
+    val avatar: String?=null,
+    val topics:List<TopicResponse>
 )

@@ -37,4 +37,10 @@
         <item name="android:textColor">@color/pink</item>
         <item name="fontFamily">@font/montserrat_semi_bold</item>
     </style>
+    <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/back_chip</item>
+       <item name="chipStrokeColor">@color/pink</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_color_chip</item>
+    </style>
 </resources>
