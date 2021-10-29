@@ -6,6 +6,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityRegistrationBinding
+import com.tsu.itindr.request.register.RegisterController
+import com.tsu.itindr.request.register.RegisterParams
+import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.tellabout.TellAboutActivity
 
 

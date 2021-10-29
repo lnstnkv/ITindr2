@@ -7,6 +7,9 @@ import android.widget.Toast
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityAuthorizationBinding
 import com.tsu.itindr.find.FindActivity
+import com.tsu.itindr.request.login.LoginController
+import com.tsu.itindr.request.login.LoginParams
+import com.tsu.itindr.request.SharedPreference
 
 class AuthorizationActivity : AppCompatActivity() {
     private val controller = LoginController()

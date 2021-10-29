@@ -12,7 +12,10 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.FragmentSearchBinding
-import com.tsu.itindr.tellabout.TellAboutActivity
+import com.tsu.itindr.request.profile.LikeController
+import com.tsu.itindr.request.profile.ProfileResponses
+import com.tsu.itindr.request.SharedPreference
+import com.tsu.itindr.request.profile.UserFeedController
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     companion object {

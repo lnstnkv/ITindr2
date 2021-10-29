@@ -1,21 +1,14 @@
 package com.tsu.itindr.tellabout
 
-import android.R.attr
-import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Insets.add
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.view.iterator
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityTellAboutBinding
 import com.google.android.material.chip.Chip
@@ -27,20 +20,19 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
-import android.R.attr.data
-import android.media.tv.TvTrackInfo
-import android.media.tv.TvTrackInfo.TYPE_VIDEO
-import com.tsu.itindr.find.SearchFragment.Companion.TAG
-import java.io.File
-import androidx.core.app.ActivityCompat.startActivityForResult
 
-import android.os.Environment
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.LifecycleOwner
 import coil.load
+import com.tsu.itindr.registration.*
+import com.tsu.itindr.request.*
+import com.tsu.itindr.request.avatar.AvatarController
+import com.tsu.itindr.request.profile.TopicController
+import com.tsu.itindr.request.profile.TopicResponse
+import com.tsu.itindr.request.profile.UpdateParams
+import com.tsu.itindr.request.profile.UserController
 
 
 class TellAboutActivity : AppCompatActivity() {

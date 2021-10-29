@@ -31,13 +31,15 @@
                 tools:layout_editor_absoluteY="15dp" />
         </com.google.android.material.appbar.MaterialToolbar>
 
-        <TextView
-            android:id="@+id/ChoosePhotoEdit"
-            style="@style/Title"
+        <Button
+            android:id="@+id/buttonChooseEdit"
+            style="@style/Button.Ghoast"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="50dp"
+            android:elevation="@null"
+            android:stateListAnimator="@null"
             android:text="@string/choose_photo"
             app:layout_constraintStart_toEndOf="@+id/imageViewEdit"
             app:layout_constraintTop_toBottomOf="@+id/textViewAboutEdit" />
@@ -63,7 +65,7 @@
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_standard"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_user"
+            android:src="@drawable/ic_user_shape"
             android:background="@drawable/shape_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewAboutEdit"/>

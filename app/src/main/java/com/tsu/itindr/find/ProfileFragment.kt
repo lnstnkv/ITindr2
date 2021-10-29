@@ -2,16 +2,14 @@ package com.tsu.itindr.find
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
-import com.tsu.itindr.ProfileController
+import com.tsu.itindr.request.profile.ProfileController
 import com.tsu.itindr.R
-import com.tsu.itindr.SharedPreference
-import com.tsu.itindr.UserFeedController
+import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.FragmentProfileBinding
 import com.tsu.itindr.edit.EditActivity
 

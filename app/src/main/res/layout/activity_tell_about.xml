@@ -65,7 +65,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTellAbout"
-        app:srcCompat="@drawable/ic_user" />
+        app:srcCompat="@drawable/ic_user_shape" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutAbout"

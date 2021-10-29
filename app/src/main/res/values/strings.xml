@@ -41,5 +41,6 @@
     <string name="write">Написать сообщение</string>
     <string name="item_save">Данные успешно сохранены</string>
     <string name="error">Ошибка</string>
+    <string name="update">Загрузка</string>
 
 </resources>

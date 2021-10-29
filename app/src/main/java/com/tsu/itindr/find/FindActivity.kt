@@ -1,12 +1,11 @@
 package com.tsu.itindr.find
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import com.tsu.itindr.R
-import com.tsu.itindr.SharedPreference
+import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.ActivityFindBinding
 
 class FindActivity : AppCompatActivity() {
