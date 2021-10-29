@@ -1,6 +1,7 @@
-package com.tsu.itindr.request.profile
+package com.tsu.itindr.request.user
 
 import com.tsu.itindr.request.Network
+import com.tsu.itindr.request.profile.ProfileResponses
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,4 +29,5 @@ class UserFeedController {
 
         })
     }
+
 }

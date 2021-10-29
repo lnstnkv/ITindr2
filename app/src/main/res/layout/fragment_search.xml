@@ -16,19 +16,6 @@
         app:srcCompat="@drawable/ic_logo_small" />
 
 
-    <ImageView
-        android:id="@+id/imageViewAvatarSearch"
-        android:layout_width="206dp"
-        android:layout_height="206dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/shape_photo"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.575"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:srcCompat="@drawable/ic_user_shape" />
-
     <Button
         android:id="@+id/buttonClose"
         style="@style/Button.Ghoast"
@@ -50,46 +37,77 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupSearch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameFeed" />
-
-    <TextView
-        android:id="@+id/textViewAbout"
-        style="@style/Text_Medium"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/update"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/chipGroupSearch"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroupSearch" />
-
-
-    <TextView
-        android:id="@+id/textViewNameFeed"
-        style="@style/Title.Start"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="77dp"
-        android:text="@string/update"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewAvatarSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageViewAvatarSearch"
+                android:layout_width="206dp"
+                android:layout_height="206dp"
+                android:background="@drawable/shape_photo"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_user_shape" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNameFeed" />
+
+            <TextView
+                android:id="@+id/textViewAbout"
+                style="@style/Text_Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/update"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/chipGroupSearch"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupSearch" />
+
+            <TextView
+                android:id="@+id/textViewNameFeed"
+                style="@style/Title.Start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="77dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="77dp"
+                android:text="@string/update"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAvatarSearch" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/buttonLike"
@@ -100,10 +118,10 @@
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/padding"
         android:gravity="fill"
-        app:backgroundTint="@null"
         android:paddingVertical="@dimen/padding_vertical"
         android:paddingLeft="50dp"
         android:text="@string/like"
+        app:backgroundTint="@null"
         app:icon="@drawable/ic_heart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

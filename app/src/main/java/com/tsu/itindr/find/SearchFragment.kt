@@ -15,7 +15,7 @@ import com.tsu.itindr.databinding.FragmentSearchBinding
 import com.tsu.itindr.request.profile.LikeController
 import com.tsu.itindr.request.profile.ProfileResponses
 import com.tsu.itindr.request.SharedPreference
-import com.tsu.itindr.request.profile.UserFeedController
+import com.tsu.itindr.request.user.UserFeedController
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     companion object {
@@ -28,8 +28,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private val controllerLike = LikeController()
     var users: List<ProfileResponses> = listOf()
     var index: Int = 0
-    var indexId:Int=0
-    var userID:String=""
+    var indexId: Int = 0
+    var userID: String = ""
 
     private lateinit var viewbinding: FragmentSearchBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,8 +54,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     .load(users[index].avatar)
                     .into(viewbinding.imageViewAvatarSearch);
 
-              userID = users[index].userId
-                Log.d("KZKZKKZKZ",userID.toString())
+                userID = users[index].userId
+                Log.d("KZKZKKZKZ", userID.toString())
 
             },
             onFailure = {
@@ -63,22 +63,44 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
         )
+        viewbinding.buttonClose.setOnClickListener {
+            controllerLike.dislikeUser(
+                "Bearer " + sharedPreference.getValueString("accessToken"),
+                    userID,
+                onSuccess = {
 
+                },
+                onFailure = {
+                    Toast.makeText(activity,  R.string.error, Toast.LENGTH_LONG).show()
+                }
+            )
+            index++
+            chipGroup.removeAllViews()
+            userID = users[index].userId
+            viewbinding.textViewNameFeed.text = users[index].name
+            for (j in users[index].topics) {
+                addChip(j.title)
+            }
+            viewbinding.textViewAbout.text = users[index].aboutMyself
+            Glide
+                .with(this)
+                .load(users[index].avatar)
+                .into(viewbinding.imageViewAvatarSearch);
+        }
         viewbinding.buttonLike.setOnClickListener {
-            Log.d("KZKZKKZKZ",userID.toString())
-           controllerLike.likeUser(
+            Log.d("KZKZKKZKZ", userID.toString())
+            controllerLike.likeUser(
                 "Bearer " + sharedPreference.getValueString("accessToken"),
                 userID,
                 onSuccess = {
-                    if (it.isMutual)
-                    {
+                    if (it.isMutual) {
                         val intent = Intent(activity, MatchActivity::class.java)
                         startActivity(intent)
                     }
 
                 },
                 onFailure = {
-                    Toast.makeText(activity, "ТЫ сделала хрень", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
                 }
 
             )
@@ -99,7 +121,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 .into(viewbinding.imageViewAvatarSearch);
         }
 
-        }
+    }
 
 
     private fun addChip(text: String) {

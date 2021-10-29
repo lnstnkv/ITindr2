@@ -27,58 +27,74 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
 
-    <ImageView
-        android:id="@+id/imageViewAvatarProfile"
-        android:layout_width="206dp"
-        android:layout_height="206dp"
-        android:layout_marginTop="40dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/shape_photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarControls"
-        tools:srcCompat="@drawable/ic_user_shape" />
-
-    <TextView
-        android:id="@+id/textViewNameProfile"
-        style="@style/Title.Start"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="133dp"
-        android:text="@string/update"
-        android:textAlignment="center"
-        android:textColor="@color/black"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewAvatarProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarControls">>
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupProfile"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="@dimen/margin_standard"
-        android:layout_marginEnd="37dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameProfile">
-    </com.google.android.material.chip.ChipGroup>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
 
-    <TextView
-        android:id="@+id/textViewAboutMySelf"
-        style="@style/Hint"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="37dp"
-        android:text="@string/update"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroupProfile" />
+            <ImageView
+                android:id="@+id/imageViewAvatarProfile"
+                android:layout_width="206dp"
+                android:layout_height="206dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/shape_photo"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/ic_user_shape" />
+
+            <TextView
+                android:id="@+id/textViewNameProfile"
+                style="@style/Title.Start"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="100dp"
+                android:text="@string/update"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAvatarProfile" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:layout_marginEnd="37dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNameProfile"></com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/textViewAboutMySelf"
+                style="@style/Hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="37dp"
+                android:text="@string/update"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupProfile" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/buttonEdit"

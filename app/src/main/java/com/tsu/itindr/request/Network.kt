@@ -22,7 +22,7 @@ object Network {
         }
     }
     private val client = OkHttpClient.Builder().readTimeout(20, TimeUnit.SECONDS)
-        .writeTimeout(20, TimeUnit.SECONDS)
+        .writeTimeout(50, TimeUnit.SECONDS)
         .addInterceptor(interceptor).build()
 
     @ExperimentalSerializationApi

@@ -32,7 +32,7 @@ import com.tsu.itindr.request.avatar.AvatarController
 import com.tsu.itindr.request.profile.TopicController
 import com.tsu.itindr.request.profile.TopicResponse
 import com.tsu.itindr.request.profile.UpdateParams
-import com.tsu.itindr.request.profile.UserController
+import com.tsu.itindr.request.user.UserController
 
 
 class TellAboutActivity : AppCompatActivity() {
@@ -104,7 +104,8 @@ class TellAboutActivity : AppCompatActivity() {
                 "Bearer " + sharedPreference.getValueString("accessToken"),
                 UpdateParams(
                     viewbinding.editTextName.text.toString(),
-                    viewbinding.editTextAboutYourself.text.toString(),
+                    viewbinding.editTextAboutYourself
+                    .text.toString(),
                     chips.toList()
                 ),
                 onSuccess = {

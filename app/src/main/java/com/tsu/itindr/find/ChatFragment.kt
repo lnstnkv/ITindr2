@@ -16,7 +16,7 @@ class ChatFragment:Fragment(R.layout.fragment_chat) {
     }
     private lateinit var binding: FragmentChatBinding
     private var controller= GetChatController()
-
+    val profile: MutableList<Profile> = mutableListOf()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val sharedPreference = SharedPreference(activity as FindActivity)
@@ -24,8 +24,9 @@ class ChatFragment:Fragment(R.layout.fragment_chat) {
         controller.getChat(
             "Bearer " + sharedPreference.getValueString("accessToken"),
             onSuccess = {
+                        for(i in it){
 
-                Toast.makeText(activity, "Работает", Toast.LENGTH_LONG).show()
+                        }
             },
             onFailure = {
                 Toast.makeText(activity, "ТЫ сделала хрень", Toast.LENGTH_LONG).show()

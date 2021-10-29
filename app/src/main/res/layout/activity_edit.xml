@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -64,11 +64,11 @@
             android:layout_height="88dp"
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_standard"
+            android:background="@drawable/shape_photo"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_user_shape"
-            android:background="@drawable/shape_photo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAboutEdit"/>
+            app:layout_constraintTop_toBottomOf="@+id/textViewAboutEdit" />
 
         <EditText
             android:id="@+id/editTextEditName"
@@ -89,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageViewEdit" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutAbout"
+            android:id="@+id/textInputLayoutEdit"
             style="@style/Hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -125,7 +125,8 @@
             android:text="@string/interests"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAbout" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEdit" />
+
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
             android:layout_width="0dp"
@@ -133,10 +134,9 @@
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="@dimen/margin_standard"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewInterestEdit"/>
+            app:layout_constraintTop_toBottomOf="@+id/textViewInterestEdit" />
 
         <Button
             android:id="@+id/buttonSavEdit"

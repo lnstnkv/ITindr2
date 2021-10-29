@@ -1,4 +1,4 @@
-package com.tsu.itindr.request.profile
+package com.tsu.itindr.request.user
 
 import kotlinx.serialization.Serializable
 

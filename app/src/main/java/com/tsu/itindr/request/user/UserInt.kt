@@ -1,5 +1,8 @@
-package com.tsu.itindr.request.profile
+package com.tsu.itindr.request.user
 
+import com.tsu.itindr.request.profile.LikeResponse
+import com.tsu.itindr.request.profile.ProfileResponses
+import com.tsu.itindr.request.profile.UpdateParams
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,4 +15,7 @@ interface UserInt {
 
     @POST()
     fun like(@Header("Authorization")token:String,@Url url:String):Call<LikeResponse>
+
+    @POST()
+    fun disLike(@Header("Authorization")token:String,@Url url:String):Call<String>
 }
