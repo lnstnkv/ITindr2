@@ -37,6 +37,9 @@
     <string name="edit">Редактировать</string>
     <string name="edit_profile">Редактирование</string>
     <string name="delete">Удалить</string>
+    <string name="delete_photo">Удалить фото</string>
     <string name="write">Написать сообщение</string>
+    <string name="item_save">Данные успешно сохранены</string>
+    <string name="error">Ошибка</string>
 
 </resources>

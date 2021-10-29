@@ -6,15 +6,18 @@ import retrofit2.Response
 
 class ProfileController {
     private val api: ProfileInt = Network.retrofit.create(ProfileInt::class.java)
-    fun profile(accessToken:String,onSuccess: () -> Unit, onFailure: () -> Unit) {
+    fun profile(accessToken:String,onSuccess: (data:ProfileResponses) -> Unit, onFailure: () -> Unit) {
         api.loginProfile(accessToken).enqueue(object : Callback<ProfileResponses> {
             override fun onResponse(
                 call: Call<ProfileResponses>,
                 response: Response<ProfileResponses>
             ) {
                 if (response.isSuccessful) {
-                    onSuccess.invoke()
-                } else {
+                    response.body()?.let {
+                        onSuccess.invoke(it)
+                    }
+                }
+                    else {
                     onFailure.invoke()
                 }
             }

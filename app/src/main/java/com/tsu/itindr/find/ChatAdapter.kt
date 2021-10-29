@@ -8,6 +8,8 @@ import com.tsu.itindr.R
 
 class ChatAdapter:RecyclerView.Adapter<ChatAdapter.ViewHolder>(){
 
+
+
     override fun getItemCount(): Int {
         TODO("Not yet implemented")
     }

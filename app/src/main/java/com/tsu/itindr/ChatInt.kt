@@ -10,6 +10,6 @@ interface ChatInt {
     fun createChat(@Header("Authorization")token:String,chatParams: ChatParams): Call<ChatResponse>
 
     @GET("./v1/chat")
-    fun getChat(@Header("Authorization")token:String): Call<GetChatResponse>
+    fun getChat(@Header("Authorization")token:String): Call<List<GetChatResponse>>
 
 }

@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class GetChatResponse (
     val chat:ChatResponse,
     val lastMessage: LastMessage,
-    val user:UserParams
+    val user:UserParams,
+    val attachments:List<String>
     )

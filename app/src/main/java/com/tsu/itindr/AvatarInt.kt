@@ -8,4 +8,9 @@ import retrofit2.http.*
 interface AvatarInt {
     @Multipart
     @POST("./v1/profile/avatar")
-        fun upload(@Header("Authorization")token:String, @Part avatar:  MultipartBody.Part): Call<String>}
+        fun upload(@Header("Authorization")token:String, @Part avatar:  MultipartBody.Part): Call<String>
+
+    @DELETE("./v1/profile/avatar")
+    fun delete(@Header("Authorization")token:String): Call<String>
+
+}

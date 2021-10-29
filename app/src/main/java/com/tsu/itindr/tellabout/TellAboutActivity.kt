@@ -58,11 +58,10 @@ class TellAboutActivity : AppCompatActivity() {
     private val GALLERY_REQUEST = 1
     private val updateController = UserController()
     val chips: MutableList<String> = mutableListOf()
-    private lateinit var outputFileUri: Uri
 
     private fun addChip(it: TopicResponse) {
-        var text = it.title
-        var id = it.id
+        val text = it.title
+        val id = it.id
         val chip = LayoutInflater.from(this).inflate(R.layout.item_chip, null) as Chip
         chip.text = text
         chipGroup.addView(chip)
@@ -103,7 +102,7 @@ class TellAboutActivity : AppCompatActivity() {
 
             },
             onFailure = {
-                Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
             }
 
         )
@@ -124,15 +123,29 @@ class TellAboutActivity : AppCompatActivity() {
 
                 }
             )
-           // val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
+            // val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
             //startActivity(intent)
         }
 
 
     }
 
-     private fun saveAvatarFunc(uri: Uri) {
-         val sharedPreference = SharedPreference(this)
+    private fun deleteAvatar() {
+        val sharedPreference = SharedPreference(this)
+
+        saveAvatar.deleteAvatar("Bearer " + sharedPreference.getValueString("accessToken"),
+            onSuccess = {
+                viewbinding.imageViewAvatar.setImageResource(R.drawable.ic_user)
+                viewbinding.button.setText(R.string.choose_photo)
+            },
+            onFailure = {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+            })
+
+    }
+
+    private fun saveAvatarFunc(uri: Uri) {
+        val sharedPreference = SharedPreference(this)
         val stream = uri.let { contentResolver.openInputStream(it) }
         val bitmap = BitmapFactory.decodeStream(stream)
         val image = imageToByteArray(bitmap)
@@ -145,13 +158,13 @@ class TellAboutActivity : AppCompatActivity() {
             body,
             onSuccess = {
 
-                Toast.makeText(this, "Эивем", Toast.LENGTH_LONG).show()
-                viewbinding.button.setText("Удалить фото")
+                viewbinding.button.setText(R.string.delete_photo)
+                viewbinding.button.setOnClickListener { deleteAvatar() }
 
 
             },
             onFailure = {
-                Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
             })
 
     }
@@ -169,12 +182,12 @@ class TellAboutActivity : AppCompatActivity() {
             onSuccess = {
 
                 Toast.makeText(this, "Эивем", Toast.LENGTH_LONG).show()
-                viewbinding.button.setText("Удалить фото")
+                viewbinding.button.setText(R.string.delete_photo)
 
 
             },
             onFailure = {
-                Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
             })
 
     }

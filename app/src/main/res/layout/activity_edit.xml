@@ -22,6 +22,7 @@
             app:navigationIcon="@drawable/ic_arrow_left_line">
 
             <TextView
+                android:id="@+id/textViewedit"
                 style="@style/ToolBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -31,6 +32,7 @@
         </com.google.android.material.appbar.MaterialToolbar>
 
         <TextView
+            android:id="@+id/ChoosePhotoEdit"
             style="@style/Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,10 +40,10 @@
             android:layout_marginTop="50dp"
             android:text="@string/choose_photo"
             app:layout_constraintStart_toEndOf="@+id/imageViewEdit"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewAboutEdit" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textViewAboutEdit"
             style="@style/Title.Start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,12 +62,14 @@
             android:layout_height="88dp"
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_standard"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_user"
+            android:background="@drawable/shape_photo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:srcCompat="@drawable/selector_background" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewAboutEdit"/>
 
         <EditText
-            android:id="@+id/EditTextEdit"
+            android:id="@+id/editTextEditName"
             style="@style/Hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,9 +97,10 @@
             android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/EditTextEdit">
+            app:layout_constraintTop_toBottomOf="@+id/editTextEditName">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/TextInputEdit"
                 style="@style/Hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,7 +113,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textViewInterestEdit"
             style="@style/Title.Start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -129,137 +134,13 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-
-                android:text="@string/python"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/back_chip"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/django"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rest"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/swift"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/react_js"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/kotlin"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/git"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/unity"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/net"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sql"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/clean"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/uml"
-                android:textColor="@color/pink"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinHeight="25dp"
-                app:chipStrokeColor="@color/pink"
-                app:chipStrokeWidth="1dp" />
-
-
-        </com.google.android.material.chip.ChipGroup>
+            app:layout_constraintTop_toBottomOf="@+id/textViewInterestEdit"/>
 
         <Button
+            android:id="@+id/buttonSavEdit"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/Button"
             android:layout_marginStart="@dimen/margin_standard"
             android:layout_marginTop="44dp"
             android:layout_marginEnd="@dimen/margin_standard"
@@ -269,6 +150,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup"/>
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
