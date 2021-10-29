@@ -3,6 +3,6 @@ package com.tsu.itindr
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LikeResponse(
-    val isMutual:Boolean
+data class ChatParams(
+    val userId:String
 )

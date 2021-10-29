@@ -1,8 +1,10 @@
 package com.tsu.itindr.find
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tsu.itindr.R
 
 class ChatAdapter:RecyclerView.Adapter<ChatAdapter.ViewHolder>(){
 
@@ -11,7 +13,10 @@ class ChatAdapter:RecyclerView.Adapter<ChatAdapter.ViewHolder>(){
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        return ViewHolder(
+            LayoutInflater
+                .from(parent.context).inflate(R.layout.item_chat,parent,false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

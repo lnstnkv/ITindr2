@@ -10,6 +10,6 @@ interface UserInt {
     @GET("./v1/user/feed")
     fun feedUser(@Header("Authorization")token:String):Call<List<ProfileResponses>>
 
-    @POST("./v1/user/{userId}/like")
+    @POST()
     fun like(@Header("Authorization")token:String,@Url url:String):Call<LikeResponse>
 }

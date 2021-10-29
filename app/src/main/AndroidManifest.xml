@@ -3,17 +3,21 @@
     package="com.tsu.itindr">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
+        android:fontFamily="@font/montserrat_bold"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/itindr"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.ITindr"
-        android:usesCleartextTraffic="true"
-        android:fontFamily="@font/montserrat_bold">
+        android:usesCleartextTraffic="true">
+        <activity android:theme="@style/Theme.Transparent"
+            android:name=".find.MatchActivity"
+            android:exported="true" />
         <activity
             android:name=".edit.EditActivity"
             android:exported="true" />

@@ -1,9 +1,11 @@
 package com.tsu.itindr.find
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
@@ -20,8 +22,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var chipGroup: ChipGroup
     private val controller = UserFeedController()
+    private val controllerLike = LikeController()
     var users: List<ProfileResponses> = listOf()
     var index: Int = 0
+    var indexId:Int=0
+    var userID:String=""
+
     private lateinit var viewbinding: FragmentSearchBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,8 +40,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             "Bearer " + sharedPreference.getValueString("accessToken"),
             onSuccess = {
                 users = it
-                Log.d("Текст",(users[index].name).toString())
-                Log.d("Текс2",( viewbinding.textViewNameFeed.text).toString())
+
                 viewbinding.textViewNameFeed.text = users[index].name
                 for (j in users[index].topics) {
                     addChip(j.title)
@@ -46,6 +51,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     .load(users[index].avatar)
                     .into(viewbinding.imageViewAvatarSearch);
 
+              userID = users[index].userId
+                Log.d("KZKZKKZKZ",userID.toString())
 
             },
             onFailure = {
@@ -53,8 +60,31 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
         )
+
         viewbinding.buttonLike.setOnClickListener {
+            Log.d("KZKZKKZKZ",userID.toString())
+           controllerLike.likeUser(
+                "Bearer " + sharedPreference.getValueString("accessToken"),
+                userID,
+                onSuccess = {
+                    if (it.isMutual)
+                    {
+                        val intent = Intent(activity, MatchActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                },
+                onFailure = {
+                    Toast.makeText(activity, "ТЫ сделала хрень", Toast.LENGTH_LONG).show()
+                }
+
+            )
+
+
+
             index++
+            chipGroup.removeAllViews()
+            userID = users[index].userId
             viewbinding.textViewNameFeed.text = users[index].name
             for (j in users[index].topics) {
                 addChip(j.title)
@@ -64,9 +94,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 .with(this)
                 .load(users[index].avatar)
                 .into(viewbinding.imageViewAvatarSearch);
+        }
 
         }
-    }
+
 
     private fun addChip(text: String) {
 
