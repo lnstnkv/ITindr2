@@ -22,7 +22,7 @@
         <item name="android:backgroundTint">@color/white</item>
         <item name="android:textColor">@color/pink</item>
     </style>
-    <style name="Hint">
+    <style name="Hint" >
         <item name="android:textColorHint">@color/hint</item>
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@color/black</item>

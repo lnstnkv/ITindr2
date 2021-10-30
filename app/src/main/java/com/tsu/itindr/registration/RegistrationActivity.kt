@@ -17,7 +17,7 @@ class RegistrationActivity : AppCompatActivity() {
 
     private lateinit var token: String
     private lateinit var viewbinding: ActivityRegistrationBinding
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreference = SharedPreference(this)
         viewbinding = ActivityRegistrationBinding.inflate(layoutInflater)
@@ -27,37 +27,43 @@ class RegistrationActivity : AppCompatActivity() {
             if (samePassword(
                     viewbinding.editTextTextPassworReg.text.toString(),
                     viewbinding.editTextTextPasswordTwice.text.toString()
-                ) && (emailRegex(viewbinding.editTextEmailAddressReg.text.toString()))
+                )
             ) {
-                /*controller2.profile(
-                "Bearer "+ accessToken,
-            )
-            */
-                controller.register(
-                    RegisterParams(
-                        viewbinding.editTextEmailAddressReg.text.toString(),
-                        viewbinding.editTextTextPassworReg.text.toString()
-                    ),
-                    onSuccess = {
+                if ((emailRegex(viewbinding.editTextEmailAddressReg.text.toString()))) {
+                    controller.register(
+                        RegisterParams(
+                            viewbinding.editTextEmailAddressReg.text.toString(),
+                            viewbinding.editTextTextPassworReg.text.toString()
+                        ),
+                        onSuccess = {
 
-                       sharedPreference.save("accessToken",it.accessToken)
-                        val intent =
-                            Intent(this@RegistrationActivity, TellAboutActivity::class.java)
-                        startActivity(intent)
+                            sharedPreference.save("accessToken", it.accessToken)
+                            val intent =
+                                Intent(this@RegistrationActivity, TellAboutActivity::class.java)
+                            startActivity(intent)
 
-                    },
-                    onFailure = {
-                        Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show()
-                    })
+                        },
+                        onFailure = {
+                            Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+                        })
+                } else {
+                    Toast.makeText(this, R.string.error_email, Toast.LENGTH_LONG).show()
+                }
+            } else
+            {
+                Toast.makeText(this, R.string.error_pwd, Toast.LENGTH_LONG).show()
             }
         }
 
     }
 }
-private fun emailRegex(email:String): Boolean{
-    val regex= Regex("""[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}""") //[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}
+
+private fun emailRegex(email: String): Boolean {
+    val regex =
+        Regex("""[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}""") //[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}
     return regex.matches(email)
 }
+
 private fun samePassword(password: String, passwordRepeat: String): Boolean {
     return passwordRepeat.contentEquals(password)
 }

@@ -24,12 +24,10 @@ class ChatFragment:Fragment(R.layout.fragment_chat) {
         controller.getChat(
             "Bearer " + sharedPreference.getValueString("accessToken"),
             onSuccess = {
-                        for(i in it){
-
-                        }
+                Toast.makeText(activity, R.string.people, Toast.LENGTH_LONG).show()
             },
             onFailure = {
-                Toast.makeText(activity, "ТЫ сделала хрень", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
 
         )

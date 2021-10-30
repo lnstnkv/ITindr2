@@ -29,13 +29,14 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarControls">>
+        app:layout_constraintTop_toBottomOf="@+id/toolbarControls">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -78,7 +79,7 @@
                 android:layout_marginEnd="37dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNameProfile"></com.google.android.material.chip.ChipGroup>
+                app:layout_constraintTop_toBottomOf="@+id/textViewNameProfile" />
 
             <TextView
                 android:id="@+id/textViewAboutMySelf"

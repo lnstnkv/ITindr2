@@ -30,7 +30,7 @@ class LikeController {
 
 
     fun dislikeUser(accessToken:String, url:String, onSuccess: () -> Unit, onFailure: () -> Unit){
-        api.disLike(accessToken, "./v1/user/" + url + "/like").enqueue(object : Callback<String>{
+        api.disLike(accessToken, "./v1/user/" + url + "/dislike").enqueue(object : Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
                 if (response.isSuccessful) {

@@ -113,7 +113,7 @@ class TellAboutActivity : AppCompatActivity() {
                     startActivity(intent)
                 },
                 onFailure = {
-
+                    Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
                 }
             )
             // val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
@@ -174,7 +174,6 @@ class TellAboutActivity : AppCompatActivity() {
             body,
             onSuccess = {
 
-                Toast.makeText(this, "Эивем", Toast.LENGTH_LONG).show()
                 viewbinding.button.setText(R.string.delete_photo)
 
 

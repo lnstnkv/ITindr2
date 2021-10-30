@@ -35,14 +35,18 @@ class AuthorizationActivity : AppCompatActivity() {
 
                     },
                     onFailure = {
-                        Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
                     })
+            }
+            else
+            {
+                Toast.makeText(this, R.string.error_email, Toast.LENGTH_LONG).show()
             }
         }
     }
 }
 
 private fun emailRegex(email: String): Boolean {
-    var regex = Regex("\\w*@\\w*\\.[a-zA-Z]*")
+    var regex = Regex("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}")
     return regex.matches(email)
 }

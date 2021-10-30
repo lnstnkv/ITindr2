@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     tools:context=".tellabout.TellAboutActivity">
 <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -75,7 +76,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
+        android:background="@null"
         android:textAlignment="viewStart"
+        app:boxStrokeColor="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName">
@@ -88,9 +91,7 @@
             android:background="@drawable/selector_background"
             android:hint="@string/about_yourself"
             android:inputType="textLongMessage"
-            android:paddingVertical="64dp">
-
-        </com.google.android.material.textfield.TextInputEditText>
+            android:paddingVertical="64dp"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

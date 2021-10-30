@@ -42,5 +42,6 @@
     <string name="item_save">Данные успешно сохранены</string>
     <string name="error">Ошибка</string>
     <string name="update">Загрузка</string>
-
+    <string name="error_email">Проверьте введенный email</string>
+    <string name="error_pwd">Пароли не совпадают</string>
 </resources>

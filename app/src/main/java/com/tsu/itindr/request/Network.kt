@@ -21,7 +21,7 @@ object Network {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         }
     }
-    private val client = OkHttpClient.Builder().readTimeout(20, TimeUnit.SECONDS)
+    private val client = OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(50, TimeUnit.SECONDS)
         .addInterceptor(interceptor).build()
 

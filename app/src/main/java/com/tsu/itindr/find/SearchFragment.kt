@@ -55,8 +55,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     .into(viewbinding.imageViewAvatarSearch);
 
                 userID = users[index].userId
-                Log.d("KZKZKKZKZ", userID.toString())
-
             },
             onFailure = {
 
@@ -88,7 +86,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 .into(viewbinding.imageViewAvatarSearch);
         }
         viewbinding.buttonLike.setOnClickListener {
-            Log.d("KZKZKKZKZ", userID.toString())
             controllerLike.likeUser(
                 "Bearer " + sharedPreference.getValueString("accessToken"),
                 userID,
