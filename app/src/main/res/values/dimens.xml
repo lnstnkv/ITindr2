@@ -6,4 +6,7 @@
     <dimen name="padding">24dp</dimen>
     <dimen name="padding_vertical">15dp</dimen>
     <dimen name="padding_vertical_hint">18dp</dimen>
+    <dimen name="margin8">8dp</dimen>
+    <dimen name="margin16">16dp</dimen>
+    <dimen name="margin32">32dp</dimen>
 </resources>

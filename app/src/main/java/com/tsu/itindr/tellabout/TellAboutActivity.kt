@@ -90,8 +90,6 @@ class TellAboutActivity : AppCompatActivity() {
                 for (i in it) {
                     addChip(i)
                 }
-
-
             },
             onFailure = {
                 Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()

@@ -14,35 +14,40 @@ import com.tsu.itindr.request.SharedPreference
 class AuthorizationActivity : AppCompatActivity() {
     private val controller = LoginController()
     private lateinit var viewbinding: ActivityAuthorizationBinding
+    val sharedPreference = SharedPreference(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreference = SharedPreference(this)
+
         viewbinding = ActivityAuthorizationBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
         viewbinding.buttonBackAuto.setOnClickListener { this.finish() }
         viewbinding.buttonComeAuto.setOnClickListener {
             if (emailRegex(viewbinding.editTextEmailAddressAuto.text.toString())) {
-                controller.login(
-                    LoginParams(
-                        viewbinding.editTextEmailAddressAuto.text.toString(),
-                        viewbinding.editTextPasswordAuto.text.toString()
-                    ),
-                    onSuccess = {
-                        sharedPreference.save("accessToken",it.accessToken)
-                        val intent =
-                            Intent(this@AuthorizationActivity, FindActivity::class.java)
-                        startActivity(intent)
-
-                    },
-                    onFailure = {
-                        Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-                    })
+              authorizationProfile()
             }
             else
             {
                 Toast.makeText(this, R.string.error_email, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun authorizationProfile() {
+        controller.login(
+            LoginParams(
+                viewbinding.editTextEmailAddressAuto.text.toString(),
+                viewbinding.editTextPasswordAuto.text.toString()
+            ),
+            onSuccess = {
+                sharedPreference.save("accessToken",it.accessToken)
+                val intent =
+                    Intent(this@AuthorizationActivity, FindActivity::class.java)
+                startActivity(intent)
+
+            },
+            onFailure = {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+            })
     }
 }
 

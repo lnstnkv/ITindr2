@@ -35,10 +35,11 @@ class EditActivity : AppCompatActivity() {
         viewbinding.imageViewEdit.load(imageUri)
         saveAvatarFunc(imageUri)
     }
-
+    val sharedPreference = SharedPreference(this)
+    val accessToken = sharedPreference.getValueString("accessToken")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreference = SharedPreference(this)
+
         viewbinding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
         viewbinding.imageViewEdit.clipToOutline = true
@@ -47,10 +48,20 @@ class EditActivity : AppCompatActivity() {
             imagePicker.pickImage()
 
         }
+        getProfile()
+        getTopic()
+
+        viewbinding.buttonSavEdit.setOnClickListener {
+            updateProfile()
+        }
+
+    }
+
+    private fun getProfile() {
         controller.profile(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
+            "Bearer " + accessToken,
             onSuccess = {
-                chooseChips= it.topics
+                chooseChips = it.topics
                 for (j in it.topics) {
                     chooseChip(j.title)
                 }
@@ -64,47 +75,15 @@ class EditActivity : AppCompatActivity() {
 
             },
             onFailure = {
-
-            }
-        )
-        controllerTopic.topic(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
-            onSuccess = {
-
-                for (i in it) {
-                    addChip(i)
-                }
-            },
-            onFailure = {
                 Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
             }
-
         )
-        viewbinding.buttonSavEdit.setOnClickListener {
-            updateController.update(
-                "Bearer " + sharedPreference.getValueString("accessToken"),
-                UpdateParams(
-                    viewbinding.editTextEditName.text.toString(),
-                    viewbinding.TextInputEdit.text.toString(),
-                    chips.toList()
-                ),
-                onSuccess = {
-                    Toast.makeText(this, R.string.item_save, Toast.LENGTH_LONG).show()
-                },
-                onFailure = {
-                    Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-                }
-            )
-
-        }
-
-
     }
 
     private fun deleteAvatar() {
         val sharedPreference = SharedPreference(this)
 
-        saveAvatar.deleteAvatar("Bearer " + sharedPreference.getValueString("accessToken"),
+        saveAvatar.deleteAvatar("Bearer " + accessToken,
             onSuccess = {
                 viewbinding.imageViewEdit.setImageResource(R.drawable.ic_user)
                 viewbinding.buttonChooseEdit.setText(R.string.choose_photo)
@@ -120,12 +99,11 @@ class EditActivity : AppCompatActivity() {
         val id = it.id
         val chipWhite = LayoutInflater.from(this).inflate(R.layout.item_chip, null) as Chip
         chipWhite.text = text
-       for(i in chooseChips)
-       {
-          if(i.title==text){
-              chipWhite.isChecked
-          }
-       }
+        for (i in chooseChips) {
+            if (i.title == text) {
+                chipWhite.isChecked
+            }
+        }
         viewbinding.chipGroup.addView(chipWhite)
         chipWhite.setOnClickListener {
             if (chipWhite.isChecked) {
@@ -153,7 +131,7 @@ class EditActivity : AppCompatActivity() {
         val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
 
         saveAvatar.updateAvatar(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
+            "Bearer " + accessToken,
             body,
             onSuccess = {
 
@@ -172,6 +150,39 @@ class EditActivity : AppCompatActivity() {
         val byteArrayOutput = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutput)
         return byteArrayOutput.toByteArray()
+    }
+
+    private fun getTopic() {
+        controllerTopic.topic(
+            "Bearer " + accessToken,
+            onSuccess = {
+
+                for (i in it) {
+                    addChip(i)
+                }
+            },
+            onFailure = {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+            }
+
+        )
+    }
+
+    private fun updateProfile() {
+        updateController.update(
+            "Bearer " + accessToken,
+            UpdateParams(
+                viewbinding.editTextEditName.text.toString(),
+                viewbinding.TextInputEdit.text.toString(),
+                chips.toList()
+            ),
+            onSuccess = {
+                Toast.makeText(this, R.string.item_save, Toast.LENGTH_LONG).show()
+            },
+            onFailure = {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+            }
+        )
     }
 }
 
