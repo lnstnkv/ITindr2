@@ -51,6 +51,66 @@ class TellAboutActivity : AppCompatActivity() {
     private val updateController = UserController()
     val chips: MutableList<String> = mutableListOf()
 
+
+    val sharedPreference = SharedPreference(this)
+    val accessToken = sharedPreference.getValueString("accessToken")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewbinding = ActivityTellAboutBinding.inflate(layoutInflater)
+        setContentView(viewbinding.root)
+
+        chipGroup = viewbinding.chipGroup
+        viewbinding.imageViewAvatar.clipToOutline = true
+        imageView = viewbinding.imageViewAvatar
+
+        viewbinding.button.setOnClickListener {
+            imagePicker.pickImage()
+
+        }
+        addTopic()
+
+        viewbinding.buttonSaveYourself.setOnClickListener {
+            updateParams()
+
+        }
+
+    }
+
+    private fun updateParams() {
+        updateController.update(
+            "Bearer " + accessToken,
+            UpdateParams(
+                viewbinding.editTextName.text.toString(),
+                viewbinding.editTextAboutYourself
+                    .text.toString(),
+                chips.toList()
+            ),
+            onSuccess = {
+                val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
+                startActivity(intent)
+            },
+            onFailure = {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+            }
+        )
+    }
+
+    private fun addTopic() {
+        controller.topic(
+            "Bearer " + accessToken,
+            onSuccess = {
+
+                for (i in it) {
+                    addChip(i)
+                }
+            },
+            onFailure = {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+            }
+
+        )
+    }
+
     private fun addChip(it: TopicResponse) {
         val text = it.title
         val id = it.id
@@ -67,64 +127,9 @@ class TellAboutActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewbinding = ActivityTellAboutBinding.inflate(layoutInflater)
-        setContentView(viewbinding.root)
-        val sharedPreference = SharedPreference(this)
-
-        chipGroup = viewbinding.chipGroup
-        viewbinding.imageViewAvatar.clipToOutline = true
-        imageView = viewbinding.imageViewAvatar
-
-        viewbinding.button.setOnClickListener {
-            imagePicker.pickImage()
-
-        }
-
-        controller.topic(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
-            onSuccess = {
-
-                for (i in it) {
-                    addChip(i)
-                }
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            }
-
-        )
-
-        viewbinding.buttonSaveYourself.setOnClickListener {
-            updateController.update(
-                "Bearer " + sharedPreference.getValueString("accessToken"),
-                UpdateParams(
-                    viewbinding.editTextName.text.toString(),
-                    viewbinding.editTextAboutYourself
-                    .text.toString(),
-                    chips.toList()
-                ),
-                onSuccess = {
-                    val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
-                    startActivity(intent)
-                },
-                onFailure = {
-                    Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-                }
-            )
-            // val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
-            //startActivity(intent)
-        }
-
-
-    }
-
     private fun deleteAvatar() {
-        val sharedPreference = SharedPreference(this)
 
-        saveAvatar.deleteAvatar("Bearer " + sharedPreference.getValueString("accessToken"),
+        saveAvatar.deleteAvatar("Bearer " + accessToken,
             onSuccess = {
                 viewbinding.imageViewAvatar.setImageResource(R.drawable.ic_user)
                 viewbinding.button.setText(R.string.choose_photo)
@@ -145,7 +150,7 @@ class TellAboutActivity : AppCompatActivity() {
         val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
 
         saveAvatar.updateAvatar(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
+            "Bearer " + accessToken,
             body,
             onSuccess = {
 
@@ -168,7 +173,7 @@ class TellAboutActivity : AppCompatActivity() {
         val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
 
         saveAvatar.updateAvatar(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
+            "Bearer " + accessToken,
             body,
             onSuccess = {
 

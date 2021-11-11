@@ -14,47 +14,51 @@ import com.tsu.itindr.tellabout.TellAboutActivity
 
 class RegistrationActivity : AppCompatActivity() {
     private val controller = RegisterController()
-
+    val sharedPreference = SharedPreference(this)
     private lateinit var token: String
     private lateinit var viewbinding: ActivityRegistrationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreference = SharedPreference(this)
+
         viewbinding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
         viewbinding.buttonBackRegister.setOnClickListener { this.finish() }
         viewbinding.buttonComeRegister.setOnClickListener {
-            if (samePassword(
+            if (!samePassword(
                     viewbinding.editTextTextPassworReg.text.toString(),
                     viewbinding.editTextTextPasswordTwice.text.toString()
                 )
-            ) {
-                if ((emailRegex(viewbinding.editTextEmailAddressReg.text.toString()))) {
-                    controller.register(
-                        RegisterParams(
-                            viewbinding.editTextEmailAddressReg.text.toString(),
-                            viewbinding.editTextTextPassworReg.text.toString()
-                        ),
-                        onSuccess = {
+            ) return@setOnClickListener Toast.makeText(this, R.string.error_pwd, Toast.LENGTH_LONG)
+                .show()
 
-                            sharedPreference.save("accessToken", it.accessToken)
-                            val intent =
-                                Intent(this@RegistrationActivity, TellAboutActivity::class.java)
-                            startActivity(intent)
+            if (!(emailRegex(viewbinding.editTextEmailAddressReg.text.toString())))
+                return@setOnClickListener Toast.makeText(
+                    this,
+                    R.string.error_email,
+                    Toast.LENGTH_LONG
+                ).show()
 
-                        },
-                        onFailure = {
-                            Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-                        })
-                } else {
-                    Toast.makeText(this, R.string.error_email, Toast.LENGTH_LONG).show()
-                }
-            } else
-            {
-                Toast.makeText(this, R.string.error_pwd, Toast.LENGTH_LONG).show()
-            }
+            registerProfile()
         }
+    }
 
+    private fun registerProfile() {
+        controller.register(
+            RegisterParams(
+                viewbinding.editTextEmailAddressReg.text.toString(),
+                viewbinding.editTextTextPassworReg.text.toString()
+            ),
+            onSuccess = {
+
+                sharedPreference.save("accessToken", it.accessToken)
+                val intent =
+                    Intent(this@RegistrationActivity, TellAboutActivity::class.java)
+                startActivity(intent)
+
+            },
+            onFailure = {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
+            })
     }
 }
 

@@ -15,9 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ITindr"
         android:usesCleartextTraffic="true">
-        <activity android:theme="@style/Theme.Transparent"
-            android:name=".find.MatchActivity"
+        <activity
+            android:name=".profile.ProfileActivity"
             android:exported="true" />
+        <activity
+            android:name=".find.MatchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".edit.EditActivity"
             android:exported="true" />

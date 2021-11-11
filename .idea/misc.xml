@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/ITindr/app/src/main/res/drawable/ic_user_shape.xml" value="0.2483108108108108" />
+        <entry key="..\:/AndroidStudioProjects/ITindr/app/src/main/res/layout/activity_profile.xml" value="0.23783783783783785" />
+        <entry key="..\:/AndroidStudioProjects/ITindr/app/src/main/res/layout/item_people.xml" value="0.23783783783783785" />
         <entry key="..\:/Users/Zver/AndroidStudioProjects/ITindr/app/src/main/res/drawable-v24/selector_background.xml" value="0.14121621621621622" />
         <entry key="..\:/Users/Zver/AndroidStudioProjects/ITindr/app/src/main/res/drawable/back_chip.xml" value="0.14358108108108109" />
         <entry key="..\:/Users/Zver/AndroidStudioProjects/ITindr/app/src/main/res/drawable/gradient.xml" value="0.2483108108108108" />

@@ -30,17 +30,32 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     var index: Int = 0
     var indexId: Int = 0
     var userID: String = ""
-
+    val sharedPreference = SharedPreference(activity as FindActivity)
+    val accessToken = sharedPreference.getValueString("accessToken")
     private lateinit var viewbinding: FragmentSearchBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewbinding = FragmentSearchBinding.bind(view)
         chipGroup = viewbinding.chipGroupSearch
         viewbinding.imageViewAvatarSearch.clipToOutline = true
-        val sharedPreference = SharedPreference(activity as FindActivity)
 
+        getUser()
+
+        viewbinding.buttonClose.setOnClickListener {
+            disLikeProfile()
+            addResponse()
+        }
+        viewbinding.buttonLike.setOnClickListener {
+
+            likeProfile()
+            addResponse()
+        }
+
+    }
+
+    private fun getUser() {
         controller.feedUser(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
+            "Bearer " + accessToken,
             onSuccess = {
                 users = it
 
@@ -57,69 +72,58 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 userID = users[index].userId
             },
             onFailure = {
-
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
 
         )
-        viewbinding.buttonClose.setOnClickListener {
-            controllerLike.dislikeUser(
-                "Bearer " + sharedPreference.getValueString("accessToken"),
-                    userID,
-                onSuccess = {
-
-                },
-                onFailure = {
-                    Toast.makeText(activity,  R.string.error, Toast.LENGTH_LONG).show()
-                }
-            )
-            index++
-            chipGroup.removeAllViews()
-            userID = users[index].userId
-            viewbinding.textViewNameFeed.text = users[index].name
-            for (j in users[index].topics) {
-                addChip(j.title)
-            }
-            viewbinding.textViewAbout.text = users[index].aboutMyself
-            Glide
-                .with(this)
-                .load(users[index].avatar)
-                .into(viewbinding.imageViewAvatarSearch);
-        }
-        viewbinding.buttonLike.setOnClickListener {
-            controllerLike.likeUser(
-                "Bearer " + sharedPreference.getValueString("accessToken"),
-                userID,
-                onSuccess = {
-                    if (it.isMutual) {
-                        val intent = Intent(activity, MatchActivity::class.java)
-                        startActivity(intent)
-                    }
-
-                },
-                onFailure = {
-                    Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
-                }
-
-            )
-
-
-
-            index++
-            chipGroup.removeAllViews()
-            userID = users[index].userId
-            viewbinding.textViewNameFeed.text = users[index].name
-            for (j in users[index].topics) {
-                addChip(j.title)
-            }
-            viewbinding.textViewAbout.text = users[index].aboutMyself
-            Glide
-                .with(this)
-                .load(users[index].avatar)
-                .into(viewbinding.imageViewAvatarSearch);
-        }
-
     }
 
+    private fun disLikeProfile() {
+        controllerLike.dislikeUser(
+            "Bearer " + accessToken,
+            userID,
+            onSuccess = {
+                Toast.makeText(activity, "Как жаль, что он вам не подошел!", Toast.LENGTH_LONG)
+                    .show()
+            },
+            onFailure = {
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
+            }
+        )
+    }
+
+    private fun likeProfile() {
+        controllerLike.likeUser(
+            "Bearer " + accessToken,
+            userID,
+            onSuccess = {
+                if (it.isMutual) {
+                    val intent = Intent(activity, MatchActivity::class.java)
+                    startActivity(intent)
+                }
+
+            },
+            onFailure = {
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
+            }
+
+        )
+    }
+
+    private fun addResponse() {
+        index++
+        chipGroup.removeAllViews()
+        userID = users[index].userId
+        viewbinding.textViewNameFeed.text = users[index].name
+        for (j in users[index].topics) {
+            addChip(j.title)
+        }
+        viewbinding.textViewAbout.text = users[index].aboutMyself
+        Glide
+            .with(this)
+            .load(users[index].avatar)
+            .into(viewbinding.imageViewAvatarSearch)
+    }
 
     private fun addChip(text: String) {
 
