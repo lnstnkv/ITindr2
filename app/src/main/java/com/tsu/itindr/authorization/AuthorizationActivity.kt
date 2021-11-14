@@ -14,16 +14,16 @@ import com.tsu.itindr.request.SharedPreference
 class AuthorizationActivity : AppCompatActivity() {
     private val controller = LoginController()
     private lateinit var viewbinding: ActivityAuthorizationBinding
-    val sharedPreference = SharedPreference(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val sharedPreference = SharedPreference(this)
         viewbinding = ActivityAuthorizationBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
         viewbinding.buttonBackAuto.setOnClickListener { this.finish() }
         viewbinding.buttonComeAuto.setOnClickListener {
             if (emailRegex(viewbinding.editTextEmailAddressAuto.text.toString())) {
-              authorizationProfile()
+              authorizationProfile(sharedPreference)
             }
             else
             {
@@ -32,7 +32,7 @@ class AuthorizationActivity : AppCompatActivity() {
         }
     }
 
-    private fun authorizationProfile() {
+    private fun authorizationProfile(sharedPreference:SharedPreference) {
         controller.login(
             LoginParams(
                 viewbinding.editTextEmailAddressAuto.text.toString(),

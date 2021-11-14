@@ -23,8 +23,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val controller = ProfileController()
     private lateinit var binding: FragmentProfileBinding
-    val sharedPreference = SharedPreference(activity as FindActivity)
-    val accessToken=sharedPreference.getValueString("accessToken")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
@@ -32,17 +30,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             val intent = Intent(activity, EditActivity::class.java)
             binding.buttonEdit.setOnClickListener { startActivity(intent) }
         }
-
+        val sharedPreference = SharedPreference(activity as FindActivity)
 
         binding.imageViewAvatarProfile.clipToOutline = true
-        getProfile()
-
-
-    }
-
-    private fun getProfile() {
         controller.profile(
-            "Bearer " + accessToken,
+            "Bearer " + sharedPreference.getValueString("accessToken"),
             onSuccess = {
                 for (j in it.topics) {
                     addChip(j.title)
@@ -56,9 +48,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
             },
             onFailure = {
-                Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
+
             }
         )
+
     }
 
 

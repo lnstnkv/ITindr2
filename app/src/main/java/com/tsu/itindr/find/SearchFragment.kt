@@ -30,8 +30,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     var index: Int = 0
     var indexId: Int = 0
     var userID: String = ""
-    val sharedPreference = SharedPreference(activity as FindActivity)
-    val accessToken = sharedPreference.getValueString("accessToken")
+
     private lateinit var viewbinding: FragmentSearchBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,6 +53,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun getUser() {
+        val sharedPreference = SharedPreference(activity as FindActivity)
+        val accessToken = sharedPreference.getValueString("accessToken")
         controller.feedUser(
             "Bearer " + accessToken,
             onSuccess = {
@@ -79,6 +80,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun disLikeProfile() {
+        val sharedPreference = SharedPreference(activity as FindActivity)
+        val accessToken = sharedPreference.getValueString("accessToken")
         controllerLike.dislikeUser(
             "Bearer " + accessToken,
             userID,
@@ -93,6 +96,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun likeProfile() {
+        val sharedPreference = SharedPreference(activity as FindActivity)
+        val accessToken = sharedPreference.getValueString("accessToken")
         controllerLike.likeUser(
             "Bearer " + accessToken,
             userID,

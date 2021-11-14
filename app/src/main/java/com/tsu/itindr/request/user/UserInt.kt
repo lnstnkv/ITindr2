@@ -18,4 +18,7 @@ interface UserInt {
 
     @POST()
     fun disLike(@Header("Authorization")token:String,@Url url:String):Call<String>
+
+    @GET("./v1/user")
+    fun getPeople(@Header("Authorization")token:String,@Query("limit") limit:Int,@Query("offset") offset:Int):Call<List<ProfileResponses>>
 }

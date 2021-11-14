@@ -81,9 +81,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun deleteAvatar() {
-        val sharedPreference = SharedPreference(this)
-
-        saveAvatar.deleteAvatar("Bearer " + accessToken,
+          saveAvatar.deleteAvatar("Bearer " + accessToken,
             onSuccess = {
                 viewbinding.imageViewEdit.setImageResource(R.drawable.ic_user)
                 viewbinding.buttonChooseEdit.setText(R.string.choose_photo)

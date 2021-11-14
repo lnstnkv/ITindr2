@@ -14,12 +14,12 @@ import com.tsu.itindr.tellabout.TellAboutActivity
 
 class RegistrationActivity : AppCompatActivity() {
     private val controller = RegisterController()
-    val sharedPreference = SharedPreference(this)
+
     private lateinit var token: String
     private lateinit var viewbinding: ActivityRegistrationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val sharedPreference = SharedPreference(this)
         viewbinding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
         viewbinding.buttonBackRegister.setOnClickListener { this.finish() }
@@ -38,11 +38,11 @@ class RegistrationActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
 
-            registerProfile()
+            registerProfile(sharedPreference)
         }
     }
 
-    private fun registerProfile() {
+    private fun registerProfile(sharedPreference:SharedPreference) {
         controller.register(
             RegisterParams(
                 viewbinding.editTextEmailAddressReg.text.toString(),

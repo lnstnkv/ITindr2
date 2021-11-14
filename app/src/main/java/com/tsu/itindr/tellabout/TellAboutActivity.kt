@@ -52,13 +52,13 @@ class TellAboutActivity : AppCompatActivity() {
     val chips: MutableList<String> = mutableListOf()
 
 
-    val sharedPreference = SharedPreference(this)
-    val accessToken = sharedPreference.getValueString("accessToken")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewbinding = ActivityTellAboutBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
 
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         chipGroup = viewbinding.chipGroup
         viewbinding.imageViewAvatar.clipToOutline = true
         imageView = viewbinding.imageViewAvatar
@@ -67,16 +67,16 @@ class TellAboutActivity : AppCompatActivity() {
             imagePicker.pickImage()
 
         }
-        addTopic()
+        addTopic(accessToken)
 
         viewbinding.buttonSaveYourself.setOnClickListener {
-            updateParams()
+            updateParams(accessToken)
 
         }
 
     }
 
-    private fun updateParams() {
+    private fun updateParams(accessToken:String?) {
         updateController.update(
             "Bearer " + accessToken,
             UpdateParams(
@@ -95,7 +95,7 @@ class TellAboutActivity : AppCompatActivity() {
         )
     }
 
-    private fun addTopic() {
+    private fun addTopic(accessToken:String?) {
         controller.topic(
             "Bearer " + accessToken,
             onSuccess = {
@@ -128,7 +128,8 @@ class TellAboutActivity : AppCompatActivity() {
     }
 
     private fun deleteAvatar() {
-
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         saveAvatar.deleteAvatar("Bearer " + accessToken,
             onSuccess = {
                 viewbinding.imageViewAvatar.setImageResource(R.drawable.ic_user)
@@ -141,14 +142,14 @@ class TellAboutActivity : AppCompatActivity() {
     }
 
     private fun saveAvatarFunc(uri: Uri) {
-        val sharedPreference = SharedPreference(this)
         val stream = uri.let { contentResolver.openInputStream(it) }
         val bitmap = BitmapFactory.decodeStream(stream)
         val image = imageToByteArray(bitmap)
         val requestFile: RequestBody =
             image.toRequestBody("multipart/form-data".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
-
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         saveAvatar.updateAvatar(
             "Bearer " + accessToken,
             body,
@@ -167,6 +168,7 @@ class TellAboutActivity : AppCompatActivity() {
 
     private fun saveAvatarFuncGallery(bitmap: Bitmap) {
         val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         val image = imageToByteArray(bitmap)
         val requestFile: RequestBody =
             image.toRequestBody("multipart/form-data".toMediaTypeOrNull())
