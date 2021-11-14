@@ -16,6 +16,15 @@
         android:theme="@style/Theme.ITindr"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".launcher.SplashActivity"
+            android:theme="@style/Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".profile.ProfileActivity"
             android:exported="true" />
         <activity
@@ -40,11 +49,7 @@
         <activity
             android:name=".start.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
