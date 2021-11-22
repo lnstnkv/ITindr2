@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
 import com.tsu.itindr.R
 import com.tsu.itindr.databinding.ItemChatBinding
 import com.tsu.itindr.databinding.ItemPeopleBinding
@@ -51,8 +52,11 @@ class PeopleAdapter(
         fun bind(peopleProfile: PeopleProfile) = with(binding) {
            textViewNamePeople.text = peopleProfile.username
             peopleProfile.avatar?.let {
-                imageViewAvatarPeople.load(it)
-                imageViewAvatarPeople.clipToOutline= true
+                Glide
+                    .with(imageViewAvatarPeople.context)
+                    .load(peopleProfile.avatar)
+                    .circleCrop()
+                    .into(imageViewAvatarPeople)
             }
         }
     }

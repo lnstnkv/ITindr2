@@ -1,4 +1,4 @@
-package com.tsu.itindr.request.login
+package com.tsu.itindr.authorization.model
 
 import retrofit2.Call
 import retrofit2.http.Body

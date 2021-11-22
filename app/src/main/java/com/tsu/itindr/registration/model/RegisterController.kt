@@ -1,4 +1,4 @@
-package com.tsu.itindr.request.register
+package com.tsu.itindr.registration.model
 
 import com.tsu.itindr.request.Network
 import retrofit2.Call

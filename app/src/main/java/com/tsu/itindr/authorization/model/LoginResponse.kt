@@ -1,9 +1,9 @@
-package com.tsu.itindr.request.register
+package com.tsu.itindr.authorization.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RefreshResponse(
+data class LoginResponse(
     val accessToken: String,
     val accessTokenExpiredAt: String,
     val refreshToken: String,

@@ -1,9 +1,9 @@
-package com.tsu.itindr.request.register
+package com.tsu.itindr.authorization.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterParams(
+data class LoginParams(
     val email:String,
     val password:String
 )

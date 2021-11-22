@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class LastMessage(
     val id:String,
     val text:String?=null,
-    val createAt:String,
+    val createdAt:String,
     val user:UserParams,
     val attachments:List<String>?=null
 )

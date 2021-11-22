@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
 import com.tsu.itindr.R
 import com.tsu.itindr.databinding.ItemChatBinding
 
@@ -45,7 +46,12 @@ class ChatAdapter(
            textViewNameUser.text= profileItem.username
            profileItem.lastMessage?.let { textViewLasMessenger.text=it }
            profileItem.avatar?.let {
-               imageViewUserChat.load(it)
+               Glide
+                   .with(imageViewUserChat.context)
+                   .load(profileItem.avatar)
+                   .circleCrop()
+                   .into(imageViewUserChat)
+               //imageViewUserChat.load(it)
                imageViewUserChat.clipToOutline=true
            }
         }
@@ -54,3 +60,7 @@ class ChatAdapter(
         fun onItemClick(item: ProfileItem)
     }
 }
+/*      Glide
+                   .with()
+                   .load(profileItem.avatar)
+                   .into(imageViewUserChat)*/
