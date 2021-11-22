@@ -35,11 +35,11 @@ class EditActivity : AppCompatActivity() {
         viewbinding.imageViewEdit.load(imageUri)
         saveAvatarFunc(imageUri)
     }
-    val sharedPreference = SharedPreference(this)
-    val accessToken = sharedPreference.getValueString("accessToken")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         viewbinding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
         viewbinding.imageViewEdit.clipToOutline = true
@@ -58,6 +58,8 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun getProfile() {
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         controller.profile(
             "Bearer " + accessToken,
             onSuccess = {
@@ -68,10 +70,12 @@ class EditActivity : AppCompatActivity() {
 
                 viewbinding.textViewAboutEdit.text = it.aboutMyself
                 viewbinding.editTextEditName.setText(it.name)
+                if (it.avatar!=null){
                 Glide
                     .with(this)
                     .load(it.avatar)
-                    .into(viewbinding.imageViewEdit);
+                    .into(viewbinding.imageViewEdit)
+                }
 
             },
             onFailure = {
@@ -81,6 +85,8 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun deleteAvatar() {
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
           saveAvatar.deleteAvatar("Bearer " + accessToken,
             onSuccess = {
                 viewbinding.imageViewEdit.setImageResource(R.drawable.ic_user)
@@ -121,6 +127,7 @@ class EditActivity : AppCompatActivity() {
 
     private fun saveAvatarFunc(uri: Uri) {
         val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         val stream = uri.let { contentResolver.openInputStream(it) }
         val bitmap = BitmapFactory.decodeStream(stream)
         val image = imageToByteArray(bitmap)
@@ -151,6 +158,8 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun getTopic() {
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         controllerTopic.topic(
             "Bearer " + accessToken,
             onSuccess = {
@@ -167,6 +176,8 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun updateProfile() {
+        val sharedPreference = SharedPreference(this)
+        val accessToken = sharedPreference.getValueString("accessToken")
         updateController.update(
             "Bearer " + accessToken,
             UpdateParams(

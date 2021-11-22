@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.tsu.itindr.R
 
-class ChatItemDecoration:RecyclerView.ItemDecoration() {
+class PeopleItemDecoration:RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -20,11 +20,21 @@ class ChatItemDecoration:RecyclerView.ItemDecoration() {
         val margin8=parent.context.resources.getDimensionPixelSize(R.dimen.margin8)
         val margin16=parent.context.resources.getDimensionPixelSize(R.dimen.margin16)
         val margin24=parent.context.resources.getDimensionPixelSize(R.dimen.margin24)
+        val margin12=parent.context.resources.getDimensionPixelSize(R.dimen.margin12)
+        val margin80=parent.context.resources.getDimensionPixelSize(R.dimen.margin80)
 
         val newRect=when(position){
-            0->Rect(margin16,margin24,margin16,margin8)
-            state.itemCount-1->Rect(margin16,margin8,margin16,margin24)
-            else->Rect(margin16,margin8,margin16,margin8)
+            0->Rect(margin16,margin24,margin8,margin12)
+            1->Rect(margin8,margin80,margin8,margin12)
+            2->Rect(margin8,margin24,margin16,margin8)
+          /* if(position%3==0)
+           {
+
+               position->Rect(margin16,margin12,margin16,margin8)
+           }
+           */
+            else-> Rect(margin16,margin8,margin16,margin8)
+
         }
 
         outRect.apply {
@@ -35,5 +45,3 @@ class ChatItemDecoration:RecyclerView.ItemDecoration() {
         }
     }
 }
-
-

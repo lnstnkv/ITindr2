@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".find.FindActivity">
 
@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:itemIconTint="@color/bottom_navigation_bar"
-        app:itemTextColor="@color/bottom_navigation_bar"
-        app:itemTextAppearanceInactive="@style/Text_Bottom_Navigation"
         app:itemTextAppearanceActive="@style/Text_Bottom_Navigation"
+        app:itemTextAppearanceInactive="@style/Text_Bottom_Navigation"
+        app:itemTextColor="@color/bottom_navigation_bar"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

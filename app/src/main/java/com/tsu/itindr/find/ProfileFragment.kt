@@ -41,14 +41,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 }
                 binding.textViewNameProfile.text = it.name
                 binding.textViewAboutMySelf.text = it.aboutMyself
-                Glide
-                    .with(this)
-                    .load(it.avatar)
-                    .into(binding.imageViewAvatarProfile);
-
+                if (it.avatar != null) {
+                    Glide
+                        .with(this)
+                        .load(it.avatar)
+                        .into(binding.imageViewAvatarProfile);
+                }
             },
             onFailure = {
-
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
         )
 

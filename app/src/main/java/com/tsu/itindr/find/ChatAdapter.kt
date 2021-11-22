@@ -42,7 +42,7 @@ class ChatAdapter(
             }
         }
         fun bind(profileItem: ProfileItem)= with(binding){
-           profileItem.username= textViewNameUser.text as String
+           textViewNameUser.text= profileItem.username
            profileItem.lastMessage?.let { textViewLasMessenger.text=it }
            profileItem.avatar?.let {
                imageViewUserChat.load(it)
