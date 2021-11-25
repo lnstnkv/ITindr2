@@ -13,7 +13,7 @@ import com.tsu.itindr.tellabout.TellAboutActivity
 
 
 class RegistrationActivity : AppCompatActivity() {
-    private val controller = RegisterController()
+
     private val viewbinding by lazy { ActivityRegistrationBinding.inflate(layoutInflater) }
     private val viewModel by lazy {
         ViewModelProvider(this).get(RegistrationViewModel::class.java)
@@ -29,25 +29,6 @@ class RegistrationActivity : AppCompatActivity() {
             viewModel.register( viewbinding.editTextEmailAddressReg.text.toString(),
                 viewbinding.editTextTextPassworReg.text.toString(), viewbinding.editTextTextPasswordTwice.text.toString())
 
-
-
-        /* if (!samePassword(
-                    viewbinding.editTextTextPassworReg.text.toString(),
-                    viewbinding.editTextTextPasswordTwice.text.toString()
-                )
-            ) return@setOnClickListener Toast.makeText(this, R.string.error_pwd, Toast.LENGTH_LONG)
-                .show()
-
-            if (!(emailRegex(viewbinding.editTextEmailAddressReg.text.toString())))
-                return@setOnClickListener Toast.makeText(
-                    this,
-                    R.string.error_email,
-                    Toast.LENGTH_LONG
-                ).show()
-
-            registerProfile(sharedPreference)
-
-            */
         }
     }
     private fun initView() = with(viewbinding) {
@@ -78,34 +59,3 @@ class RegistrationActivity : AppCompatActivity() {
 
     }
 }
-  /*  private fun registerProfile(sharedPreference:SharedPreference) {
-        controller.register(
-            RegisterParams(
-                viewbinding.editTextEmailAddressReg.text.toString(),
-                viewbinding.editTextTextPassworReg.text.toString()
-            ),
-            onSuccess = {
-
-                sharedPreference.save("accessToken", it.accessToken)
-                val intent =
-                    Intent(this@RegistrationActivity, TellAboutActivity::class.java)
-                startActivity(intent)
-
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            })
-    }
-}
-/*
-private fun emailRegex(email: String): Boolean {
-    val regex =
-        Regex("""[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}""") //[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}
-    return regex.matches(email)
-}
-
-private fun samePassword(password: String, passwordRepeat: String): Boolean {
-    return passwordRepeat.contentEquals(password)
-}
-
- */

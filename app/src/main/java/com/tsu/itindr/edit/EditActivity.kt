@@ -7,16 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.tsu.itindr.*
+
 import com.tsu.itindr.databinding.ActivityEditBinding
+import com.tsu.itindr.registration.model.ImagePicker
 import com.tsu.itindr.request.*
 import com.tsu.itindr.request.avatar.AvatarController
 import com.tsu.itindr.request.profile.*
 import com.tsu.itindr.request.user.UserController
-import com.tsu.itindr.tellabout.ImagePicker
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -24,7 +26,9 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 
 class EditActivity : AppCompatActivity() {
-    private lateinit var viewbinding: ActivityEditBinding
+    private val viewModel by lazy { ViewModelProvider(this).get(EditViewModel::class.java) }
+    private val sharedPreference by lazy { SharedPreference(this) }
+    private val viewbinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
     private var controller = ProfileController()
     val controllerTopic = TopicController()
     val updateController = UserController()
@@ -38,9 +42,7 @@ class EditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreference = SharedPreference(this)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        viewbinding = ActivityEditBinding.inflate(layoutInflater)
+        initView()
         setContentView(viewbinding.root)
         viewbinding.imageViewEdit.clipToOutline = true
         viewbinding.materialToolbar.setOnClickListener { finish() }
@@ -48,13 +50,51 @@ class EditActivity : AppCompatActivity() {
             imagePicker.pickImage()
 
         }
-        getProfile()
-        getTopic()
+        viewModel.addTopic()
+        viewModel.getProfile()
+       // getProfile()
+        //getTopic()
 
         viewbinding.buttonSavEdit.setOnClickListener {
             updateProfile()
         }
 
+    }
+
+    private fun initView() = with(viewbinding) {
+        viewModel.isErrorAvatar.observe(this@EditActivity) { isErrorAvatar ->
+            if (isErrorAvatar == false) {
+                Toast.makeText(this@EditActivity, R.string.error_email, Toast.LENGTH_LONG)
+                    .show()
+            }
+
+        }
+        viewModel.isErrorTopic.observe(this@EditActivity) {
+            if (it != null)
+            {
+                for (i in it) {
+                    addChip(i)
+                }
+            }
+        }
+        viewModel.isErrorProfile.observe(this@EditActivity){
+            if(it!=null)
+            {
+                chooseChips = it.topics
+                for (j in it.topics) {
+                    chooseChip(j.title)
+                }
+
+                viewbinding.textViewAboutEdit.text = it.aboutMyself
+                viewbinding.editTextEditName.setText(it.name)
+                if (it.avatar != null) {
+                    Glide
+                        .with(imageViewEdit.context)
+                        .load(it.avatar)
+                        .into(viewbinding.imageViewEdit)
+                }
+            }
+        }
     }
 
     private fun getProfile() {
@@ -70,11 +110,11 @@ class EditActivity : AppCompatActivity() {
 
                 viewbinding.textViewAboutEdit.text = it.aboutMyself
                 viewbinding.editTextEditName.setText(it.name)
-                if (it.avatar!=null){
-                Glide
-                    .with(this)
-                    .load(it.avatar)
-                    .into(viewbinding.imageViewEdit)
+                if (it.avatar != null) {
+                    Glide
+                        .with(this)
+                        .load(it.avatar)
+                        .into(viewbinding.imageViewEdit)
                 }
 
             },
@@ -84,7 +124,7 @@ class EditActivity : AppCompatActivity() {
         )
     }
 
-    private fun deleteAvatar() {
+    /*private fun deleteAvatar() {
         val sharedPreference = SharedPreference(this)
         val accessToken = sharedPreference.getValueString("accessToken")
           saveAvatar.deleteAvatar("Bearer " + accessToken,
@@ -97,6 +137,7 @@ class EditActivity : AppCompatActivity() {
             })
 
     }
+     */
 
     private fun addChip(it: TopicResponse) {
         val text = it.title
@@ -141,7 +182,7 @@ class EditActivity : AppCompatActivity() {
             onSuccess = {
 
                 viewbinding.buttonChooseEdit.setText(R.string.delete_photo)
-                viewbinding.buttonChooseEdit.setOnClickListener { deleteAvatar() }
+                viewbinding.buttonChooseEdit.setOnClickListener { viewModel.deleteAvatar() }
 
 
             },
@@ -158,6 +199,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun getTopic() {
+
         val sharedPreference = SharedPreference(this)
         val accessToken = sharedPreference.getValueString("accessToken")
         controllerTopic.topic(

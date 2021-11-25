@@ -1,6 +1,7 @@
 package com.tsu.itindr.request
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.tsu.itindr.StatusCodeInterceptor
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -21,6 +22,7 @@ object Network {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         }
     }
+
     private val client = OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(50, TimeUnit.SECONDS)
         .addInterceptor(interceptor).build()

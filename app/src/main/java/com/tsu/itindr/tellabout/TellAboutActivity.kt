@@ -27,6 +27,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.LifecycleOwner
 import coil.load
 import com.tsu.itindr.registration.*
+import com.tsu.itindr.registration.model.ImagePicker
 import com.tsu.itindr.request.*
 import com.tsu.itindr.request.avatar.AvatarController
 import com.tsu.itindr.request.profile.TopicController
@@ -46,8 +47,6 @@ class TellAboutActivity : AppCompatActivity() {
     }
     val controller = TopicController()
     val saveAvatar = AvatarController()
-    private val REQUEST_TAKE_PHOTO = 1
-    private val GALLERY_REQUEST = 1
     private val updateController = UserController()
     val chips: MutableList<String> = mutableListOf()
 
@@ -67,6 +66,7 @@ class TellAboutActivity : AppCompatActivity() {
             imagePicker.pickImage()
 
         }
+
         addTopic(accessToken)
 
         viewbinding.buttonSaveYourself.setOnClickListener {
@@ -196,27 +196,4 @@ class TellAboutActivity : AppCompatActivity() {
         return byteArrayOutput.toByteArray()
     }
 
-}
-
-class ImagePicker(
-    private val activityResultRegistry: ActivityResultRegistry,
-    private val lifecycleOwner: LifecycleOwner,
-    private val callback: (imageUri: Uri) -> Unit
-
-) {
-    private val getContent: ActivityResultLauncher<String> =
-        activityResultRegistry.register(
-            REGISTER_KEY, lifecycleOwner,
-            ActivityResultContracts.GetContent(),
-            callback,
-
-            )
-
-    fun pickImage() {
-        getContent.launch(MIMETYPE_IMAGES)
-    }
-
-    private companion object {
-        private const val REGISTER_KEY = "Avatar"
-    }
 }

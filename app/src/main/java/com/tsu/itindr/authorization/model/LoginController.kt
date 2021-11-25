@@ -20,7 +20,6 @@ class LoginController {
                     }
                 } else {
                     onFailure.invoke()
-                    //Log.i(TAG, "Ошибка тут")
                 }
 
             }

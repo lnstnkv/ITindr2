@@ -6,36 +6,41 @@ import androidx.lifecycle.ViewModel
 import com.tsu.itindr.authorization.model.LoginController
 import com.tsu.itindr.authorization.model.LoginParams
 import com.tsu.itindr.authorization.model.LoginResponse
+import com.tsu.itindr.registration.model.Email
 
-class AuthorizationViewModel:ViewModel() {
+class AuthorizationViewModel : ViewModel() {
 
     private val controller = LoginController()
 
-    private val _isErrorEmail=MutableLiveData<Boolean>()
-    val isErrorEmail:LiveData<Boolean>
-    get()=_isErrorEmail
+    private val _isErrorEmail = MutableLiveData<Boolean>()
+    val isErrorEmail: LiveData<Boolean>
+        get() = _isErrorEmail
 
 
-    private val _isErrorPassword=MutableLiveData<Boolean>()
-    val isErrorPassword:LiveData<Boolean>
-        get()=_isErrorPassword
+    private val _isErrorPassword = MutableLiveData<Boolean>()
+    val isErrorPassword: LiveData<Boolean>
+        get() = _isErrorPassword
 
-    private val _authorizationSuccess=MutableLiveData<LoginResponse?>()
-    val authorizationSuccess:LiveData<LoginResponse?>
-        get()=_authorizationSuccess
+    private val _authorizationSuccess = MutableLiveData<LoginResponse?>()
+    val authorizationSuccess: LiveData<LoginResponse?>
+        get() = _authorizationSuccess
 
+
+    private val checkingEmail = Email()
 
     private fun checkEmail(email: String) {
-        var regex = Regex("""[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}""")
-        _isErrorEmail.value = regex.matches(email)
+
+        _isErrorEmail.value = checkingEmail.checkEmail(email)
     }
+
     private fun checkPassword(password: String) {
         _isErrorPassword.value = password.length >= 8
     }
-    fun authorization(email: String,password: String){
+
+    fun authorization(email: String, password: String) {
         checkEmail(email)
         checkPassword(password)
-        if(_isErrorEmail.value==false || _isErrorPassword.value==false) return
+        if (_isErrorEmail.value == false || _isErrorPassword.value == false) return
         controller.login(
             LoginParams(
                 email,
@@ -43,11 +48,11 @@ class AuthorizationViewModel:ViewModel() {
             ),
             onSuccess = {
 
-                _authorizationSuccess.value=it
+                _authorizationSuccess.value = it
 
             },
             onFailure = {
-                _authorizationSuccess.value=null
+                _authorizationSuccess.value = null
 
             })
     }
