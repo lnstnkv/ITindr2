@@ -1,13 +1,16 @@
 package com.tsu.itindr.registration.model
 
+import android.content.Context
 import com.tsu.itindr.request.Network
+import com.tsu.itindr.request.SharedPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RegisterController {
+class RegisterController(context: Context) {
 
     private val api: RegisterInt = Network.retrofit.create(RegisterInt::class.java)
+    private val sharedPreference=SharedPreference(context)
 
     fun register(registerParams: RegisterParams, onSuccess: (data: RegisterResponse) -> Unit, onFailure: () -> Unit) {
         api.registerProfile(registerParams).enqueue(object : Callback<RegisterResponse> {
@@ -18,16 +21,16 @@ class RegisterController {
                 if (response.isSuccessful) {
                     response.body()?.let{
                     onSuccess.invoke(it)
+                        sharedPreference.save("accessToken", it.accessToken)
+
                     }
                 } else {
                     onFailure.invoke()
-                    //Log.i(TAG, "Ошибка тут")
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 onFailure.invoke()
-               // Log.i(TAG, "нет Ошибка тут")
             }
 
         })

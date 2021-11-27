@@ -1,5 +1,7 @@
 package com.tsu.itindr.authorization
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,10 +9,11 @@ import com.tsu.itindr.authorization.model.LoginController
 import com.tsu.itindr.authorization.model.LoginParams
 import com.tsu.itindr.authorization.model.LoginResponse
 import com.tsu.itindr.registration.model.Email
+import com.tsu.itindr.request.SharedPreference
 
-class AuthorizationViewModel : ViewModel() {
+class AuthorizationViewModel  (app: Application) : AndroidViewModel(app)  {
 
-    private val controller = LoginController()
+    private val controller = LoginController(app)
 
     private val _isErrorEmail = MutableLiveData<Boolean>()
     val isErrorEmail: LiveData<Boolean>

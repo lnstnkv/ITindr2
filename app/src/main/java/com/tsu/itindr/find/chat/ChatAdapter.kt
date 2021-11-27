@@ -1,4 +1,4 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.chat
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.bumptech.glide.Glide
 import com.tsu.itindr.R
 import com.tsu.itindr.databinding.ItemChatBinding
+import com.tsu.itindr.find.chat.model.ProfileItem
 
 class ChatAdapter(
     private val listener: ChatAdapterListener
-) :  ListAdapter<ProfileItem,ChatAdapter.ViewHolder>(DIFF){
+) :  ListAdapter<ProfileItem, ChatAdapter.ViewHolder>(DIFF){
 
     private companion object {
         val DIFF = object : DiffUtil.ItemCallback<ProfileItem>() {

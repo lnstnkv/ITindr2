@@ -1,4 +1,4 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.chat
 
 import android.graphics.Rect
 import android.view.View

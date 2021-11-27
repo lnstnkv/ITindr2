@@ -14,7 +14,6 @@ import com.google.android.material.chip.Chip
 import com.tsu.itindr.*
 
 import com.tsu.itindr.databinding.ActivityEditBinding
-import com.tsu.itindr.registration.model.ImagePicker
 import com.tsu.itindr.request.*
 import com.tsu.itindr.request.avatar.AvatarController
 import com.tsu.itindr.request.profile.*
@@ -38,25 +37,33 @@ class EditActivity : AppCompatActivity() {
     private val imagePicker = ImagePicker(activityResultRegistry, this) { imageUri ->
         viewbinding.imageViewEdit.load(imageUri)
         saveAvatarFunc(imageUri)
+        //viewModel.saveAvatar(imageUri)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
         setContentView(viewbinding.root)
+
         viewbinding.imageViewEdit.clipToOutline = true
         viewbinding.materialToolbar.setOnClickListener { finish() }
+
         viewbinding.buttonChooseEdit.setOnClickListener {
             imagePicker.pickImage()
 
         }
         viewModel.addTopic()
         viewModel.getProfile()
-       // getProfile()
+        // getProfile()
         //getTopic()
 
         viewbinding.buttonSavEdit.setOnClickListener {
-            updateProfile()
+            //updateProfile()
+            viewModel.updateProfile(
+                viewbinding.editTextEditName.text.toString(),
+                viewbinding.TextInputEdit.text.toString(),
+                chips.toList()
+            )
         }
 
     }
@@ -69,17 +76,22 @@ class EditActivity : AppCompatActivity() {
             }
 
         }
-        viewModel.isErrorTopic.observe(this@EditActivity) {
-            if (it != null)
+        viewModel.isErrorFromTopic.observe(this@EditActivity){
+            if(it==true)
             {
+                Toast.makeText(this@EditActivity, "Проблемка топиков", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+        viewModel.isTopic.observe(this@EditActivity) {
+            if (it != null) {
                 for (i in it) {
                     addChip(i)
                 }
             }
         }
-        viewModel.isErrorProfile.observe(this@EditActivity){
-            if(it!=null)
-            {
+        viewModel.isErrorProfile.observe(this@EditActivity) {
+            if (it != null) {
                 chooseChips = it.topics
                 for (j in it.topics) {
                     chooseChip(j.title)
@@ -95,6 +107,19 @@ class EditActivity : AppCompatActivity() {
                 }
             }
         }
+        viewModel.isErrorUpdateProfile.observe(this@EditActivity) {
+            if (it != null) {
+                Toast.makeText(this@EditActivity, "ОШибка updae Profile", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+       /* viewModel.isErrorSaveAvatar.observe(this@EditActivity) {
+            if (it != null) {
+                Toast.makeText(this@EditActivity, "ОШибка Avatart", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+        */
     }
 
     private fun getProfile() {

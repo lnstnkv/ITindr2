@@ -1,17 +1,20 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.tsu.itindr.*
+import com.tsu.itindr.authorization.AuthorizationViewModel
 import com.tsu.itindr.databinding.FragmentSearchBinding
+import com.tsu.itindr.find.FindActivity
+import com.tsu.itindr.find.MatchActivity
 import com.tsu.itindr.request.profile.LikeController
 import com.tsu.itindr.request.profile.ProfileResponses
 import com.tsu.itindr.request.SharedPreference
@@ -21,6 +24,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     companion object {
         val TAG = SearchFragment::class.java.simpleName
         fun newInstance() = SearchFragment()
+    }
+
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(SearchViewModel::class.java)
     }
 
     private lateinit var chipGroup: ChipGroup
@@ -37,9 +44,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         viewbinding = FragmentSearchBinding.bind(view)
         chipGroup = viewbinding.chipGroupSearch
         viewbinding.imageViewAvatarSearch.clipToOutline = true
-
-        getUser()
-
+        initView()
+        //getUser()
+        viewModel.getUser()
         viewbinding.buttonClose.setOnClickListener {
             disLikeProfile()
             addResponse()
@@ -51,6 +58,35 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
     }
+
+    private fun initView() = with(viewbinding) {
+        viewModel.isErrorUser.observe(viewLifecycleOwner) { isError ->
+            if (isError == true) {
+                Toast.makeText(activity, R.string.error_email, Toast.LENGTH_LONG)
+                    .show()
+            }
+
+        }
+        viewModel.isUser.observe(viewLifecycleOwner){
+            if(it!=null)
+            {
+                users = it
+
+                viewbinding.textViewNameFeed.text = users[index].name
+                for (j in users[index].topics) {
+                    addChip(j.title)
+                }
+                viewbinding.textViewAbout.text = users[index].aboutMyself
+                Glide
+                    .with(imageViewAvatarSearch.context)
+                    .load(users[index].avatar)
+                    .into(viewbinding.imageViewAvatarSearch);
+
+                userID = users[index].userId
+            }
+        }
+    }
+
 
     private fun getUser() {
         val sharedPreference = SharedPreference(activity as FindActivity)

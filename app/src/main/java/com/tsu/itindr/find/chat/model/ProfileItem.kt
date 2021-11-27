@@ -1,4 +1,4 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.chat.model
 
 data class ProfileItem(
     val id:String,

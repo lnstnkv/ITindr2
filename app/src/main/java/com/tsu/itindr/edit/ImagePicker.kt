@@ -1,4 +1,4 @@
-package com.tsu.itindr.registration.model
+package com.tsu.itindr.edit
 
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher

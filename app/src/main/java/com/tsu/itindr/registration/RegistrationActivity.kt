@@ -47,7 +47,6 @@ class RegistrationActivity : AppCompatActivity() {
         }
         viewModel.registerSuccess.observe(this@RegistrationActivity) {
             if (it != null) {
-                sharedPreference.save("accessToken", it.accessToken)
                 val intent =
                     Intent(this@RegistrationActivity, TellAboutActivity::class.java)
                 startActivity(intent)

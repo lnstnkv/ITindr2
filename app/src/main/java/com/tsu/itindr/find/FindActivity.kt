@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import com.tsu.itindr.R
 import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.ActivityFindBinding
+import com.tsu.itindr.find.chat.ChatFragment
+import com.tsu.itindr.find.search.SearchFragment
 
 class FindActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityFindBinding
@@ -16,7 +18,7 @@ class FindActivity : AppCompatActivity() {
         val sharedPreference = SharedPreference(this)
         setContentView(viewBinding.root)
         if(savedInstanceState==null){
-            selectScreen(SearchFragment.TAG,SearchFragment.newInstance())
+            selectScreen(SearchFragment.TAG, SearchFragment.newInstance())
         }
         viewBinding.bottomNavigation.setOnItemSelectedListener {
             revealFragment(it.itemId)
@@ -26,11 +28,11 @@ class FindActivity : AppCompatActivity() {
 
         when(itemId){
             R.id.navigation_search -> {
-                selectScreen(SearchFragment.TAG,SearchFragment.newInstance())
+                selectScreen(SearchFragment.TAG, SearchFragment.newInstance())
                 return true
             }
             R.id.navigation_chat -> {
-                selectScreen(ChatFragment.TAG,ChatFragment.newInstance())
+                selectScreen(ChatFragment.TAG, ChatFragment.newInstance())
                 return true
             }
             R.id.navigation_people -> {

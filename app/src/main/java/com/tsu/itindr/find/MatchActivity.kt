@@ -3,9 +3,8 @@ package com.tsu.itindr.find
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.tsu.itindr.R
-import com.tsu.itindr.databinding.ActivityFindBinding
 import com.tsu.itindr.databinding.ActivityMatchBinding
+import com.tsu.itindr.find.chat.ChatFragment
 import com.tsu.itindr.request.SharedPreference
 
 class MatchActivity : AppCompatActivity() {

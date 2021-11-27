@@ -1,5 +1,7 @@
 package com.tsu.itindr.registration
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,9 +10,9 @@ import com.tsu.itindr.registration.model.RegisterController
 import com.tsu.itindr.registration.model.RegisterParams
 import com.tsu.itindr.registration.model.RegisterResponse
 
-class RegistrationViewModel : ViewModel() {
+class RegistrationViewModel (app: Application) : AndroidViewModel(app) {
 
-    private val controller = RegisterController()
+    private val controller = RegisterController(app)
     private val _isErrorEmail = MutableLiveData<Boolean>()
     val isErrorEmail: LiveData<Boolean>
         get() = _isErrorEmail

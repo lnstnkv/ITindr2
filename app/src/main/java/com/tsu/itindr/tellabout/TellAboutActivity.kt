@@ -21,13 +21,9 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.LifecycleOwner
 import coil.load
 import com.tsu.itindr.registration.*
-import com.tsu.itindr.registration.model.ImagePicker
+import com.tsu.itindr.edit.ImagePicker
 import com.tsu.itindr.request.*
 import com.tsu.itindr.request.avatar.AvatarController
 import com.tsu.itindr.request.profile.TopicController
