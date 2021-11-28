@@ -66,7 +66,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         viewModel.isUser.observe(viewLifecycleOwner) {
             if (it != null) {
                 users = it
-
                 viewbinding.textViewNameFeed.text = users[index].name
                 for (j in users[index].topics) {
                     addChip(j.title)

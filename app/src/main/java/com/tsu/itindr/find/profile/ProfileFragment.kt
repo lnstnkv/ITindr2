@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.tsu.itindr.request.profile.ProfileController
@@ -14,6 +15,7 @@ import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.FragmentProfileBinding
 import com.tsu.itindr.edit.EditActivity
 import com.tsu.itindr.find.FindActivity
+import com.tsu.itindr.find.search.SearchViewModel
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -22,21 +24,29 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         fun newInstance() = ProfileFragment()
     }
 
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(ProfileViewModel::class.java)
+    }
+
     private val controller = ProfileController()
     private lateinit var binding: FragmentProfileBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentProfileBinding.bind(view)
         binding.buttonEdit.setOnClickListener {
             val intent = Intent(activity, EditActivity::class.java)
-            binding.buttonEdit.setOnClickListener { startActivity(intent) }
+            startActivity(intent)
         }
-        val sharedPreference = SharedPreference(activity as FindActivity)
+        initView()
+        viewModel.getProfile()
+        addData()
+    }
 
+    private fun addData() {
         binding.imageViewAvatarProfile.clipToOutline = true
-        controller.profile(
-            "Bearer " + sharedPreference.getValueString("accessToken"),
-            onSuccess = {
+        viewModel.isUser.observe(viewLifecycleOwner) {
+            if (it != null) {
                 for (j in it.topics) {
                     addChip(j.title)
                 }
@@ -48,12 +58,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         .load(it.avatar)
                         .into(binding.imageViewAvatarProfile);
                 }
-            },
-            onFailure = {
+            }
+        }
+    }
+
+    private fun initView() = with(binding) {
+        viewModel.isErrorUser.observe(viewLifecycleOwner) { isError ->
+            if (isError == true) {
                 Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
-        )
 
+        }
     }
 
 
