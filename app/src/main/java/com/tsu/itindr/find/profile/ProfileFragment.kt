@@ -1,4 +1,4 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import com.tsu.itindr.R
 import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.FragmentProfileBinding
 import com.tsu.itindr.edit.EditActivity
+import com.tsu.itindr.find.FindActivity
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {

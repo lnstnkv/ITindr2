@@ -12,7 +12,7 @@ class MatchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMatchBinding.inflate(layoutInflater)
-        val sharedPreference = SharedPreference(this)
+
         setContentView(viewBinding.root)
         viewBinding.buttonCreateMessage.setOnClickListener {
             val intent = Intent(this@MatchActivity, ChatFragment::class.java)

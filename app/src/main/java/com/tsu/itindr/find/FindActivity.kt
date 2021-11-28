@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import com.tsu.itindr.R
-import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.ActivityFindBinding
 import com.tsu.itindr.find.chat.ChatFragment
 import com.tsu.itindr.find.people.PeopleFragment
+import com.tsu.itindr.find.profile.ProfileFragment
 import com.tsu.itindr.find.search.SearchFragment
 
 class FindActivity : AppCompatActivity() {
@@ -16,7 +16,7 @@ class FindActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityFindBinding.inflate(layoutInflater)
-        val sharedPreference = SharedPreference(this)
+
         setContentView(viewBinding.root)
         if(savedInstanceState==null){
             selectScreen(SearchFragment.TAG, SearchFragment.newInstance())
@@ -41,7 +41,7 @@ class FindActivity : AppCompatActivity() {
                 return true
             }
             R.id.navigation_profile -> {
-                selectScreen(ProfileFragment.TAG,ProfileFragment.newInstance())
+                selectScreen(ProfileFragment.TAG, ProfileFragment.newInstance())
                 return true
             }
             else -> return false
