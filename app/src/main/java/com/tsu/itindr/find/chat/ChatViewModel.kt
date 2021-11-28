@@ -19,7 +19,6 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
     val isChat: LiveData<List<GetChatResponse>?>
         get() = _isChat
 
-
     private var controller = GetChatController()
     fun getChat() {
         controller.getChat(

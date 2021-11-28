@@ -1,18 +1,15 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.people
 
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.bumptech.glide.Glide
 import com.tsu.itindr.R
-import com.tsu.itindr.databinding.ItemChatBinding
 import com.tsu.itindr.databinding.ItemPeopleBinding
+import com.tsu.itindr.find.PeopleProfile
 
 class PeopleAdapter(
     private val listener: PeopleAdapterListener

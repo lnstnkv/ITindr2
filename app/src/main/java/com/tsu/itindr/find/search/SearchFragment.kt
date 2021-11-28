@@ -31,11 +31,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private lateinit var chipGroup: ChipGroup
-    private val controller = UserFeedController()
-    private val controllerLike = LikeController()
+
     var users: List<ProfileResponses> = listOf()
     var index: Int = 0
-    var indexId: Int = 0
     var userID: String = ""
 
     private lateinit var viewbinding: FragmentSearchBinding
@@ -45,15 +43,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         chipGroup = viewbinding.chipGroupSearch
         viewbinding.imageViewAvatarSearch.clipToOutline = true
         initView()
-        //getUser()
         viewModel.getUser()
         viewbinding.buttonClose.setOnClickListener {
-            disLikeProfile()
+            viewModel.disLikeProfile(userID)
             addResponse()
         }
         viewbinding.buttonLike.setOnClickListener {
-
-            likeProfile()
+            viewModel.likeProfile(userID)
             addResponse()
         }
 
@@ -67,9 +63,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
         }
-        viewModel.isUser.observe(viewLifecycleOwner){
-            if(it!=null)
-            {
+        viewModel.isUser.observe(viewLifecycleOwner) {
+            if (it != null) {
                 users = it
 
                 viewbinding.textViewNameFeed.text = users[index].name
@@ -85,70 +80,33 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 userID = users[index].userId
             }
         }
-    }
-
-
-    private fun getUser() {
-        val sharedPreference = SharedPreference(activity as FindActivity)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        controller.feedUser(
-            "Bearer " + accessToken,
-            onSuccess = {
-                users = it
-
-                viewbinding.textViewNameFeed.text = users[index].name
-                for (j in users[index].topics) {
-                    addChip(j.title)
-                }
-                viewbinding.textViewAbout.text = users[index].aboutMyself
-                Glide
-                    .with(this)
-                    .load(users[index].avatar)
-                    .into(viewbinding.imageViewAvatarSearch);
-
-                userID = users[index].userId
-            },
-            onFailure = {
+        viewModel.isErrorDisLike.observe(viewLifecycleOwner) {
+            if (it == true) {
                 Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
-            }
 
-        )
-    }
-
-    private fun disLikeProfile() {
-        val sharedPreference = SharedPreference(activity as FindActivity)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        controllerLike.dislikeUser(
-            "Bearer " + accessToken,
-            userID,
-            onSuccess = {
+            } else {
                 Toast.makeText(activity, "Как жаль, что он вам не подошел!", Toast.LENGTH_LONG)
                     .show()
-            },
-            onFailure = {
-                Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
-        )
-    }
+        }
+        viewModel.isErrorLike.observe(viewLifecycleOwner){ it ->
+            if(it==false)
+            {
+                viewModel.isLike.observe(viewLifecycleOwner){
+                    if (it != null) {
+                        if (it.isMutual) {
+                            val intent = Intent(activity, MatchActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
 
-    private fun likeProfile() {
-        val sharedPreference = SharedPreference(activity as FindActivity)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        controllerLike.likeUser(
-            "Bearer " + accessToken,
-            userID,
-            onSuccess = {
-                if (it.isMutual) {
-                    val intent = Intent(activity, MatchActivity::class.java)
-                    startActivity(intent)
                 }
-
-            },
-            onFailure = {
+            }
+            else
+            {
                 Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
-
-        )
+        }
     }
 
     private fun addResponse() {

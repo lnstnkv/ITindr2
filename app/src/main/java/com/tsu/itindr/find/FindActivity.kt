@@ -8,6 +8,7 @@ import com.tsu.itindr.R
 import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.ActivityFindBinding
 import com.tsu.itindr.find.chat.ChatFragment
+import com.tsu.itindr.find.people.PeopleFragment
 import com.tsu.itindr.find.search.SearchFragment
 
 class FindActivity : AppCompatActivity() {
@@ -36,7 +37,7 @@ class FindActivity : AppCompatActivity() {
                 return true
             }
             R.id.navigation_people -> {
-                selectScreen(PeopleFragment.TAG,PeopleFragment.newInstance())
+                selectScreen(PeopleFragment.TAG, PeopleFragment.newInstance())
                 return true
             }
             R.id.navigation_profile -> {

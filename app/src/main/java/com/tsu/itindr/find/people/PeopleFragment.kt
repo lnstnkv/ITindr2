@@ -1,22 +1,16 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.people
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.tsu.itindr.R
-import com.tsu.itindr.databinding.FragmentChatBinding
 import com.tsu.itindr.databinding.FragmentPeopleBinding
-import com.tsu.itindr.databinding.FragmentProfileBinding
-import com.tsu.itindr.edit.EditActivity
 import com.tsu.itindr.request.SharedPreference
-import com.tsu.itindr.request.profile.ProfileController
 import com.tsu.itindr.request.user.PeopleController
-import com.tsu.itindr.request.user.UserController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.tsu.itindr.find.FindActivity
+import com.tsu.itindr.find.PeopleProfile
 
 
 class PeopleFragment:Fragment(R.layout.fragment_people) {
@@ -26,12 +20,12 @@ class PeopleFragment:Fragment(R.layout.fragment_people) {
     }
     private val controller = PeopleController()
     private lateinit var binding: FragmentPeopleBinding
-    private val peopleAdapterListener=object : PeopleAdapter.PeopleAdapterListener{
+    private val peopleAdapterListener=object : PeopleAdapter.PeopleAdapterListener {
         override fun onItemClick(item: PeopleProfile) {
             print(item)
         }
     }
-    private val peopleAdapter=PeopleAdapter(peopleAdapterListener)
+    private val peopleAdapter= PeopleAdapter(peopleAdapterListener)
 
     private fun initView()= with(binding){
         peopleRecycler.layoutManager = StaggeredGridLayoutManager( 3,StaggeredGridLayoutManager.VERTICAL)
@@ -50,7 +44,7 @@ class PeopleFragment:Fragment(R.layout.fragment_people) {
         binding = FragmentPeopleBinding.bind(view)
         initView()
      controller.getUser(
-         "Bearer " + accessToken,24,100,
+         "Bearer " + accessToken,24,50,
          onSuccess = {
              val peopleItems= mutableListOf<PeopleProfile>()
              for (getChat in it) {

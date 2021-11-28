@@ -1,4 +1,4 @@
-package com.tsu.itindr.find
+package com.tsu.itindr.find.people
 
 import android.graphics.Rect
 import android.view.View
