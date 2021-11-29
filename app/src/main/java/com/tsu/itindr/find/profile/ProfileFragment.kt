@@ -9,13 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
-import com.tsu.itindr.request.profile.ProfileController
+import com.tsu.itindr.data.profile.ProfileController
 import com.tsu.itindr.R
-import com.tsu.itindr.request.SharedPreference
 import com.tsu.itindr.databinding.FragmentProfileBinding
 import com.tsu.itindr.edit.EditActivity
-import com.tsu.itindr.find.FindActivity
-import com.tsu.itindr.find.search.SearchViewModel
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {

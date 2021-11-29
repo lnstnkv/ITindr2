@@ -5,7 +5,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.LifecycleOwner
-import com.tsu.itindr.MIMETYPE_IMAGES
+import com.tsu.itindr.data.MIMETYPE_IMAGES
 
 class ImagePicker(
     private val activityResultRegistry: ActivityResultRegistry,

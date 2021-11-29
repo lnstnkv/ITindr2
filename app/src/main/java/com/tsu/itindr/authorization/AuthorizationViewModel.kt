@@ -4,12 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.tsu.itindr.authorization.model.LoginController
 import com.tsu.itindr.authorization.model.LoginParams
 import com.tsu.itindr.authorization.model.LoginResponse
 import com.tsu.itindr.registration.model.Email
-import com.tsu.itindr.request.SharedPreference
 
 class AuthorizationViewModel  (app: Application) : AndroidViewModel(app)  {
 

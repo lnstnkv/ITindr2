@@ -1,15 +1,12 @@
 package com.tsu.itindr.find.profile
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.Glide
-import com.tsu.itindr.R
-import com.tsu.itindr.request.SharedPreference
-import com.tsu.itindr.request.profile.ProfileController
-import com.tsu.itindr.request.profile.ProfileResponses
+import com.tsu.itindr.data.SharedPreference
+import com.tsu.itindr.data.profile.ProfileController
+import com.tsu.itindr.data.profile.ProfileResponses
 
 class ProfileViewModel(app: Application) : AndroidViewModel(app) {
 

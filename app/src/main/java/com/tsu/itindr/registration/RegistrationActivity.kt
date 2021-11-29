@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityRegistrationBinding
-import com.tsu.itindr.registration.model.RegisterController
-import com.tsu.itindr.request.SharedPreference
+import com.tsu.itindr.data.SharedPreference
 import com.tsu.itindr.tellabout.TellAboutActivity
 
 

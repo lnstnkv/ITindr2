@@ -1,8 +1,8 @@
 package com.tsu.itindr.authorization.model
 
 import android.content.Context
-import com.tsu.itindr.request.Network
-import com.tsu.itindr.request.SharedPreference
+import com.tsu.itindr.data.Network
+import com.tsu.itindr.data.SharedPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

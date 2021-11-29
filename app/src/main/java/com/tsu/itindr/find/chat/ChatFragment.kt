@@ -5,10 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tsu.itindr.request.chat.GetChatController
+import com.tsu.itindr.data.chat.GetChatController
 import com.tsu.itindr.R
-import com.tsu.itindr.authorization.AuthorizationViewModel
-import com.tsu.itindr.request.SharedPreference
+import com.tsu.itindr.data.SharedPreference
 import com.tsu.itindr.databinding.FragmentChatBinding
 import com.tsu.itindr.find.FindActivity
 import com.tsu.itindr.find.Profile
@@ -41,7 +40,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                 Toast.makeText(activity, "ОШибочка чатика", Toast.LENGTH_LONG).show()
             } else {
                 viewModel.isChat.observe(viewLifecycleOwner) {
-                    val profileItems = mutableListOf<ProfileItem>()
+                    /*val profileItems = mutableListOf<ProfileItem>()
                     if (it != null) {
                         for (getChat in it) {
                             profileItems.add(
@@ -54,13 +53,17 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                             )
                         }
                     }
-                    chatAdapter.submitList(profileItems)
+
+                     */
+                    if(it!=null) {
+                        chatAdapter.submitList(it)
+                    }
                 }
             }
         }
     }
 
-    private var controller = GetChatController()
+    //private var controller = GetChatController()
     val profile: MutableList<Profile> = mutableListOf()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

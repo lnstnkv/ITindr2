@@ -1,0 +1,17 @@
+package com.tsu.itindr.room
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.tsu.itindr.room.people.ProfileDao
+import com.tsu.itindr.room.people.ProfileEntity
+import com.tsu.itindr.room.topic.TopicDao
+import com.tsu.itindr.room.topic.TopicEntity
+
+@Database(entities = [ProfileEntity::class,TopicEntity::class], version = 2)
+abstract class AppDatabase:RoomDatabase() {
+
+    abstract fun getProfileDao(): ProfileDao
+
+    abstract  fun getTopicDao(): TopicDao
+}
+

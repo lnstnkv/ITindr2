@@ -11,14 +11,9 @@ import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.tsu.itindr.*
-import com.tsu.itindr.authorization.AuthorizationViewModel
 import com.tsu.itindr.databinding.FragmentSearchBinding
-import com.tsu.itindr.find.FindActivity
 import com.tsu.itindr.find.MatchActivity
-import com.tsu.itindr.request.profile.LikeController
-import com.tsu.itindr.request.profile.ProfileResponses
-import com.tsu.itindr.request.SharedPreference
-import com.tsu.itindr.request.user.UserFeedController
+import com.tsu.itindr.data.profile.ProfileResponses
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     companion object {
@@ -64,19 +59,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         }
         viewModel.isUser.observe(viewLifecycleOwner) {
-            if (it != null) {
-                users = it
-                viewbinding.textViewNameFeed.text = users[index].name
-                for (j in users[index].topics) {
-                    addChip(j.title)
-                }
-                viewbinding.textViewAbout.text = users[index].aboutMyself
-                Glide
-                    .with(imageViewAvatarSearch.context)
-                    .load(users[index].avatar)
-                    .into(viewbinding.imageViewAvatarSearch);
+            it?.let {
+                    users = it
+                    viewbinding.textViewNameFeed.text = users[index].name
+                    for (j in users[index].topics) {
+                        addChip(j.title)
+                    }
+                    viewbinding.textViewAbout.text = users[index].aboutMyself
+                    Glide
+                        .with(imageViewAvatarSearch.context)
+                        .load(users[index].avatar)
+                        .into(viewbinding.imageViewAvatarSearch);
 
-                userID = users[index].userId
+                    userID = users[index].userId
+
             }
         }
         viewModel.isErrorDisLike.observe(viewLifecycleOwner) {

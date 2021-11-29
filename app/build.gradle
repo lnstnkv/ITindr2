@@ -3,14 +3,15 @@ plugins {
     id 'kotlin-android'
     id 'kotlinx-serialization'
 }
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.tsu.itindr"
         minSdk 26
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -62,4 +63,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    implementation "androidx.room:room-runtime:2.4.0-beta02"
+    implementation "androidx.room:room-ktx:2.4.0-beta02"
+    kapt "androidx.room:room-compiler:2.4.0-beta02"
+
+    implementation("androidx.room:room-runtime:2.3.0")
+    annotationProcessor("androidx.room:room-compiler:2.3.0")
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
 }

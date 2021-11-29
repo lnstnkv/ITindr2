@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityTellAboutBinding
 import com.google.android.material.chip.Chip
@@ -24,12 +25,8 @@ import java.io.ByteArrayOutputStream
 import coil.load
 import com.tsu.itindr.registration.*
 import com.tsu.itindr.edit.ImagePicker
-import com.tsu.itindr.request.*
-import com.tsu.itindr.request.avatar.AvatarController
-import com.tsu.itindr.request.profile.TopicController
-import com.tsu.itindr.request.profile.TopicResponse
-import com.tsu.itindr.request.profile.UpdateParams
-import com.tsu.itindr.request.user.UserController
+import com.tsu.itindr.data.*
+import com.tsu.itindr.data.avatar.AvatarController
 
 
 class TellAboutActivity : AppCompatActivity() {
@@ -41,9 +38,9 @@ class TellAboutActivity : AppCompatActivity() {
         viewbinding.imageViewAvatar.load(imageUri)
         saveAvatarFunc(imageUri)
     }
-    val controller = TopicController()
-    val saveAvatar = AvatarController()
-    private val updateController = UserController()
+    private val viewModel by lazy { ViewModelProvider(this).get(TellAboutViewModel::class.java) }
+
+    val saveAvatar = AvatarController(this)
     val chips: MutableList<String> = mutableListOf()
 
 
@@ -52,8 +49,6 @@ class TellAboutActivity : AppCompatActivity() {
         viewbinding = ActivityTellAboutBinding.inflate(layoutInflater)
         setContentView(viewbinding.root)
 
-        val sharedPreference = SharedPreference(this)
-        val accessToken = sharedPreference.getValueString("accessToken")
         chipGroup = viewbinding.chipGroup
         viewbinding.imageViewAvatar.clipToOutline = true
         imageView = viewbinding.imageViewAvatar
@@ -62,52 +57,63 @@ class TellAboutActivity : AppCompatActivity() {
             imagePicker.pickImage()
 
         }
-
-        addTopic(accessToken)
+        initView()
+        viewModel.addTopic()
 
         viewbinding.buttonSaveYourself.setOnClickListener {
-            updateParams(accessToken)
+            viewModel.updateProfile(
+                viewbinding.editTextName.text.toString(),
+                viewbinding.editTextAboutYourself
+                    .text.toString(),
+                chips.toList()
+            )
 
         }
 
     }
 
-    private fun updateParams(accessToken:String?) {
-        updateController.update(
-            "Bearer " + accessToken,
-            UpdateParams(
-                viewbinding.editTextName.text.toString(),
-                viewbinding.editTextAboutYourself
-                    .text.toString(),
-                chips.toList()
-            ),
-            onSuccess = {
+    private fun initView() = with(viewbinding) {
+        viewModel.isErrorAvatar.observe(this@TellAboutActivity) { isErrorAvatar ->
+            if (isErrorAvatar == false) {
+                Toast.makeText(this@TellAboutActivity, R.string.error_email, Toast.LENGTH_LONG)
+                    .show()
+            }
+
+        }
+        viewModel.isErrorFromTopic.observe(this@TellAboutActivity) {
+            if (it == true) {
+                Toast.makeText(this@TellAboutActivity, "Проблемка топиков", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+
+        viewModel.topics.observe(this@TellAboutActivity){
+            for (i in it) {
+                addChip(i)
+            }
+        }
+
+        viewModel.isErrorUpdateProfile.observe(this@TellAboutActivity) {
+            if (it == true) {
+                Toast.makeText(this@TellAboutActivity, "ОШибка updae Profile", Toast.LENGTH_LONG)
+                    .show()
+            }
+            else
+            {
                 val intent = Intent(this@TellAboutActivity, FindActivity::class.java)
                 startActivity(intent)
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
             }
-        )
+        }
+        /* viewModel.isErrorSaveAvatar.observe(this@TellAboutActivity) {
+             if (it != null) {
+                 Toast.makeText(this@EditActivity, "ОШибка Avatart", Toast.LENGTH_LONG)
+                     .show()
+             }
+         }
+         */
     }
 
-    private fun addTopic(accessToken:String?) {
-        controller.topic(
-            "Bearer " + accessToken,
-            onSuccess = {
-
-                for (i in it) {
-                    addChip(i)
-                }
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            }
-
-        )
-    }
-
-    private fun addChip(it: TopicResponse) {
+    private fun addChip(it: TopicItem) {
         val text = it.title
         val id = it.id
         val chip = LayoutInflater.from(this).inflate(R.layout.item_chip, null) as Chip
@@ -136,6 +142,7 @@ class TellAboutActivity : AppCompatActivity() {
             })
 
     }
+
 
     private fun saveAvatarFunc(uri: Uri) {
         val stream = uri.let { contentResolver.openInputStream(it) }

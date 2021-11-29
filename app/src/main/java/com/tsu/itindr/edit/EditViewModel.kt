@@ -1,33 +1,29 @@
 package com.tsu.itindr.edit
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 
-import com.tsu.itindr.request.SharedPreference
-import com.tsu.itindr.request.avatar.AvatarController
-import com.tsu.itindr.request.profile.*
-import com.tsu.itindr.request.user.UserController
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
+import com.tsu.itindr.data.SharedPreference
+import com.tsu.itindr.data.avatar.AvatarController
+import com.tsu.itindr.data.profile.*
+import com.tsu.itindr.data.user.UserController
+import com.tsu.itindr.room.people.ProfileRepository
+import com.tsu.itindr.room.topic.TopicRepository
+import kotlinx.coroutines.launch
 
 class EditViewModel(app: Application) : AndroidViewModel(app) {
 
     val sharedPreference = SharedPreference(app)
     private val updateController = UserController()
-    private val saveAvatar = AvatarController()
+    private val saveAvatar = AvatarController(app)
     private val controllerTopic = TopicController()
     private var controller = ProfileController()
 
     private val _isErrorFromTopic = MutableLiveData<Boolean>()
-    val isErrorFromTopic:  LiveData<Boolean>
+    val isErrorFromTopic: LiveData<Boolean>
         get() = _isErrorFromTopic
     private val _isTopic = MutableLiveData<List<TopicResponse>?>()
     val isTopic: LiveData<List<TopicResponse>?>
@@ -50,8 +46,11 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
     val isErrorSaveAvatar: LiveData<Boolean>
         get() = _isErrorSaveAvatar
 
+    private val topicRepository = TopicRepository(app)
+    val topics = topicRepository.observeAllProfiles()
 
-   // private val multiPartAvatar = Avatar()
+
+    // private val multiPartAvatar = Avatar()
     val accessToken = sharedPreference.getValueString("accessToken")
 
     fun deleteAvatar() {
@@ -72,12 +71,13 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
         controllerTopic.topic(
             "Bearer " + accessToken,
             onSuccess = {
-                _isErrorFromTopic.value=false
+                _isErrorFromTopic.value = false
                 _isTopic.value = it
+                add(it)
 
             },
             onFailure = {
-                _isErrorFromTopic.value=true
+                _isErrorFromTopic.value = true
                 _isTopic.value = null
             }
 
@@ -134,5 +134,16 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
 
             }
         )
+    }
+
+    fun add(topicsItem: List<TopicResponse>) {
+        for (topic in topicsItem) {
+            viewModelScope.launch {
+                topicRepository.addNew(
+                    id = topic.id,
+                    title = topic.title
+                )
+            }
+        }
     }
 }

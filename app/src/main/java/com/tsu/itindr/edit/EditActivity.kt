@@ -14,10 +14,10 @@ import com.google.android.material.chip.Chip
 import com.tsu.itindr.*
 
 import com.tsu.itindr.databinding.ActivityEditBinding
-import com.tsu.itindr.request.*
-import com.tsu.itindr.request.avatar.AvatarController
-import com.tsu.itindr.request.profile.*
-import com.tsu.itindr.request.user.UserController
+import com.tsu.itindr.data.*
+import com.tsu.itindr.data.avatar.AvatarController
+import com.tsu.itindr.data.profile.*
+import com.tsu.itindr.data.user.UserController
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -31,7 +31,7 @@ class EditActivity : AppCompatActivity() {
     private var controller = ProfileController()
     val controllerTopic = TopicController()
     val updateController = UserController()
-    val saveAvatar = AvatarController()
+    val saveAvatar = AvatarController(this)
     val chips: MutableList<String> = mutableListOf()
     var chooseChips: List<TopicResponse> = listOf()
     private val imagePicker = ImagePicker(activityResultRegistry, this) { imageUri ->
@@ -54,11 +54,9 @@ class EditActivity : AppCompatActivity() {
         }
         viewModel.addTopic()
         viewModel.getProfile()
-        // getProfile()
-        //getTopic()
+
 
         viewbinding.buttonSavEdit.setOnClickListener {
-            //updateProfile()
             viewModel.updateProfile(
                 viewbinding.editTextEditName.text.toString(),
                 viewbinding.TextInputEdit.text.toString(),
@@ -108,46 +106,14 @@ class EditActivity : AppCompatActivity() {
             }
         }
         viewModel.isErrorUpdateProfile.observe(this@EditActivity) {
-            if (it != null) {
+            if (it == null) {
                 Toast.makeText(this@EditActivity, "ОШибка updae Profile", Toast.LENGTH_LONG)
                     .show()
             }
         }
-       /* viewModel.isErrorSaveAvatar.observe(this@EditActivity) {
-            if (it != null) {
-                Toast.makeText(this@EditActivity, "ОШибка Avatart", Toast.LENGTH_LONG)
-                    .show()
-            }
-        }
-        */
+
     }
 
-    private fun getProfile() {
-        val sharedPreference = SharedPreference(this)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        controller.profile(
-            "Bearer " + accessToken,
-            onSuccess = {
-                chooseChips = it.topics
-                for (j in it.topics) {
-                    chooseChip(j.title)
-                }
-
-                viewbinding.textViewAboutEdit.text = it.aboutMyself
-                viewbinding.editTextEditName.setText(it.name)
-                if (it.avatar != null) {
-                    Glide
-                        .with(this)
-                        .load(it.avatar)
-                        .into(viewbinding.imageViewEdit)
-                }
-
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            }
-        )
-    }
 
     /*private fun deleteAvatar() {
         val sharedPreference = SharedPreference(this)
@@ -223,42 +189,6 @@ class EditActivity : AppCompatActivity() {
         return byteArrayOutput.toByteArray()
     }
 
-    private fun getTopic() {
 
-        val sharedPreference = SharedPreference(this)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        controllerTopic.topic(
-            "Bearer " + accessToken,
-            onSuccess = {
-
-                for (i in it) {
-                    addChip(i)
-                }
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            }
-
-        )
-    }
-
-    private fun updateProfile() {
-        val sharedPreference = SharedPreference(this)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        updateController.update(
-            "Bearer " + accessToken,
-            UpdateParams(
-                viewbinding.editTextEditName.text.toString(),
-                viewbinding.TextInputEdit.text.toString(),
-                chips.toList()
-            ),
-            onSuccess = {
-                Toast.makeText(this, R.string.item_save, Toast.LENGTH_LONG).show()
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            }
-        )
-    }
 }
 

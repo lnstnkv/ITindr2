@@ -8,8 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tsu.itindr.*
 import com.tsu.itindr.databinding.ActivityAuthorizationBinding
 import com.tsu.itindr.find.FindActivity
-import com.tsu.itindr.authorization.model.LoginController
-import com.tsu.itindr.request.SharedPreference
+import com.tsu.itindr.data.SharedPreference
 
 class AuthorizationActivity : AppCompatActivity() {
 

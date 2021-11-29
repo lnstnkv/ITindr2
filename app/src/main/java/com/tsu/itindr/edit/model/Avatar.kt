@@ -2,18 +2,8 @@ package com.tsu.itindr.edit.model
 
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
-import android.net.Uri
-import android.widget.Toast
-import com.tsu.itindr.R
-import com.tsu.itindr.request.SharedPreference
-import android.content.ContentResolver as ContentResolver
 
 class Avatar {
 

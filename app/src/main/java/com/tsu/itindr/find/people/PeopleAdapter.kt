@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tsu.itindr.R
 import com.tsu.itindr.databinding.ItemPeopleBinding
-import com.tsu.itindr.find.PeopleProfile
+import com.tsu.itindr.find.people.model.PeopleProfile
 
 class PeopleAdapter(
     private val listener: PeopleAdapterListener
