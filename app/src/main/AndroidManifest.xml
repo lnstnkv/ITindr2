@@ -16,6 +16,9 @@
         android:theme="@style/Theme.ITindr"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".chat.ChatActivity"
+            android:exported="true" />
+        <activity
             android:name=".launcher.SplashActivity"
             android:exported="true"
             android:theme="@style/Launcher">
@@ -49,9 +52,7 @@
             android:exported="true" />
         <activity
             android:name=".start.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

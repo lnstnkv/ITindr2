@@ -9,17 +9,23 @@ import retrofit2.Response
 
 class LoginController(context: Context) {
     private val api: LoginInt = Network.retrofit.create(LoginInt::class.java)
-    private val sharedPreference= SharedPreference(context)
 
-    fun login(loginParams: LoginParams, onSuccess: (data: LoginResponse) -> Unit, onFailure: () -> Unit) {
+
+    private val sharedPreference = SharedPreference(context)
+
+    fun login(
+        loginParams: LoginParams,
+        onSuccess: (data: LoginResponse) -> Unit,
+        onFailure: () -> Unit
+    ) {
         api.loginProfile(loginParams).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
                 if (response.isSuccessful) {
-                    response.body()?.let{
-                    onSuccess.invoke(it)
+                    response.body()?.let {
+                        onSuccess.invoke(it)
                         sharedPreference.save("accessToken", it.accessToken)
                     }
                 } else {
@@ -29,6 +35,7 @@ class LoginController(context: Context) {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                t.printStackTrace()
                 onFailure.invoke()
             }
 

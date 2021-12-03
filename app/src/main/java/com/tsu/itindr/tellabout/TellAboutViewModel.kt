@@ -15,9 +15,9 @@ import kotlinx.coroutines.launch
 
 class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
     val sharedPreference = SharedPreference(app)
-    private val updateController = UserController()
-    private val saveAvatar = AvatarController(app)
-    private val controllerTopic = TopicController()
+    private val updateController = UserController(app)
+    private val saveAvatar = AvatarController()
+    private val controllerTopic = TopicController(app)
 
     private val _isErrorFromTopic = MutableLiveData<Boolean>()
     val isErrorFromTopic: LiveData<Boolean>
@@ -62,10 +62,9 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
     fun addTopic() {
 
         controllerTopic.topic(
-            "Bearer " + accessToken,
             onSuccess = {
                 _isErrorFromTopic.value=false
-                _isTopic.value = it
+                add(it)
 
             },
             onFailure = {
@@ -101,7 +100,6 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
     fun updateProfile(name: String, aboutMyself: String, topics: List<String>) {
 
         updateController.update(
-            "Bearer " + accessToken,
             UpdateParams(
                 name,
                 aboutMyself,

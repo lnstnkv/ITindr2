@@ -25,7 +25,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         ViewModelProvider(this).get(ProfileViewModel::class.java)
     }
 
-    private val controller = ProfileController()
     private lateinit var binding: FragmentProfileBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

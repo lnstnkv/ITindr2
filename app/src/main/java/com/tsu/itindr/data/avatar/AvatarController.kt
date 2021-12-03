@@ -15,7 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 
-class AvatarController( context: Context)
+class AvatarController()
  {
     private val api: AvatarInt = Network.retrofitMultipart.create(AvatarInt::class.java)
 
@@ -26,8 +26,7 @@ class AvatarController( context: Context)
         image.toRequestBody("multipart/form-data".toMediaTypeOrNull())
     val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
 */
-     val sharedPreference = SharedPreference(context)
-     val accessToken = sharedPreference.getValueString("accessToken")
+
 
     fun updateAvatar(
         accessToken: String,

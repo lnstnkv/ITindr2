@@ -15,8 +15,8 @@ class SearchViewModel(app: Application) : AndroidViewModel(app) {
     val sharedPreference = SharedPreference(app)
     val accessToken = sharedPreference.getValueString("accessToken")
 
-    private val controller = UserFeedController()
-    private val controllerLike = LikeController()
+    private val controller = UserFeedController(app)
+    private val controllerLike = LikeController(app)
 
     private val _isErrorUser = MutableLiveData<Boolean>()
     val isErrorUser: LiveData<Boolean>
@@ -41,7 +41,6 @@ class SearchViewModel(app: Application) : AndroidViewModel(app) {
     fun getUser() {
 
         controller.feedUser(
-            "Bearer " + accessToken,
             onSuccess = {
                 _isErrorUser.value = false
                 _isUser.value = it
@@ -56,7 +55,6 @@ class SearchViewModel(app: Application) : AndroidViewModel(app) {
 
     fun disLikeProfile(userID:String) {
         controllerLike.dislikeUser(
-            "Bearer " + accessToken,
             userID,
             onSuccess = {
             _isErrorDisLike.value=false
@@ -69,7 +67,6 @@ class SearchViewModel(app: Application) : AndroidViewModel(app) {
     }
     fun likeProfile(userID:String) {
         controllerLike.likeUser(
-            "Bearer " + accessToken,
             userID,
             onSuccess = {
                 _isErrorLike.value=false

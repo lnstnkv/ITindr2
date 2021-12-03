@@ -28,10 +28,7 @@ class EditActivity : AppCompatActivity() {
     private val viewModel by lazy { ViewModelProvider(this).get(EditViewModel::class.java) }
     private val sharedPreference by lazy { SharedPreference(this) }
     private val viewbinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
-    private var controller = ProfileController()
-    val controllerTopic = TopicController()
-    val updateController = UserController()
-    val saveAvatar = AvatarController(this)
+    val saveAvatar = AvatarController()
     val chips: MutableList<String> = mutableListOf()
     var chooseChips: List<TopicResponse> = listOf()
     private val imagePicker = ImagePicker(activityResultRegistry, this) { imageUri ->
@@ -107,7 +104,7 @@ class EditActivity : AppCompatActivity() {
         }
         viewModel.isErrorUpdateProfile.observe(this@EditActivity) {
             if (it == null) {
-                Toast.makeText(this@EditActivity, "ОШибка updae Profile", Toast.LENGTH_LONG)
+                Toast.makeText(this@EditActivity, "ОШибка update Profile", Toast.LENGTH_LONG)
                     .show()
             }
         }

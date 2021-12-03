@@ -47,7 +47,7 @@ class PeopleAdapter(
         }
 
         fun bind(peopleProfile: PeopleProfile) = with(binding) {
-           textViewNamePeople.text = peopleProfile.username
+            textViewNamePeople.text = peopleProfile.username
             peopleProfile.avatar?.let {
                 Glide
                     .with(imageViewAvatarPeople.context)

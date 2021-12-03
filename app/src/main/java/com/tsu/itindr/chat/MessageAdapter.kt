@@ -1,4 +1,4 @@
-package com.tsu.itindr.find.chat
+package com.tsu.itindr.chat
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,26 +8,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tsu.itindr.R
+import com.tsu.itindr.chat.model.Message
 import com.tsu.itindr.databinding.ItemChatBinding
-import com.tsu.itindr.find.chat.model.ProfileItem
-import com.tsu.itindr.room.chat.Chat
+import com.tsu.itindr.databinding.ItemChatMessengerBinding
 
-class ChatAdapter(
-    private val listener: ChatAdapterListener
-) : ListAdapter<Chat, ChatAdapter.ViewHolder>(DIFF) {
+class MessageAdapter (
+    private val listener: MessageAdapterListener
+) :  ListAdapter<Message, MessageAdapter.ViewHolder>(DIFF){
 
     private companion object {
-        val DIFF = object : DiffUtil.ItemCallback<Chat>() {
-            override fun areItemsTheSame(oldItem: Chat, newItem: Chat) = oldItem.id == newItem.id
+        val DIFF = object : DiffUtil.ItemCallback<Message>() {
+            override fun areItemsTheSame(oldItem: Message, newItem: Message) = oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Chat, newItem: Chat) = oldItem == newItem
+            override fun areContentsTheSame(oldItem: Message, newItem: Message) = oldItem == newItem
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater
-                .from(parent.context).inflate(R.layout.item_chat, parent, false)
+                .from(parent.context).inflate(R.layout.item_chat_messenger, parent, false)
         )
     }
 
@@ -36,29 +36,29 @@ class ChatAdapter(
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemChatBinding.bind(view)
+        private val binding = ItemChatMessengerBinding.bind(view)
 
         init {
             binding.root.setOnClickListener {
                 listener.onItemClick(getItem(bindingAdapterPosition))
             }
         }
+        fun bind(profileItem: Message)= with(binding){
 
-        fun bind(profileItem: Chat) = with(binding) {
-            textViewNameUser.text = profileItem.title
-            profileItem.lastMessage?.let { textViewLasMessenger.text = it }
+            profileItem.createdAt?.let { messageDateText.text=it }
+            profileItem.text?.let { messageText.text=it }
             profileItem.avatar?.let {
                 Glide
                     .with(imageViewUserChat.context)
                     .load(profileItem.avatar)
                     .circleCrop()
                     .into(imageViewUserChat)
-                imageViewUserChat.clipToOutline = true
+                //imageViewUserChat.load(it)
+                imageViewUserChat.clipToOutline=true
             }
         }
     }
-
-    interface ChatAdapterListener {
-        fun onItemClick(item: Chat)
+    interface MessageAdapterListener{
+        fun onItemClick(item: Message)
     }
 }

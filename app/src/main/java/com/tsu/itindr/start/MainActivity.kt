@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this@MainActivity,RegistrationActivity::class.java)
         viewbinding.buttonRegister.setOnClickListener { startActivity(intent) }
+
         val intentAuthorization = Intent(this@MainActivity,AuthorizationActivity::class.java)
         viewbinding.buttonCome.setOnClickListener { startActivity(intentAuthorization) }
     }

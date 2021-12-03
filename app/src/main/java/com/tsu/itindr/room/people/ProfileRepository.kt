@@ -10,17 +10,11 @@ class ProfileRepository(context: Context) {
     private val profileDao = Database.getInstance(context).getProfileDao()
 
     fun observeAllProfiles(): LiveData<List<PeopleProfile>> =
-        profileDao.observeAll().map { list -> list.map { it.toDomain() } }
+        profileDao.observeAll().map { list -> list.map { it.toDomain().toDomainData() } }
 
 
-    suspend fun addNew(id: String, name: String, avatar: String) {
-        profileDao.addProfile(
-            ProfileEntity(
-                id = id,
-                name = name,
-                avatar = avatar
-            )
-        )
+    suspend fun addNew(profileEntity: List<ProfileEntity>) {
+        profileDao.addProfile(profileEntity)
     }
 }
 

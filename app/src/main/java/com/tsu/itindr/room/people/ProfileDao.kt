@@ -7,7 +7,7 @@ import androidx.room.Database
 @Dao
 interface ProfileDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addProfile(profileEntity: ProfileEntity)
+    suspend fun addProfile(profileEntity: List<ProfileEntity>)
 
     @Update
     suspend fun updateProfile(profileEntity: ProfileEntity)
@@ -16,10 +16,12 @@ interface ProfileDao {
     suspend fun deleteProfile(profileEntity: ProfileEntity)
 
     @Query("UPDATE profile SET name= :name WHERE id= :id")
-    suspend fun updateProfileName(id:String,name:String)
+    suspend fun updateProfileName(id: String, name: String)
 
+    @Query("DELETE FROM profile")
+    suspend fun deleteAll()
 
     @Query("SELECT * FROM profile")
-   fun observeAll():LiveData<List<ProfileEntity>>
+    fun observeAll(): LiveData<List<ProfileEntity>>
 }
 

@@ -4,10 +4,14 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.tsu.itindr.data.SharedPreference
 import com.tsu.itindr.data.chat.GetChatController
 import com.tsu.itindr.data.chat.GetChatResponse
+import com.tsu.itindr.data.profile.ProfileResponses
 import com.tsu.itindr.find.chat.model.ProfileItem
+import com.tsu.itindr.room.chat.ChatRepository
+import kotlinx.coroutines.launch
 
 class ChatViewModel(app: Application) : AndroidViewModel(app) {
     val sharedPreference = SharedPreference(app)
@@ -36,8 +40,10 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                             avatar = getChat.chat.avatar
                         )
                     )
+                    add(getChat)
                 }
                 _isChat.value = profileItems
+
 
             },
             onFailure = {
@@ -47,5 +53,19 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
         )
     }
 
+    private val chatRepository = ChatRepository(app)
+    val chats = chatRepository.observeAllProfiles()
 
+    fun add(profile: GetChatResponse) {
+        viewModelScope.launch {
+            chatRepository.addNew(
+                id = profile.chat.id,
+                title = profile.chat.title,
+                avatar = profile.chat.avatar.toString(),
+                lastMessage = profile.lastMessage?.text.toString()
+            )
+        }
+
+
+    }
 }

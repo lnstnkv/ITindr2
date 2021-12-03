@@ -10,17 +10,23 @@ import retrofit2.Response
 class RegisterController(context: Context) {
 
     private val api: RegisterInt = Network.retrofit.create(RegisterInt::class.java)
-    private val sharedPreference=SharedPreference(context)
 
-    fun register(registerParams: RegisterParams, onSuccess: (data: RegisterResponse) -> Unit, onFailure: () -> Unit) {
-        api.registerProfile(registerParams).enqueue(object : Callback<RegisterResponse> {
+    private val sharedPreference = SharedPreference(context)
+
+    fun register(
+        registerParams: RegisterParams,
+        onSuccess: (data: RegisterResponse) -> Unit,
+        onFailure: () -> Unit
+    ) {
+        api.registerProfile(registerParams).enqueue(object : Callback<RegisterResponse>
+        {
             override fun onResponse(
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
             ) {
                 if (response.isSuccessful) {
-                    response.body()?.let{
-                    onSuccess.invoke(it)
+                    response.body()?.let {
+                        onSuccess.invoke(it)
                         sharedPreference.save("accessToken", it.accessToken)
 
                     }

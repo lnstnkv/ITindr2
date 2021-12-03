@@ -16,7 +16,7 @@ class AuthorizationActivity : AppCompatActivity() {
     private val viewModel by lazy {
         ViewModelProvider(this).get(AuthorizationViewModel::class.java)
     }
-    private val sharedPreference by lazy { SharedPreference(this) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,6 @@ class AuthorizationActivity : AppCompatActivity() {
         }
         viewModel.authorizationSuccess.observe(this@AuthorizationActivity) {
             if (it != null) {
-                sharedPreference.save("accessToken", it.accessToken)
                 val intent =
                     Intent(this@AuthorizationActivity, FindActivity::class.java)
                 startActivity(intent)

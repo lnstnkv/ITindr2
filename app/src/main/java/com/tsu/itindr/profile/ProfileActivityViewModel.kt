@@ -1,4 +1,4 @@
-package com.tsu.itindr.find.people
+package com.tsu.itindr.profile
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -10,12 +10,9 @@ import com.tsu.itindr.data.profile.ProfileResponses
 import com.tsu.itindr.data.user.PeopleController
 import com.tsu.itindr.find.people.model.PeopleProfile
 import com.tsu.itindr.room.people.ProfileRepository
-//import com.tsu.itindr.room.people.ProfileRepository
 import kotlinx.coroutines.launch
 
-class PeopleViewModel(app: Application) : AndroidViewModel(app) {
-
-    val sharedPreference = SharedPreference(app)
+class ProfileActivityViewModel(app: Application) : AndroidViewModel(app) {   val sharedPreference = SharedPreference(app)
     val accessToken = sharedPreference.getValueString("accessToken")
 
     private val profileRepository = ProfileRepository(app)
@@ -27,23 +24,16 @@ class PeopleViewModel(app: Application) : AndroidViewModel(app) {
     val isErrorUser: LiveData<Boolean>
         get() = _isErrorUser
 
-    fun getUser() {
-        controller.getUser(
-            24, 0,
-            onSuccess = {
-                _isErrorUser.value = false
-                add(it)
-            },
-            onFailure = {
-                _isErrorUser.value = true
-            }
-        )
-    }
+    private val _isUser = MutableLiveData<List<PeopleProfile>?>()
+    val isUser: LiveData<List<PeopleProfile>?>
+        get() = _isUser
 
-    fun add(profile: List<ProfileResponses>) {
+
+    /*fun add(profile: List<ProfileResponses>) {
         viewModelScope.launch {
-            profileRepository.addNew(profile.map { it.toEntityData() })
+            profileRepository.addNew(id=profile.userId,name = profile.name.toString(),avatar = profile.avatar.toString())
         }
     }
 
+     */
 }

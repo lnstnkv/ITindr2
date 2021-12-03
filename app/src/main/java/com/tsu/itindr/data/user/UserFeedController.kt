@@ -1,14 +1,18 @@
 package com.tsu.itindr.data.user
 
+import android.content.Context
 import com.tsu.itindr.data.Network
+import com.tsu.itindr.data.SharedPreference
 import com.tsu.itindr.data.profile.ProfileResponses
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserFeedController {
+class UserFeedController(context: Context) {
     private val api: UserInt = Network.retrofit.create(UserInt::class.java)
-    fun feedUser(accessToken:String, onSuccess: (data: List<ProfileResponses>) -> Unit, onFailure: () -> Unit) {
+    private val sharedPreference = SharedPreference(context)
+    fun feedUser( onSuccess: (data: List<ProfileResponses>) -> Unit, onFailure: () -> Unit) {
+        val accessToken = "Bearer " + sharedPreference.getValueString("accessToken").toString()
         api.feedUser(accessToken).enqueue(object : Callback<List<ProfileResponses>> {
             override fun onResponse(
                 call: Call<List<ProfileResponses>>,

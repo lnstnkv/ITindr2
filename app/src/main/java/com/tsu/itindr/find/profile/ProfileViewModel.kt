@@ -22,11 +22,10 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
     val isUser: LiveData<ProfileResponses?>
         get() = _isUser
 
-    private val controller = ProfileController()
+    private val controller = ProfileController(app)
 
     fun getProfile() {
         controller.profile(
-            "Bearer " + accessToken,
             onSuccess =
             {
                 _isErrorUser.value=false

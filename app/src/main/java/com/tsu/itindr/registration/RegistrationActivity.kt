@@ -17,7 +17,7 @@ class RegistrationActivity : AppCompatActivity() {
     private val viewModel by lazy {
         ViewModelProvider(this).get(RegistrationViewModel::class.java)
     }
-    private val sharedPreference by lazy { SharedPreference(this) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

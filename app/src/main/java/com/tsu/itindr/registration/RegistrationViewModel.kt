@@ -46,6 +46,7 @@ class RegistrationViewModel (app: Application) : AndroidViewModel(app) {
         controller.register(
             RegisterParams(email, password),
             onSuccess = {
+
                 _registerSuccess.value = it
 
             },

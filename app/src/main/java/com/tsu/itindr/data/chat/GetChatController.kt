@@ -10,7 +10,6 @@ import retrofit2.Response
 class GetChatController(context: Context) {
     private val api: ChatInt = Network.retrofit.create(ChatInt::class.java)
     private val sharedPreference = SharedPreference(context)
-    val accessToken = sharedPreference.getValueString("accessToken")
 
     fun getChat(onSuccess: (data: List<GetChatResponse>) -> Unit, onFailure: () -> Unit) {
         val accessToken = "Bearer " + sharedPreference.getValueString("accessToken").toString()

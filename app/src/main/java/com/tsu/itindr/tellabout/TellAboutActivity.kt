@@ -40,7 +40,7 @@ class TellAboutActivity : AppCompatActivity() {
     }
     private val viewModel by lazy { ViewModelProvider(this).get(TellAboutViewModel::class.java) }
 
-    val saveAvatar = AvatarController(this)
+    val saveAvatar = AvatarController()
     val chips: MutableList<String> = mutableListOf()
 
 
