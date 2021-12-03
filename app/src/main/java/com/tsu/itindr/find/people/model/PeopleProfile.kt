@@ -7,8 +7,8 @@ import kotlinx.serialization.json.Json
 
 data class PeopleProfile(
     val id: String,
-    val username: String? = null,
-    val about: String? = null,
+    var username: String? = null,
+    var about: String? = null,
     val avatar: String? = null,
     val topics: List<TopicItem>
 )

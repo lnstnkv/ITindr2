@@ -15,9 +15,6 @@ import kotlinx.coroutines.launch
 
 class PeopleViewModel(app: Application) : AndroidViewModel(app) {
 
-    val sharedPreference = SharedPreference(app)
-    val accessToken = sharedPreference.getValueString("accessToken")
-
     private val profileRepository = ProfileRepository(app)
     val profiles = profileRepository.observeAllProfiles()
 
@@ -29,7 +26,7 @@ class PeopleViewModel(app: Application) : AndroidViewModel(app) {
 
     fun getUser() {
         controller.getUser(
-            24, 0,
+            32, 0,
             onSuccess = {
                 _isErrorUser.value = false
                 add(it)

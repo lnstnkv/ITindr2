@@ -24,8 +24,8 @@ class RegistrationViewModel (app: Application) : AndroidViewModel(app) {
     val isErrorPassword: LiveData<Boolean>
         get() = _isErrorPassword
 
-    private val _registerSuccess = MutableLiveData<RegisterResponse?>()
-    val registerSuccess: LiveData<RegisterResponse?>
+    private val _registerSuccess = MutableLiveData<Boolean>()
+    val registerSuccess: LiveData<Boolean>
         get() = _registerSuccess
 
     private val checkingEmail = Email()
@@ -47,11 +47,11 @@ class RegistrationViewModel (app: Application) : AndroidViewModel(app) {
             RegisterParams(email, password),
             onSuccess = {
 
-                _registerSuccess.value = it
+                _registerSuccess.value = true
 
             },
             onFailure = {
-                _registerSuccess.value = null
+                _registerSuccess.value = false
             })
     }
 

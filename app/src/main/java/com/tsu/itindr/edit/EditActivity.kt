@@ -26,15 +26,15 @@ import java.io.ByteArrayOutputStream
 
 class EditActivity : AppCompatActivity() {
     private val viewModel by lazy { ViewModelProvider(this).get(EditViewModel::class.java) }
-    private val sharedPreference by lazy { SharedPreference(this) }
+
     private val viewbinding by lazy { ActivityEditBinding.inflate(layoutInflater) }
-    val saveAvatar = AvatarController()
+
     val chips: MutableList<String> = mutableListOf()
     var chooseChips: List<TopicResponse> = listOf()
+
     private val imagePicker = ImagePicker(activityResultRegistry, this) { imageUri ->
         viewbinding.imageViewEdit.load(imageUri)
-        saveAvatarFunc(imageUri)
-        //viewModel.saveAvatar(imageUri)
+        viewModel.saveAvatar(imageUri)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,17 +64,30 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun initView() = with(viewbinding) {
+        viewModel.isErrorSaveAvatar.observe(this@EditActivity){ isErrorSaveAvatar->
+            if(isErrorSaveAvatar==true){
+                Toast.makeText(this@EditActivity, "Не удалось загрузить фото", Toast.LENGTH_LONG).show()
+            }
+            else{
+                viewbinding.buttonChooseEdit.setText(R.string.delete_photo)
+                viewbinding.buttonChooseEdit.setOnClickListener { viewModel.deleteAvatar() }
+            }
+
+        }
         viewModel.isErrorAvatar.observe(this@EditActivity) { isErrorAvatar ->
             if (isErrorAvatar == false) {
-                Toast.makeText(this@EditActivity, R.string.error_email, Toast.LENGTH_LONG)
+                Toast.makeText(this@EditActivity, "Не удалось удалить фото", Toast.LENGTH_LONG)
                     .show()
+            }
+            else{
+                viewbinding.buttonChooseEdit.setText(R.string.choose_photo)
             }
 
         }
         viewModel.isErrorFromTopic.observe(this@EditActivity){
             if(it==true)
             {
-                Toast.makeText(this@EditActivity, "Проблемка топиков", Toast.LENGTH_LONG)
+                Toast.makeText(this@EditActivity, "Проблема отображения топиков", Toast.LENGTH_LONG)
                     .show()
             }
         }
@@ -85,47 +98,35 @@ class EditActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.isErrorProfile.observe(this@EditActivity) {
-            if (it != null) {
-                chooseChips = it.topics
-                for (j in it.topics) {
+        viewModel.isErrorProfile.observe(this@EditActivity) { profileItem->
+            if (profileItem != null) {
+                chooseChips = profileItem.topics
+                for (j in profileItem.topics) {
                     chooseChip(j.title)
                 }
 
-                viewbinding.textViewAboutEdit.text = it.aboutMyself
-                viewbinding.editTextEditName.setText(it.name)
-                if (it.avatar != null) {
+                viewbinding.textViewAboutEdit.text = profileItem.aboutMyself
+                viewbinding.editTextEditName.setText(profileItem.name)
+                if (profileItem.avatar != null) {
                     Glide
                         .with(imageViewEdit.context)
-                        .load(it.avatar)
+                        .load(profileItem.avatar)
                         .into(viewbinding.imageViewEdit)
                 }
             }
         }
         viewModel.isErrorUpdateProfile.observe(this@EditActivity) {
             if (it == null) {
-                Toast.makeText(this@EditActivity, "ОШибка update Profile", Toast.LENGTH_LONG)
+                Toast.makeText(this@EditActivity, "Ошибка обновлнеия профиля", Toast.LENGTH_LONG)
+                    .show()
+            }
+            else{
+                Toast.makeText(this@EditActivity, "Обновление профиля просто успешно", Toast.LENGTH_LONG)
                     .show()
             }
         }
 
     }
-
-
-    /*private fun deleteAvatar() {
-        val sharedPreference = SharedPreference(this)
-        val accessToken = sharedPreference.getValueString("accessToken")
-          saveAvatar.deleteAvatar("Bearer " + accessToken,
-            onSuccess = {
-                viewbinding.imageViewEdit.setImageResource(R.drawable.ic_user)
-                viewbinding.buttonChooseEdit.setText(R.string.choose_photo)
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            })
-
-    }
-     */
 
     private fun addChip(it: TopicResponse) {
         val text = it.title
@@ -153,39 +154,5 @@ class EditActivity : AppCompatActivity() {
         chip.text = text
         viewbinding.chipGroup.addView(chip)
     }
-
-    private fun saveAvatarFunc(uri: Uri) {
-        val sharedPreference = SharedPreference(this)
-        val accessToken = sharedPreference.getValueString("accessToken")
-        val stream = uri.let { contentResolver.openInputStream(it) }
-        val bitmap = BitmapFactory.decodeStream(stream)
-        val image = imageToByteArray(bitmap)
-        val requestFile: RequestBody =
-            image.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
-
-        saveAvatar.updateAvatar(
-            "Bearer " + accessToken,
-            body,
-            onSuccess = {
-
-                viewbinding.buttonChooseEdit.setText(R.string.delete_photo)
-                viewbinding.buttonChooseEdit.setOnClickListener { viewModel.deleteAvatar() }
-
-
-            },
-            onFailure = {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-            })
-
-    }
-
-    fun imageToByteArray(bitmap: Bitmap): ByteArray {
-        val byteArrayOutput = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutput)
-        return byteArrayOutput.toByteArray()
-    }
-
-
 }
 

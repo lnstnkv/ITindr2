@@ -2,6 +2,7 @@ package com.tsu.itindr.find.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.tsu.itindr.*
 import com.tsu.itindr.databinding.FragmentSearchBinding
 import com.tsu.itindr.find.MatchActivity
 import com.tsu.itindr.data.profile.ProfileResponses
+import com.tsu.itindr.profile.ProfileActivity
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     companion object {
@@ -48,6 +50,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             addResponse()
         }
 
+
     }
 
     private fun initView() = with(viewbinding) {
@@ -58,21 +61,27 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
 
         }
-        viewModel.isUser.observe(viewLifecycleOwner) {
+        viewModel.userProfile.observe(viewLifecycleOwner) {
             it?.let {
-                    users = it
-                    viewbinding.textViewNameFeed.text = users[index].name
-                    for (j in users[index].topics) {
-                        addChip(j.title)
-                    }
-                    viewbinding.textViewAbout.text = users[index].aboutMyself
-                    Glide
-                        .with(imageViewAvatarSearch.context)
-                        .load(users[index].avatar)
-                        .into(viewbinding.imageViewAvatarSearch);
+                users = it
+                viewbinding.textViewNameFeed.text = users[index].name
+                for (j in users[index].topics) {
+                    addChip(j.title)
+                }
+                viewbinding.textViewAbout.text = users[index].aboutMyself
+                Glide
+                    .with(imageViewAvatarSearch.context)
+                    .load(users[index].avatar)
+                    .into(viewbinding.imageViewAvatarSearch);
 
-                    userID = users[index].userId
+                userID = users[index].userId
 
+            }
+            viewbinding.imageViewAvatarSearch.setOnClickListener {
+                val intent = Intent(activity, ProfileActivity::class.java)
+                intent.putExtra("userId",userID)
+                Log.d("userID",userID)
+                startActivity(intent)
             }
         }
         viewModel.isErrorDisLike.observe(viewLifecycleOwner) {
@@ -84,10 +93,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     .show()
             }
         }
-        viewModel.isErrorLike.observe(viewLifecycleOwner){ it ->
-            if(it==false)
-            {
-                viewModel.isLike.observe(viewLifecycleOwner){
+        viewModel.isErrorLike.observe(viewLifecycleOwner) { isMutual ->
+            if (isMutual == false) {
+                viewModel.isMutual.observe(viewLifecycleOwner) {
                     if (it != null) {
                         if (it.isMutual) {
                             val intent = Intent(activity, MatchActivity::class.java)
@@ -96,9 +104,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     }
 
                 }
-            }
-            else
-            {
+            } else {
                 Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
         }

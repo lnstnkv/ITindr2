@@ -9,7 +9,7 @@ import com.tsu.itindr.room.people.ProfileEntity
 import com.tsu.itindr.room.topic.TopicDao
 import com.tsu.itindr.room.topic.TopicEntity
 
-@Database(entities = [ProfileEntity::class,TopicEntity::class,ChatEntity::class], version = 4)
+@Database(entities = [ProfileEntity::class,TopicEntity::class,ChatEntity::class], version = 5)
 abstract class AppDatabase:RoomDatabase() {
 
     abstract fun getProfileDao(): ProfileDao

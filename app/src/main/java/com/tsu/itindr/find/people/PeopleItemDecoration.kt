@@ -30,11 +30,13 @@ class PeopleItemDecoration : RecyclerView.ItemDecoration() {
 
 
             else -> {
-                if (position % 2 == 0) {
-                    Rect(margin8, margin12, margin16, margin12)
-                } else {
-                    Rect(margin16, margin12, margin8, margin12)
+                if (position % 3 == 0) {
+                    Rect(margin8, margin8, margin8, margin12)
                 }
+                else {
+                    Rect(margin8, margin12, margin8, margin12)
+                }
+
             }
 
         }

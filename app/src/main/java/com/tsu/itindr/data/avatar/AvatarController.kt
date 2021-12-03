@@ -15,26 +15,24 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 
-class AvatarController()
- {
+class AvatarController(private val context: Context) {
     private val api: AvatarInt = Network.retrofitMultipart.create(AvatarInt::class.java)
-
-   /* val stream = uri.let { context.contentResolver.openInputStream(uri) }
-    val bitmap = BitmapFactory.decodeStream(stream)
-    val image = imageToByteArray(bitmap)
-    val requestFile: RequestBody =
-        image.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-    val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
-*/
-
+    private val sharedPreference = SharedPreference(context)
 
     fun updateAvatar(
-        accessToken: String,
-        avatar: MultipartBody.Part,
+        uri: Uri,
         onSuccess: () -> Unit,
         onFailure: () -> Unit
     ) {
-        api.upload(accessToken, avatar).enqueue(object : Callback<String> {
+        val stream = uri.let { context.contentResolver.openInputStream(uri) }
+        val bitmap = BitmapFactory.decodeStream(stream)
+        val image = imageToByteArray(bitmap)
+        val requestFile: RequestBody =
+            image.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("avatar", "avatar.jpg", requestFile)
+        val accessToken = "Bearer " + sharedPreference.getValueString("accessToken").toString()
+
+        api.upload(accessToken, body).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful) {
                     onSuccess.invoke()
@@ -50,10 +48,10 @@ class AvatarController()
     }
 
     fun deleteAvatar(
-        accessToken: String,
         onSuccess: () -> Unit,
         onFailure: () -> Unit
     ) {
+        val accessToken = "Bearer " + sharedPreference.getValueString("accessToken").toString()
         api.delete(accessToken).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful) {
@@ -70,7 +68,7 @@ class AvatarController()
         })
     }
 
-   private fun imageToByteArray(bitmap: Bitmap): ByteArray {
+    private fun imageToByteArray(bitmap: Bitmap): ByteArray {
         val byteArrayOutput = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutput)
         return byteArrayOutput.toByteArray()

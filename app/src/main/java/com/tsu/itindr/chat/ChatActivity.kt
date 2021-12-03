@@ -20,10 +20,12 @@ import com.tsu.itindr.find.people.model.PeopleProfile
 import android.content.Intent
 import android.util.Log
 import androidx.core.content.getSystemService
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.tsu.itindr.chat.model.Message
 import com.tsu.itindr.data.profile.ProfileResponses
 import com.tsu.itindr.databinding.ActivityAuthorizationBinding
+import com.tsu.itindr.edit.EditViewModel
 import com.tsu.itindr.room.chat.ChatRepository
 import kotlinx.coroutines.launch
 
@@ -32,13 +34,16 @@ class ChatActivity : AppCompatActivity() {
 
 
     private val binding by lazy { ActivityChatBinding.inflate(layoutInflater) }
+
+    private val viewModel by lazy { ViewModelProvider(this).get(ChatMessageViewModel::class.java) }
+
     private val messageAdapterListener = object : MessageAdapter.MessageAdapterListener {
 
         override fun onItemClick(item: Message) {
-            TODO("Not yet implemented")
+            println()
         }
     }
-    private val cotroller = MessageController()
+
     private val messageAdapter = MessageAdapter(messageAdapterListener)
 
     private fun initView() = with(binding) {
@@ -47,7 +52,20 @@ class ChatActivity : AppCompatActivity() {
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         messageRecycler.apply {
             adapter = messageAdapter
-            //addItemDecoration(PeopleItemDecoration())
+
+            viewModel.isErrorGetMessage.observe(this@ChatActivity) { isError ->
+                if (isError) {
+                    Toast.makeText(this@ChatActivity, "Ошибка чата", Toast.LENGTH_LONG).show()
+                } else {
+                    viewModel.getMessageItem.observe(this@ChatActivity) { chatItem ->
+                        if (chatItem != null) {
+                            messageAdapter.submitList(chatItem)
+                        }
+                    }
+                }
+            }
+
+
         }
 
     }
@@ -56,47 +74,14 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initView()
-        val sharedPreferences = SharedPreference(this)
+
         val intent = intent
 
         val fName = intent.getStringExtra("chatID")
-        if (fName != null) {
-            Log.d("ID",fName)
+        fName?.let {
+            viewModel.getMessage(fName)
         }
 
-        if (fName != null) {
-            cotroller.getChat(
-                "Bearer " + sharedPreferences.getValueString("accessToken"), fName, 50,0,
-                onSuccess = {
-
-                    val peopleItems = mutableListOf<Message>()
-                    for (getChat in it) {
-                        peopleItems.add(
-                            Message(
-                                id=getChat.id,
-                                text = getChat.text,
-                                createdAt = getChat.createdAt,
-                                attachments = getChat.attachments,
-                                userId = getChat.user.userId,
-                                name=getChat.user.name,
-                                avatar = getChat.user.avatar,
-                                aboutMyself = getChat.user.aboutMyself
-
-                            )
-
-                        )
-
-
-                    }
-                    messageAdapter.submitList(peopleItems)
-
-
-                },
-                onFailure = {
-
-                }
-            )
-        }
 
     }
 }

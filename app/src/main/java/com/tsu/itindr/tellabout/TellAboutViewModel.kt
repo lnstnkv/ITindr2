@@ -14,9 +14,9 @@ import com.tsu.itindr.room.topic.TopicRepository
 import kotlinx.coroutines.launch
 
 class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
-    val sharedPreference = SharedPreference(app)
+
     private val updateController = UserController(app)
-    private val saveAvatar = AvatarController()
+    private val saveAvatar=AvatarController(app)
     private val controllerTopic = TopicController(app)
 
     private val _isErrorFromTopic = MutableLiveData<Boolean>()
@@ -43,13 +43,11 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
         get() = _isErrorSaveAvatar
 
 
-    // private val multiPartAvatar = Avatar()
-    val accessToken = sharedPreference.getValueString("accessToken")
 
     fun deleteAvatar() {
 
 
-        saveAvatar.deleteAvatar("Bearer " + accessToken,
+        saveAvatar.deleteAvatar(
             onSuccess = {
                 _isErrorAvatar.value = false
             },
@@ -76,10 +74,8 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
-   /* fun saveAvatar(uri: Uri) {
-
+    fun saveAvatar(uri: Uri) {
         saveAvatar.updateAvatar(
-            "Bearer " + accessToken,
             uri,
             onSuccess = {
                 _isErrorSaveAvatar.value = false
@@ -91,11 +87,6 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
             })
 
     }
-
-    */
-
-
-
 
     fun updateProfile(name: String, aboutMyself: String, topics: List<String>) {
 

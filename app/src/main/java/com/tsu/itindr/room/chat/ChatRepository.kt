@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.tsu.itindr.data.TopicItem
 import com.tsu.itindr.data.chat.LastMessage
-import com.tsu.itindr.edit.model.Avatar
 import com.tsu.itindr.room.Database
 import com.tsu.itindr.room.topic.TopicEntity
 

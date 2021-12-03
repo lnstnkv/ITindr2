@@ -10,18 +10,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.NumberFormatException
 
-class MessageController()  {
+class MessageController(context: Context)  {
     private val api: ChatInt = Network.retrofit.create(ChatInt::class.java)
-    //private val sharedPreference = SharedPreference(context)
+    private val sharedPreference = SharedPreference(context)
     fun getChat(
-        accessToken:String,
         chatId: String,
         limit: Int,
         offset: Int,
         onSuccess: (data: List<MessegeResponse>) -> Unit,
         onFailure: () -> Unit
     ) {
-       // val accessToken = "Bearer " + sharedPreference.getValueString("accessToken").toString()
+        val accessToken = "Bearer " + sharedPreference.getValueString("accessToken").toString()
         api.getChatMessage(accessToken, chatId, limit, offset)
             .enqueue(object : Callback<List<MessegeResponse>> {
                 override fun onResponse(

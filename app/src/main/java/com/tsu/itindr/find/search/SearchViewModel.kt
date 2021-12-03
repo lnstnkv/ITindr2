@@ -22,17 +22,17 @@ class SearchViewModel(app: Application) : AndroidViewModel(app) {
     val isErrorUser: LiveData<Boolean>
         get() = _isErrorUser
 
-    private val _isUser = MutableLiveData<List<ProfileResponses>?>()
-    val isUser: LiveData<List<ProfileResponses>?>
-        get() = _isUser
+    private val _userProfile = MutableLiveData<List<ProfileResponses>?>()
+    val userProfile: LiveData<List<ProfileResponses>?>
+        get() = _userProfile
 
     private val _isErrorLike = MutableLiveData<Boolean>()
     val isErrorLike: LiveData<Boolean>
         get() = _isErrorLike
 
-    private val _isLike = MutableLiveData<LikeResponse?>()
-    val isLike: LiveData<LikeResponse?>
-        get() = _isLike
+    private val _isMutual = MutableLiveData<LikeResponse?>()
+    val isMutual: LiveData<LikeResponse?>
+        get() = _isMutual
 
     private val _isErrorDisLike = MutableLiveData<Boolean>()
     val isErrorDisLike: LiveData<Boolean>
@@ -43,7 +43,7 @@ class SearchViewModel(app: Application) : AndroidViewModel(app) {
         controller.feedUser(
             onSuccess = {
                 _isErrorUser.value = false
-                _isUser.value = it
+                _userProfile.value = it
 
             },
             onFailure = {
@@ -70,11 +70,11 @@ class SearchViewModel(app: Application) : AndroidViewModel(app) {
             userID,
             onSuccess = {
                 _isErrorLike.value=false
-                _isLike.value=it
+                _isMutual.value=it
             },
             onFailure = {
                 _isErrorLike.value=true
-                _isLike.value=null
+                _isMutual.value=null
             }
         )
     }

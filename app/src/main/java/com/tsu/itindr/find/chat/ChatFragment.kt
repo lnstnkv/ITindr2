@@ -44,11 +44,11 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         }
         viewModel.isError.observe(viewLifecycleOwner) { isError ->
             if (isError) {
-                Toast.makeText(activity, "ОШибочка чатика", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, "Ошибка чата", Toast.LENGTH_LONG).show()
             } else {
-                viewModel.chats.observe(viewLifecycleOwner) {
-                    if (it != null) {
-                        chatAdapter.submitList(it)
+                viewModel.chats.observe(viewLifecycleOwner) { chatItem->
+                    if (chatItem != null) {
+                        chatAdapter.submitList(chatItem)
                     }
                 }
             }

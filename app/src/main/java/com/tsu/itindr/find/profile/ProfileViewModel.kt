@@ -18,9 +18,9 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
     val isErrorUser: LiveData<Boolean>
         get() = _isErrorUser
 
-    private val _isUser = MutableLiveData<ProfileResponses?>()
-    val isUser: LiveData<ProfileResponses?>
-        get() = _isUser
+    private val _userItem = MutableLiveData<ProfileResponses?>()
+    val userItem: LiveData<ProfileResponses?>
+        get() = _userItem
 
     private val controller = ProfileController(app)
 
@@ -29,7 +29,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
             onSuccess =
             {
                 _isErrorUser.value=false
-                _isUser.value=it
+                _userItem.value=it
             },
             onFailure =
             {

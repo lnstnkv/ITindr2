@@ -44,8 +44,8 @@ class RegistrationActivity : AppCompatActivity() {
                     .show()
             }
         }
-        viewModel.registerSuccess.observe(this@RegistrationActivity) {
-            if (it != null) {
+        viewModel.registerSuccess.observe(this@RegistrationActivity) { isError->
+            if (isError != false) {
                 val intent =
                     Intent(this@RegistrationActivity, TellAboutActivity::class.java)
                 startActivity(intent)

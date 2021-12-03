@@ -1,6 +1,7 @@
 package com.tsu.itindr.edit
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,13 +19,14 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
 
     val sharedPreference = SharedPreference(app)
     private val updateController = UserController(app)
-    private val saveAvatar = AvatarController()
+    private val saveAvatar = AvatarController(app)
     private val controllerTopic = TopicController(app)
     private var controller = ProfileController(app)
 
     private val _isErrorFromTopic = MutableLiveData<Boolean>()
     val isErrorFromTopic: LiveData<Boolean>
         get() = _isErrorFromTopic
+
     private val _isTopic = MutableLiveData<List<TopicResponse>?>()
     val isTopic: LiveData<List<TopicResponse>?>
         get() = _isTopic
@@ -36,7 +38,6 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
     private val _isErrorProfile = MutableLiveData<ProfileResponses?>()
     val isErrorProfile: LiveData<ProfileResponses?>
         get() = _isErrorProfile
-
 
     private val _isErrorUpdateProfile = MutableLiveData<Boolean>()
     val isErrorUpdateProfile: LiveData<Boolean>
@@ -50,13 +51,12 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
     val topics = topicRepository.observeAllProfiles()
 
 
-    // private val multiPartAvatar = Avatar()
     val accessToken = sharedPreference.getValueString("accessToken")
 
     fun deleteAvatar() {
 
 
-        saveAvatar.deleteAvatar("Bearer " + accessToken,
+        saveAvatar.deleteAvatar(
             onSuccess = {
                 _isErrorAvatar.value = false
             },
@@ -84,11 +84,10 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
-    /*fun saveAvatar(uri: Uri) {
+    fun saveAvatar(uri: Uri) {
 
         saveAvatar.updateAvatar(
-            "Bearer " + accessToken,
-            multiPartAvatar.saveAvatarFunc(uri),
+            uri,
             onSuccess = {
                 _isErrorSaveAvatar.value = false
 
@@ -100,7 +99,6 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
-     */
 
     fun getProfile() {
         controller.profile(

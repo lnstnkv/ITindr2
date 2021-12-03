@@ -13,6 +13,7 @@ object Database {
     private fun build(context: Context):AppDatabase=Room
         .databaseBuilder(context,AppDatabase::class.java,"app_database")
         .fallbackToDestructiveMigration()
+        .allowMainThreadQueries()
         .build()
 }
 

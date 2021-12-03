@@ -22,8 +22,8 @@ class AuthorizationViewModel  (app: Application) : AndroidViewModel(app)  {
     val isErrorPassword: LiveData<Boolean>
         get() = _isErrorPassword
 
-    private val _authorizationSuccess = MutableLiveData<LoginResponse?>()
-    val authorizationSuccess: LiveData<LoginResponse?>
+    private val _authorizationSuccess = MutableLiveData<Boolean>()
+    val authorizationSuccess: LiveData<Boolean>
         get() = _authorizationSuccess
 
 
@@ -49,11 +49,11 @@ class AuthorizationViewModel  (app: Application) : AndroidViewModel(app)  {
             ),
             onSuccess = {
 
-                _authorizationSuccess.value = it
+                _authorizationSuccess.value = true
 
             },
             onFailure = {
-                _authorizationSuccess.value = null
+                _authorizationSuccess.value = false
 
             })
     }

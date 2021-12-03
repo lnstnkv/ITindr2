@@ -46,8 +46,8 @@ class AuthorizationActivity : AppCompatActivity() {
                     .show()
             }
         }
-        viewModel.authorizationSuccess.observe(this@AuthorizationActivity) {
-            if (it != null) {
+        viewModel.authorizationSuccess.observe(this@AuthorizationActivity) { isError->
+            if (isError != false) {
                 val intent =
                     Intent(this@AuthorizationActivity, FindActivity::class.java)
                 startActivity(intent)

@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.tsu.itindr.data.SharedPreference
 import com.tsu.itindr.data.chat.GetChatController
 import com.tsu.itindr.data.chat.GetChatResponse
-import com.tsu.itindr.data.profile.ProfileResponses
 import com.tsu.itindr.find.chat.model.ProfileItem
 import com.tsu.itindr.room.chat.ChatRepository
 import kotlinx.coroutines.launch
@@ -20,9 +19,9 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
     val isError: LiveData<Boolean>
         get() = _isError
 
-    private val _isChat = MutableLiveData<MutableList<ProfileItem>?>()
-    val isChat: LiveData<MutableList<ProfileItem>?>
-        get() = _isChat
+    private val _chatItem = MutableLiveData<MutableList<ProfileItem>?>()
+    val chatItem: LiveData<MutableList<ProfileItem>?>
+        get() = _chatItem
 
     private var controller = GetChatController(app)
     fun getChat() {
@@ -42,7 +41,7 @@ class ChatViewModel(app: Application) : AndroidViewModel(app) {
                     )
                     add(getChat)
                 }
-                _isChat.value = profileItems
+                _chatItem.value = profileItems
 
 
             },

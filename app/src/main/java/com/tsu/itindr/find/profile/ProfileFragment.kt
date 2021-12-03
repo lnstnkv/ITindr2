@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
-import com.tsu.itindr.data.profile.ProfileController
 import com.tsu.itindr.R
 import com.tsu.itindr.databinding.FragmentProfileBinding
 import com.tsu.itindr.edit.EditActivity
@@ -41,7 +40,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun addData() {
         binding.imageViewAvatarProfile.clipToOutline = true
-        viewModel.isUser.observe(viewLifecycleOwner) {
+        viewModel.userItem.observe(viewLifecycleOwner) {
             if (it != null) {
                 for (j in it.topics) {
                     addChip(j.title)

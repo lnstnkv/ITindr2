@@ -2,6 +2,7 @@ package com.tsu.itindr.find.people
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.tsu.itindr.chat.ChatActivity
 import com.tsu.itindr.find.people.model.PeopleProfile
 import com.tsu.itindr.profile.ProfileActivity
+import com.tsu.itindr.user.UserActivity
 
 
 class PeopleFragment : Fragment(R.layout.fragment_people) {
@@ -28,7 +30,9 @@ class PeopleFragment : Fragment(R.layout.fragment_people) {
     private val peopleAdapterListener = object : PeopleAdapter.PeopleAdapterListener {
         override fun onItemClick(item: PeopleProfile) {
             val intent =
-                Intent(activity, ProfileActivity::class.java)
+                Intent(activity, UserActivity::class.java)
+            intent.putExtra("userId",item.id)
+            Log.d("userID",item.id)
             startActivity(intent)
         }
     }
