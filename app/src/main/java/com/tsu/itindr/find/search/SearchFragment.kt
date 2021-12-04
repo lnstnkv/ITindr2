@@ -16,6 +16,8 @@ import com.tsu.itindr.databinding.FragmentSearchBinding
 import com.tsu.itindr.find.MatchActivity
 import com.tsu.itindr.data.profile.ProfileResponses
 import com.tsu.itindr.profile.ProfileActivity
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     companion object {
@@ -79,8 +81,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
             viewbinding.imageViewAvatarSearch.setOnClickListener {
                 val intent = Intent(activity, ProfileActivity::class.java)
-                intent.putExtra("userId",userID)
-                Log.d("userID",userID)
+                intent.putExtra("userId", userID)
+                intent.putExtra("name", users[index].name)
+                intent.putExtra("about", users[index].aboutMyself)
+                intent.putExtra("topics", Json.encodeToString(users[index].topics))
+                intent.putExtra("avatar", users[index].avatar)
+                Log.d("userID", userID)
                 startActivity(intent)
             }
         }

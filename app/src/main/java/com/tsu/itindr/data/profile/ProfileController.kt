@@ -20,6 +20,7 @@ class ProfileController(context: Context) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         onSuccess.invoke(it)
+                        sharedPreference.save("userId",it.userId)
                     }
                 }
                     else {

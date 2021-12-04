@@ -11,6 +11,7 @@ import com.tsu.itindr.data.SharedPreference
 import com.tsu.itindr.data.avatar.AvatarController
 import com.tsu.itindr.data.profile.*
 import com.tsu.itindr.data.user.UserController
+import com.tsu.itindr.find.people.model.PeopleProfile
 import com.tsu.itindr.room.people.ProfileRepository
 import com.tsu.itindr.room.topic.TopicRepository
 import kotlinx.coroutines.launch
@@ -50,12 +51,17 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
     private val topicRepository = TopicRepository(app)
     val topics = topicRepository.observeAllProfiles()
 
+    private val profileRepository = ProfileRepository(app)
 
-    val accessToken = sharedPreference.getValueString("accessToken")
+    private val _userItem = MutableLiveData<PeopleProfile>()
+    val userItem: LiveData<PeopleProfile>
+        get() = _userItem
+
+    init {
+        getMyProfile()
+    }
 
     fun deleteAvatar() {
-
-
         saveAvatar.deleteAvatar(
             onSuccess = {
                 _isErrorAvatar.value = false
@@ -139,6 +145,12 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
                     title = topic.title
                 )
             }
+        }
+    }
+
+    fun getMyProfile() {
+        viewModelScope.launch {
+            _userItem.value = profileRepository.observeMyProfile()
         }
     }
 }

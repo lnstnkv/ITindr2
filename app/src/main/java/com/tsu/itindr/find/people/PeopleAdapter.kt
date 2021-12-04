@@ -48,13 +48,14 @@ class PeopleAdapter(
 
         fun bind(peopleProfile: PeopleProfile) = with(binding) {
             textViewNamePeople.text = peopleProfile.username
-            peopleProfile.avatar?.let {
+            if (!peopleProfile.avatar.isNullOrBlank()) {
                 Glide
                     .with(imageViewAvatarPeople.context)
                     .load(peopleProfile.avatar)
                     .circleCrop()
                     .into(imageViewAvatarPeople)
             }
+
         }
     }
 

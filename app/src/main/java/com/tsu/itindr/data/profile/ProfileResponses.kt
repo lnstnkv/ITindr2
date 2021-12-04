@@ -26,6 +26,7 @@ data class ProfileResponses(
     fun toDomainData() = PeopleProfile(
         id = userId,
         username = name,
+        about=aboutMyself,
         avatar = avatar,
         topics = topics.map { it.toDomainTopicData() }
 

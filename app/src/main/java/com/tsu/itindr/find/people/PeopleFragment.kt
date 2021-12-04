@@ -45,8 +45,6 @@ class PeopleFragment : Fragment(R.layout.fragment_people) {
                 Toast.makeText(activity, R.string.error, Toast.LENGTH_LONG).show()
             }
         }
-
-
         peopleRecycler.layoutManager =
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         peopleRecycler.apply {

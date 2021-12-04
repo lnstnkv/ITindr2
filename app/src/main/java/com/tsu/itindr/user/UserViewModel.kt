@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tsu.itindr.data.profile.LikeController
 import com.tsu.itindr.data.profile.LikeResponse
-import com.tsu.itindr.data.profile.ProfileResponses
 import com.tsu.itindr.find.people.model.PeopleProfile
 import com.tsu.itindr.room.people.ProfileRepository
 import kotlinx.coroutines.launch
@@ -21,6 +20,12 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val _isErrorDisLike = MutableLiveData<Boolean>()
     val isErrorDisLike: LiveData<Boolean>
         get() = _isErrorDisLike
+
+    private val profileRepository = ProfileRepository(app)
+
+    private val _userItem = MutableLiveData<PeopleProfile>()
+    val userItem: LiveData<PeopleProfile>
+        get() = _userItem
 
     private val _isErrorLike = MutableLiveData<Boolean>()
     val isErrorLike: LiveData<Boolean>
@@ -54,16 +59,10 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         )
     }
 
-    private val profileRepository = ProfileRepository(app)
-
-    private val _userId = MutableLiveData<PeopleProfile>()
-    val userId: LiveData<PeopleProfile>
-        get() = _userId
-
 
     fun getProfile(userId: String) {
         viewModelScope.launch {
-            _userId.value=profileRepository.observeProfile(userId)
+            _userItem.value = profileRepository.observeProfile(userId)
         }
     }
 }

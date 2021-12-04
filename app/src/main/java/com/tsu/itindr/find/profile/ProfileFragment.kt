@@ -23,30 +23,29 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val viewModel by lazy {
         ViewModelProvider(this).get(ProfileViewModel::class.java)
     }
-
     private lateinit var binding: FragmentProfileBinding
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentProfileBinding.bind(view)
+
         binding.buttonEdit.setOnClickListener {
             val intent = Intent(activity, EditActivity::class.java)
             startActivity(intent)
         }
-        initView()
-        viewModel.getProfile()
+
         addData()
     }
 
     private fun addData() {
         binding.imageViewAvatarProfile.clipToOutline = true
-        viewModel.userItem.observe(viewLifecycleOwner) {
+        viewModel.userId.observe(viewLifecycleOwner) {
             if (it != null) {
                 for (j in it.topics) {
                     addChip(j.title)
                 }
-                binding.textViewNameProfile.text = it.name
-                binding.textViewAboutMySelf.text = it.aboutMyself
+                binding.textViewNameProfile.text = it.username
+                binding.textViewAboutMySelf.text = it.about
                 if (it.avatar != null) {
                     Glide
                         .with(this)
@@ -55,6 +54,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 }
             }
         }
+        initView()
     }
 
     private fun initView() = with(binding) {

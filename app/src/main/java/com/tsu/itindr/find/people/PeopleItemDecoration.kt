@@ -27,17 +27,22 @@ class PeopleItemDecoration : RecyclerView.ItemDecoration() {
             0 -> Rect(margin16, margin24, margin8, margin12)
             1 -> Rect(margin8, margin80, margin8, margin12)
             2 -> Rect(margin8, margin24, margin16, margin8)
-
+            state.itemCount-1-> Rect(margin8, margin12, margin16, margin80)
 
             else -> {
                 if (position % 3 == 0) {
-                    Rect(margin8, margin8, margin8, margin12)
-                }
-                else {
                     Rect(margin8, margin12, margin8, margin12)
+                } else {
+                    if (position % 3 == 1) {
+                        Rect(margin16, margin12, margin8, margin12)
+                    } else {
+                        Rect(margin16, margin12, margin8, margin12)
+                    }
                 }
 
+
             }
+
 
         }
 

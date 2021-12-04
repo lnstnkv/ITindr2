@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.tsu.itindr.R
-import com.tsu.itindr.authorization.AuthorizationViewModel
 import com.tsu.itindr.data.TopicItem
-import com.tsu.itindr.databinding.ActivityAuthorizationBinding
 import com.tsu.itindr.databinding.ActivityUserBinding
 import com.tsu.itindr.find.MatchActivity
 
@@ -34,11 +32,12 @@ class UserActivity : AppCompatActivity() {
         viewbinding.buttonLikeUser.setOnClickListener {
             fName?.let { it1 -> viewModel.likeProfile(it1) }
         }
+        viewbinding.toolbarControls.setOnClickListener { finish() }
 
     }
 
     private fun initView() = with(viewbinding) {
-        viewModel.userId.observe(this@UserActivity){ profile->
+        viewModel.userItem.observe(this@UserActivity){ profile->
             if(profile!=null){
                 viewbinding.textViewNameProfile.text=profile.username
                 viewbinding.textViewAboutMySelf.text=profile.about
@@ -46,6 +45,7 @@ class UserActivity : AppCompatActivity() {
                     Glide
                         .with(viewbinding.imageViewAvatarProfile)
                         .load(profile.avatar)
+                        .circleCrop()
                         .into(viewbinding.imageViewAvatarProfile)
                 }
                 for(i in profile.topics){
@@ -85,11 +85,8 @@ class UserActivity : AppCompatActivity() {
     private fun addChip(it: TopicItem) {
         val text = it.title
         val id = it.id
-        val chipChoose = LayoutInflater.from(this).inflate(R.layout.item_chip, null) as Chip
+        val chipChoose = LayoutInflater.from(this).inflate(R.layout.item_chip_pink, null) as Chip
         chipChoose.text = text
-        chipChoose.isClickable = true
-        chipChoose.isCheckable = true
-        chipChoose.setChipBackgroundColorResource(R.color.pink)
         viewbinding.chipGroupProfile.addView(chipChoose)
     }
 

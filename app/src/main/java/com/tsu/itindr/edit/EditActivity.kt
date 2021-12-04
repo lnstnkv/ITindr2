@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.view.iterator
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.bumptech.glide.Glide
@@ -64,11 +65,12 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun initView() = with(viewbinding) {
-        viewModel.isErrorSaveAvatar.observe(this@EditActivity){ isErrorSaveAvatar->
-            if(isErrorSaveAvatar==true){
-                Toast.makeText(this@EditActivity, "Не удалось загрузить фото", Toast.LENGTH_LONG).show()
-            }
-            else{
+
+        viewModel.isErrorSaveAvatar.observe(this@EditActivity) { isErrorSaveAvatar ->
+            if (isErrorSaveAvatar == true) {
+                Toast.makeText(this@EditActivity, "Не удалось загрузить фото", Toast.LENGTH_LONG)
+                    .show()
+            } else {
                 viewbinding.buttonChooseEdit.setText(R.string.delete_photo)
                 viewbinding.buttonChooseEdit.setOnClickListener { viewModel.deleteAvatar() }
             }
@@ -78,27 +80,27 @@ class EditActivity : AppCompatActivity() {
             if (isErrorAvatar == false) {
                 Toast.makeText(this@EditActivity, "Не удалось удалить фото", Toast.LENGTH_LONG)
                     .show()
-            }
-            else{
+            } else {
                 viewbinding.buttonChooseEdit.setText(R.string.choose_photo)
             }
 
         }
-        viewModel.isErrorFromTopic.observe(this@EditActivity){
-            if(it==true)
-            {
+        viewModel.isErrorFromTopic.observe(this@EditActivity) {
+            if (it == true) {
                 Toast.makeText(this@EditActivity, "Проблема отображения топиков", Toast.LENGTH_LONG)
                     .show()
             }
         }
-        viewModel.isTopic.observe(this@EditActivity) {
+        viewModel.topics.observe(this@EditActivity) {
+            viewbinding.chipGroup.removeAllViews()
             if (it != null) {
                 for (i in it) {
+
                     addChip(i)
                 }
             }
         }
-        viewModel.isErrorProfile.observe(this@EditActivity) { profileItem->
+        /*viewModel.isErrorProfile.observe(this@EditActivity) { profileItem ->
             if (profileItem != null) {
                 chooseChips = profileItem.topics
                 for (j in profileItem.topics) {
@@ -115,20 +117,39 @@ class EditActivity : AppCompatActivity() {
                 }
             }
         }
+
+         */
         viewModel.isErrorUpdateProfile.observe(this@EditActivity) {
             if (it == null) {
                 Toast.makeText(this@EditActivity, "Ошибка обновлнеия профиля", Toast.LENGTH_LONG)
                     .show()
-            }
-            else{
-                Toast.makeText(this@EditActivity, "Обновление профиля просто успешно", Toast.LENGTH_LONG)
+            } else {
+                Toast.makeText(
+                    this@EditActivity,
+                    "Обновление профиля просто успешно",
+                    Toast.LENGTH_LONG
+                )
                     .show()
+            }
+        }
+        viewModel.userItem.observe(this@EditActivity) { profileItem ->
+            viewbinding.textViewAboutEdit.text = profileItem.about
+            viewbinding.editTextEditName.setText(profileItem.username)
+            if (profileItem.avatar != null) {
+                Glide
+                    .with(imageViewEdit.context)
+                    .load(profileItem.avatar)
+                    .into(viewbinding.imageViewEdit)
+                viewbinding.buttonChooseEdit.setText(R.string.delete_photo)
+            }
+            for (i in profileItem.topics) {
+                addChip(i)
             }
         }
 
     }
 
-    private fun addChip(it: TopicResponse) {
+    private fun addChip(it: TopicItem) {
         val text = it.title
         val id = it.id
         val chipWhite = LayoutInflater.from(this).inflate(R.layout.item_chip, null) as Chip
@@ -148,11 +169,16 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    private fun chooseChip(text: String) {
+    private fun chooseChip(it: TopicItem) {
 
         val chip = LayoutInflater.from(this).inflate(R.layout.item_chip_pink, null) as Chip
-        chip.text = text
-        viewbinding.chipGroup.addView(chip)
+        chip.text = it.title
+        for (i in chips) {
+            if (chip.text == i) {
+                //chipWhite.isChecked
+            }
+        }
+
     }
 }
 
