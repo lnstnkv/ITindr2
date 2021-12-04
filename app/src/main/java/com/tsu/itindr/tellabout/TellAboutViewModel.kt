@@ -45,8 +45,6 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
 
 
     fun deleteAvatar() {
-
-
         saveAvatar.deleteAvatar(
             onSuccess = {
                 _isErrorAvatar.value = false
@@ -58,7 +56,6 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun addTopic() {
-
         controllerTopic.topic(
             onSuccess = {
                 _isErrorFromTopic.value=false
@@ -71,7 +68,6 @@ class TellAboutViewModel(app: Application) : AndroidViewModel(app) {
             }
 
         )
-
     }
 
     fun saveAvatar(uri: Uri) {

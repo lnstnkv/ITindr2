@@ -12,9 +12,6 @@ import com.tsu.itindr.data.user.UserFeedController
 
 class SearchViewModel(app: Application) : AndroidViewModel(app) {
 
-    val sharedPreference = SharedPreference(app)
-    val accessToken = sharedPreference.getValueString("accessToken")
-
     private val controller = UserFeedController(app)
     private val controllerLike = LikeController(app)
 
