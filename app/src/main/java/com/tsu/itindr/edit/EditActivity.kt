@@ -50,8 +50,7 @@ class EditActivity : AppCompatActivity() {
             imagePicker.pickImage()
 
         }
-        viewModel.addTopic()
-        viewModel.getProfile()
+
 
 
         viewbinding.buttonSavEdit.setOnClickListener {
@@ -60,6 +59,7 @@ class EditActivity : AppCompatActivity() {
                 viewbinding.TextInputEdit.text.toString(),
                 chips.toList()
             )
+
         }
 
     }
@@ -94,19 +94,16 @@ class EditActivity : AppCompatActivity() {
         viewModel.topics.observe(this@EditActivity) {
             viewbinding.chipGroup.removeAllViews()
             if (it != null) {
-                for (i in it) {
-
+                for (i in it)
                     addChip(i)
-                }
             }
         }
-        /*viewModel.isErrorProfile.observe(this@EditActivity) { profileItem ->
+        viewModel.isErrorProfile.observe(this@EditActivity) { profileItem ->
             if (profileItem != null) {
                 chooseChips = profileItem.topics
                 for (j in profileItem.topics) {
-                    chooseChip(j.title)
+                    chooseChip(j)
                 }
-
                 viewbinding.textViewAboutEdit.text = profileItem.aboutMyself
                 viewbinding.editTextEditName.setText(profileItem.name)
                 if (profileItem.avatar != null) {
@@ -118,7 +115,6 @@ class EditActivity : AppCompatActivity() {
             }
         }
 
-         */
         viewModel.isErrorUpdateProfile.observe(this@EditActivity) {
             if (it == null) {
                 Toast.makeText(this@EditActivity, "Ошибка обновлнеия профиля", Toast.LENGTH_LONG)
@@ -128,8 +124,7 @@ class EditActivity : AppCompatActivity() {
                     this@EditActivity,
                     "Обновление профиля просто успешно",
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
             }
         }
         viewModel.userItem.observe(this@EditActivity) { profileItem ->
@@ -143,10 +138,10 @@ class EditActivity : AppCompatActivity() {
                 viewbinding.buttonChooseEdit.setText(R.string.delete_photo)
             }
             for (i in profileItem.topics) {
-                addChip(i)
+                chooseChips(i)
             }
         }
-
+        viewModel.addTopic()
     }
 
     private fun addChip(it: TopicItem) {
@@ -169,15 +164,26 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    private fun chooseChip(it: TopicItem) {
+    private fun chooseChip(it: TopicResponse) {
 
         val chip = LayoutInflater.from(this).inflate(R.layout.item_chip_pink, null) as Chip
         chip.text = it.title
         for (i in chips) {
             if (chip.text == i) {
-                //chipWhite.isChecked
+                chip.isChecked = true
+                chip.isCheckable = true
             }
         }
+
+    }
+
+    private fun chooseChips(it: TopicItem) {
+        val text = it.title
+        val id = it.id
+        val chip = LayoutInflater.from(this).inflate(R.layout.item_chip_pink, null) as Chip
+        chip.text = text
+        viewbinding.chipGroup.addView(chip)
+
 
     }
 }

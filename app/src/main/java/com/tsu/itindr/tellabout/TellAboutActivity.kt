@@ -80,6 +80,7 @@ class TellAboutActivity : AppCompatActivity() {
         }
 
         viewModel.topics.observe(this@TellAboutActivity) {
+            viewbinding.chipGroup.removeAllViews()
             for (i in it) {
                 addChip(i)
             }

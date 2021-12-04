@@ -11,10 +11,15 @@ import com.tsu.itindr.data.SharedPreference
 import com.tsu.itindr.data.avatar.AvatarController
 import com.tsu.itindr.data.profile.*
 import com.tsu.itindr.data.user.UserController
+import com.tsu.itindr.find.Profile
 import com.tsu.itindr.find.people.model.PeopleProfile
+import com.tsu.itindr.room.people.ProfileEntity
 import com.tsu.itindr.room.people.ProfileRepository
+import com.tsu.itindr.room.topic.TopicEntity
 import com.tsu.itindr.room.topic.TopicRepository
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 class EditViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -22,7 +27,6 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
     private val updateController = UserController(app)
     private val saveAvatar = AvatarController(app)
     private val controllerTopic = TopicController(app)
-    private var controller = ProfileController(app)
 
     private val _isErrorFromTopic = MutableLiveData<Boolean>()
     val isErrorFromTopic: LiveData<Boolean>
@@ -31,6 +35,7 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
     private val _isTopic = MutableLiveData<List<TopicResponse>?>()
     val isTopic: LiveData<List<TopicResponse>?>
         get() = _isTopic
+
 
     private val _isErrorAvatar = MutableLiveData<Boolean>()
     val isErrorAvatar: LiveData<Boolean>
@@ -51,7 +56,9 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
     private val topicRepository = TopicRepository(app)
     val topics = topicRepository.observeAllProfiles()
 
+
     private val profileRepository = ProfileRepository(app)
+    val profiles = profileRepository.observeAllProfiles()
 
     private val _userItem = MutableLiveData<PeopleProfile>()
     val userItem: LiveData<PeopleProfile>
@@ -105,19 +112,6 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
-
-    fun getProfile() {
-        controller.profile(
-            onSuccess = {
-                _isErrorProfile.value = it
-
-            },
-            onFailure = {
-                _isErrorProfile.value = null
-            }
-        )
-    }
-
     fun updateProfile(name: String, aboutMyself: String, topics: List<String>) {
 
         updateController.update(
@@ -129,6 +123,7 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
             onSuccess = {
                 _isErrorUpdateProfile.value = false
 
+
             },
             onFailure = {
                 _isErrorUpdateProfile.value = true
@@ -136,6 +131,7 @@ class EditViewModel(app: Application) : AndroidViewModel(app) {
             }
         )
     }
+
 
     fun add(topicsItem: List<TopicResponse>) {
         for (topic in topicsItem) {

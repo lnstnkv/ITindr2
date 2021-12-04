@@ -21,7 +21,7 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_height="128dp"
+        android:layout_height="200dp"
         android:background="@drawable/gradient_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         android:id="@+id/ViewStart"
         android:layout_width="0dp"
         android:layout_height="128dp"
-        android:background="@drawable/gradient_user"
+        android:background="@drawable/grad_user_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

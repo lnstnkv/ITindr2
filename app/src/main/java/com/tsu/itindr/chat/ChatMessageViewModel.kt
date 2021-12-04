@@ -23,9 +23,9 @@ class ChatMessageViewModel(app: Application) : AndroidViewModel(app) {
     val getMessageItem: LiveData<List<Message>>
         get() = _getMessageItem
 
-    fun getMessage(fName: String) {
+    fun getMessage(id: String) {
         cotroller.getChat(
-            fName, 50, 0,
+            id, 50, 0,
             onSuccess = {
                 _isErrorGetMessage.value = false
                 val peopleItems = mutableListOf<Message>()

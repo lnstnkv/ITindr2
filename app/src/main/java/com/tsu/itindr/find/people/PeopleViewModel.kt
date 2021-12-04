@@ -26,7 +26,7 @@ class PeopleViewModel(app: Application) : AndroidViewModel(app) {
 
     fun getUser() {
         controller.getUser(
-            32, 0,
+            100, 0,
             onSuccess = {
                 _isErrorUser.value = false
                 add(it)
