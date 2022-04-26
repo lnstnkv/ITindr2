@@ -9,3 +9,14 @@ ITindr — лабораторная работа по мобильной раз�
 * Изучить различные архитектуры и использовать в проекте 
 
 В проекте использована архитектура MVVM, использованы библиотеки Room, Glide, Retrofit
+
+
+
+
+
+Другие проекты по мобильной разработке
+* [Silent Moon](https://github.com/lnstnkv/MAD-SilentMoon)
+* [HitsЕлка](https://github.com/lnstnkv/HitsElka)
+* [CodeWars](https://github.com/lnstnkv/CodeWars)
+* [CodeWarsTest](https://github.com/lnstnkv/CodeWarsTest)
+* [ITindr](https://github.com/lnstnkv/MAD-ITindr)
