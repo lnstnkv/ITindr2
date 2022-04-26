@@ -19,4 +19,3 @@ ITindr — лабораторная работа по мобильной раз�
 * [HitsЕлка](https://github.com/lnstnkv/HitsElka)
 * [CodeWars](https://github.com/lnstnkv/CodeWars)
 * [CodeWarsTest](https://github.com/lnstnkv/CodeWarsTest)
-* [ITindr](https://github.com/lnstnkv/MAD-ITindr)
