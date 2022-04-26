@@ -14,7 +14,7 @@ ITindr — лабораторная работа по мобильной раз�
 
 
 
-Другие проекты по мобильной разработке
+# Другие проекты по мобильной разработке
 * [Silent Moon](https://github.com/lnstnkv/MAD-SilentMoon)
 * [HitsЕлка](https://github.com/lnstnkv/HitsElka)
 * [CodeWars](https://github.com/lnstnkv/CodeWars)
